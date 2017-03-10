@@ -1,0 +1,42 @@
+
+
+// ================================================================================================
+//                              QWINN'S TOME OF CHEATS TWEAK
+//                                BY QWINN  (Paul Escalona)
+// ================================================================================================
+// Last Modification Date:  2008/05/09 - v1
+// ================================================================================================
+
+// This is a completely original work, with no relation to Platter's Tome O' Cheats or the purported
+// (and non-existent) partial restoration in Restoration Pack.
+
+// If Unfinished Business "More Morte Mortuary Moments" mod has been installed, then the 
+// "GiveItemCreate" action that gives the Tome to TNO needs to be added to DMORTE.DLG instead
+// of DMORTE1.DLG.
+
+ACTION_IF FILE_EXISTS ~override/Q!MMMM.xxx~ THEN
+  BEGIN COMPILE ~setup-pst-tweak/PST-Tweak/TomeCheats/dlg/Q!MMMM1.d~ END
+  ELSE
+  BEGIN COMPILE ~setup-pst-tweak/PST-Tweak/TomeCheats/dlg/Q!MMMM0.d~ END
+
+// ======================================= IDS FIXES ===========================================
+
+// Removing the "Bones" modifier from PermanentStatChange and Damage in the ACTION.IDS and
+// INSTANT.IDS.
+
+// Adding here to help eliminate the need to install Fixpack before Tweak Pack.
+// Did same for UB version.
+
+COPY_EXISTING ACTION.IDS ~override~
+  REPLACE_TEXTUALLY EXACT_MATCH ~*Bones~ ~*~
+ BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING INSTANT.IDS ~override~
+  REPLACE_TEXTUALLY EXACT_MATCH ~*Bones~ ~*~
+ BUT_ONLY_IF_IT_CHANGES
+
+CLEAR_IDS_MAP
+
+// ==============================================================================================
+
+COMPILE ~setup-pst-tweak/PST-Tweak/TomeCheats/dlg/DCHEATS.d~ USING ~setup-pst-tweak/PST-Tweak/tra/%LANGUAGE%/dcheats.tra~

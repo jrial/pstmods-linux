@@ -1,0 +1,28 @@
+//========================================= VERSION 3.0 ==============================================
+
+COMPILE ~setup-pst-ub/PST-UB/Mebbeth/dlg/Mebbeth.d~
+
+COPY_EXISTING ~0102MEBB.BCS~ ~override~
+  DECOMPILE_BCS_TO_BAF
+    REPLACE_TEXTUALLY
+~IF
+  OnCreation()
+THEN
+  RESPONSE #100
+    SetInternal(Myself,INTERNAL_1,0)
+END~
+~IF
+  OnCreation()
+THEN
+  RESPONSE #100
+    SetInternal(Myself,INTERNAL_1,0)
+END
+
+IF
+  Global("Player_Dream","GLOBAL",1)
+THEN
+  RESPONSE #100
+    Dialogue(Protagonist)
+END~
+  COMPILE_BAF_TO_BCS
+ BUT_ONLY_IF_IT_CHANGES

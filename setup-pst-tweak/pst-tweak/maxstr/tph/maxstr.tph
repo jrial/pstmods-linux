@@ -1,0 +1,211 @@
+
+
+INCLUDE ~setup-pst-tweak/PST-Tweak/utils/Q_EnginePatcher.tph~
+
+
+COPY ~Torment.exe~ ~Torment.exe~
+  SPRINT "Q_Patch_Name" ~Strength Spell - Mage.~
+
+// a) "Strength"
+// wizard
+// search:  25 03 00 00 80 79 05 48 83 C8 FC 40 83 C0 01 8B 4D E0 0F AF C8
+// replace: B8 03 00 00 00 EB 05 48 83 C8 FC 40 83 C0 01 8B 4D E0 0F AF C8
+
+  SET Q_Starting_Offset = 0x2B3500
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop            = 0
+
+  SET searchlength = 21
+  SPRINT searchpattern  ~123456789012345678901~
+  SPRINT searchbytes    ~25 03 00 00 80 79 05 48 83 C8 FC 40 83 C0 01 8B 4D E0 0F AF C8~
+
+  SET replacelength = 6
+  SPRINT replacepattern ~123456~
+  SPRINT replacebytes   ~B8 03 00 00 00 EB~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+
+
+  SPRINT "Q_Patch_Name" ~Strength Spell - Cleric/Thief (x2).~
+
+// priest/rogue -> locate and replace two occurrences
+// search:  99 B9 06 00 00 00 F7 F9 83 C2 01
+// replace: BA 06 00 00 00 90 90 90 90 90 90
+
+  SET Q_Starting_Offset = 0x2B3500
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop            = 2
+
+  SET searchlength = 11
+  SPRINT searchpattern  ~12345678901~
+  SPRINT searchbytes    ~99 B9 06 00 00 00 F7 F9 83 C2 01~
+
+  SET replacelength = 11
+  SPRINT replacepattern ~12345678901~
+  SPRINT replacebytes   ~BA 06 00 00 00 90 90 90 90 90 90~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+
+  SPRINT "Q_Patch_Name" ~Strength Spell - Fighter (x2).~
+
+// warrior -> locate and replace two occurrences
+// search:  25 07 00 00 80 79 05 48 83 C8 F8 40 83 C0 01 8B 55 E0
+// replace: B8 07 00 00 00 EB 05 48 83 C8 F8 40 83 C0 01 8B 55 E0
+
+
+  SET Q_Starting_Offset = 0x2B3700
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop            = 2
+
+  SET searchlength = 18
+  SPRINT searchpattern  ~123456789012345678~
+  SPRINT searchbytes    ~25 07 00 00 80 79 05 48 83 C8 F8 40 83 C0 01 8B 55 E0~
+
+  SET replacelength = 6
+  SPRINT replacepattern ~123456~
+  SPRINT replacebytes   ~B8 07 00 00 00 EB~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+
+  SPRINT "Q_Patch_Name" ~Power of One Spell - Mage.~
+
+// b) "Power of One"
+// wizard
+// search:  25 03 00 00 80 79 05 48 83 C8 FC 40 83 C0 02 8B 4D DC
+// replace: B8 03 00 00 00 EB 05 48 83 C8 FC 40 83 C0 02 8B 4D DC
+
+  SET Q_Starting_Offset = 0x2B3F00
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop            = 0
+
+  SET searchlength = 18
+  SPRINT searchpattern  ~123456789012345678~
+  SPRINT searchbytes    ~25 03 00 00 80 79 05 48 83 C8 FC 40 83 C0 02 8B 4D DC~
+
+  SET replacelength = 6
+  SPRINT replacepattern ~123456~
+  SPRINT replacebytes   ~B8 03 00 00 00 EB~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+
+  SPRINT "Q_Patch_Name" ~Power of One Spell - Cleric/Thief (x2).~
+
+// priest/rogue -> locate and replace two occurrences
+// search:  99 B9 06 00 00 00 F7 F9 83 C2 02
+// replace: BA 07 00 00 00 90 90 90 90 90 90
+
+  SET Q_Starting_Offset = 0x2B4000
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop            = 2
+
+  SET searchlength = 11
+  SPRINT searchpattern  ~12345678901~
+  SPRINT searchbytes    ~99 B9 06 00 00 00 F7 F9 83 C2 02~
+
+  SET replacelength = 11
+  SPRINT replacepattern ~12345678901~
+  SPRINT replacebytes   ~BA 07 00 00 00 90 90 90 90 90 90~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+
+  SPRINT "Q_Patch_Name" ~Power of One Spell - Fighter.~
+
+// warrior (fixpack must have been applied first to work)
+// search:  25 07 00 00 80 83 C0 02
+// replace: B8 07 00 00 00 83 C0 02
+
+  SET Q_Starting_Offset = 0x2B4100
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop            = 0
+
+  SET searchlength = 8
+  SPRINT searchpattern  ~12345678~
+  SPRINT searchbytes    ~25 07 00 00 80 83 C0 02~
+
+  SET replacelength = 8
+  SPRINT replacepattern ~12345678~
+  SPRINT replacebytes   ~B8 07 00 00 00 83 C0 02~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+
+  SPRINT "Q_Patch_Name" ~Improved Strength - Mage.~
+
+// c) "Improved Strength"
+// wizard
+// search:  25 03 00 00 80 79 05 48 83 C8 FC 40 83 C0 05
+// replace: B8 03 00 00 00 79 05 48 83 C8 FC 40 83 C0 05
+
+  SET Q_Starting_Offset = 0x2B4C00
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop            = 0
+
+  SET searchlength = 15
+  SPRINT searchpattern  ~123456789012345~
+  SPRINT searchbytes    ~25 03 00 00 80 79 05 48 83 C8 FC 40 83 C0 05~
+
+  SET replacelength = 6
+  SPRINT replacepattern ~123456~
+  SPRINT replacebytes   ~B8 03 00 00 00 EB~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+
+
+  SPRINT "Q_Patch_Name" ~Improved Strength - Cleric/Thief.~
+
+// c) "Improved Strength"
+// rogue/priest
+// search:  99 B9 06 00 00 00 F7 F9 83 C2 05
+// replace: BA 05 00 00 00 90 90 90 83 C2 05
+
+  SET Q_Starting_Offset = 0x2B4CC0
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop            = 0
+
+  SET searchlength = 11
+  SPRINT searchpattern  ~12345678901~
+  SPRINT searchbytes    ~99 B9 06 00 00 00 F7 F9 83 C2 05~
+
+  SET replacelength = 8
+  SPRINT replacepattern ~12345678~
+  SPRINT replacebytes   ~BA 05 00 00 00 90 90 90~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+
+
+  SPRINT "Q_Patch_Name" ~Improved Strength - Fighter.~
+
+// warrior
+// search:  25 07 00 00 80 79 05 48 83 C8 F8 40 83 C0 05
+// replace: B8 07 00 00 00 EB 05 48 83 C8 F8 40 83 C0 05
+
+  SET Q_Starting_Offset = 0x2B4CD0
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop            = 0
+
+  SET searchlength = 15
+  SPRINT searchpattern  ~123456789012345~
+  SPRINT searchbytes    ~25 07 00 00 80 79 05 48 83 C8 F8 40 83 C0 05~
+
+  SET replacelength = 6
+  SPRINT replacepattern ~123456~
+  SPRINT replacebytes   ~B8 07 00 00 00 EB~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+BUT_ONLY_IF_IT_CHANGES

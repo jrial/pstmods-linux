@@ -1,0 +1,66 @@
+@-1000= "%TP2_FILE_NAME% mod ma"
+@-1001= "opcjonalnych komponentow\nZeby zaoszczedzic na czasie, mozesz zdecydowac co zrobic z nimi wszystkimi teraz, zamiast\nbyc pytanym o kazdy z osobna.\n"
+@-1002= "Co zrobic z komponentami, ktore NIE SA jeszcze zainstalowane?\n[I]nstaluj, [S]Pomin, [A]Pytaj o kazdy? "
+@-1003= "Co zrobic z komponentami ktore SA juz zainstalowane?\n[R]einstaluj, [U]sun, [S]Pomin, [A]Pytaj o kazdy? "
+@-1004= "PROSZE, wyslij plik emailem"
+@-1005= "do"
+@-1006= "Instaluj ["
+@-1007= "]?
+[R]einstaluj, [N]ie instaluj, [U]sun lub [Q]Zakoncz? "
+@-1008= "]?
+[I]nstaluj, [N]ie instaluj lub [Q]Zakoncz? "
+@-1009= "Podaj nazwe modulu: "
+@-1010= "Reinstalacja ["
+@-1011= "]"
+@-1012= "Reinstalacja z uzyciem jezyka"
+@-1013= "Usuwanie starej instalacji ["
+@-1014= "]  ..."
+@-1015= "Pomyslnie usunieto stara wersje"
+@-1016= "Instalacja"
+@-1017= "BLAD podczas instalacji ["
+@-1018= "], przywracanie poprzedniego stanu"
+@-1019= "POMYSLNIE ZAINSTALOWANO"
+@-1020= "Pomijanie "
+@-1021= "Usuwanie ["
+@-1022= "] (komponent #"
+@-1023= ")"
+@-1024= "POMYSLNIE USUNIETO ["
+@-2000= "Dokumentacja"
+@-2001= "Czy chcesz otworzyc plik readme? [Y]Tak lub [N]ie:"
+@00001 = ~Wszystkie zalecane komponenty PS:T Unfinished Business ~
+@00002 = ~Przywrocone Badania Abla Mysliciela~
+@00003 = ~Przywrocone Dialogi Mortego w Kostnicy~
+@00004 = ~Przywrocone Zadanie swiecznika~
+@00005 = ~Przywrocone Rozmowy o losie Deionarry~
+@00006 = ~Przywrocony Wisior Yemetha~
+@00007 = ~Przywrocone Towarzystwo Elicji~
+@00008 = ~Przywroceni Obywatele Klatwy~
+@00009 = ~Przywroceni Wiezniowie Klatwy~
+@00010 = ~Przywrocony Karl Parfidor~
+@00011 = ~Przywrocony Morte i Zeby Ingressy~
+@00012 = ~Przywroceni Opryszkowie z Alei Niebezpiecznych Weglow~
+@00013 = ~Przywrocone Przedmioty~
+@00014 = ~Przywrocone Rozmowy i komentarze w druzynie~
+@00015 = ~Przywrocone Oszustwa (niezalecane)~
+@00016 = ~Juz zainstalowane!~
+@00017 = ~Zbadaj niebiesk¹ ksiêgê.~
+@00018 = ~Zbadaj miecz.~
+@00019 = ~ZÊBY INGRESSY
+Waga: 1
+
+To garœæ ¿ywych zêbów Ingressy. Najwidoczniej nie chcia³y udaæ siê razem z ni¹ w podró¿ do jej rodzinnej Sfery. Za ka¿dym razem, kiedy trzyma siê je w kupie, zaczynaj¹ nieznoœnie grzechotaæ, co jako ¿ywo, przypomna ci odg³os upiornych œwierszczy.~
+@00020 = ~Przywrocona Mebbet~
+@00021 = ~Mod Los Deionarry~
+@00022 = ~Przywrocone Spotkania w Nizszej Dzielnicy~
+@00023 = ~PIÓRO DO PISANIA
+Waga: 0
+
+To gêsie pióro znalaz³eœ w schowku w swoim pokoju w Gmachu Rozrywki. Wygl¹da ca³kiem zwyczajnie.~
+@00024 = ~Zapieczêtowany schowek~
+@01117 = ~"Ha! Wygl¹da na to, ¿e to jakieœ rady..." Morte chrz¹ka zaciekawiony. "Zobaczmy, co to jest... zaczyna siê od..."
+
+"Wiem ¿e czujesz siê, jakbyœ w³adowa³ w siebie kilka bary³ek wody ze Styksu, ale musisz siê wzi¹æ w GARŒÆ. Masz przy sobie DZIENNIK, który powinien trochê rozjaœniæ sprawê. Resztê œpiewki us³yszysz od FARODA, chyba ¿e ju¿ go wpisali do ksiêgi umar³ych."
+
+"Nie zgub dziennika, bo znowu pop³yniemy w górê Styksu. I cokolwiek robisz, NIE MÓW nikomu KIM jesteœ, ani CO siê z tob¹ dzieje, bo inaczej wyl¹dujesz w krematorium. Rób co ci ka¿ê: PRZECZYTAJ dziennik, a potem ODSZUKAJ Faroda."~
+@33606 = ~"Twa mi³a chcia³a, bym powstrzyma³ was dwóch od walki."~
+@50577 = ~Ksiêga ma wiele rozdzia³ów: Oszustwo Teleportowania, Oszustwo Nieograniczonego Odpoczynku, Oszustwo Bogactwa, Oszustwo Wspó³czynników, Oszustwo Œmierci, Oszustwo Doœwiadczenia, Oszustwo Dobra i Z³a oraz Oszustwo Prawa i Chaosu.~

@@ -1,0 +1,132 @@
+
+// ======================= SKARDAVNELNATE'S RESTORED CARL PARFIDOR =========================
+
+// Original Restoration by SKARDAVNELNATE
+// WeiDUization by Qwinn
+
+// ============================= Longlist Documentation: ===================================
+// Curst Administration
+// Carl Parfidor or another administrative assistant depending on whether you had him killed.
+
+// Export 0701OFF2.BCS
+// Rename 0701OFF3.BCS
+// Place in override folder
+
+// 0701OFF3.BCS
+// Remove lines 1-14
+// Add
+// IF
+//	Die()
+//	Global("Carl_Snuffed","GLOBAL",0)
+// THEN
+//	RESPONSE #100
+//		SetGlobal("Snuff_Carl","GLOBAL",4)
+//		SetGlobal("Carl_Snuffed","GLOBAL",2)
+//		SetGlobal("KILL_ATHAR","KAPUTZ",0)
+// END
+// Remove lines 51-53
+
+// Export CWMALE.CRE
+// Rename CRSTADMN.CRE
+// Place in override folder
+
+// CRSTADMN.CRE
+// Name StrRef: 22150
+// Apparent name StrRef: 22150
+// Default script 0701OFF3.BCS
+// Dialog DADMINAS.DLG
+
+// AR0701.BCS
+// Add
+// IF
+//	!Global("Current_Area","GLOBAL",701)
+//	GlobalLT("KILL_ATHAR","KAPUTZ",1)
+// THEN
+// 	RESPONSE #100
+//		CreateCreature("CRSTADMN",[1845.615])
+//		SetGlobal("KILL_ATHAR","KAPUTZ",1)
+// END
+
+
+// ==============================================================================
+
+
+
+// Dialogue changes
+
+COMPILE ~setup-pst-ub/PST-UB/Parfidor/dlg/Parfidor.d~
+
+// The "KILL_ATHAR" "KAPUTZ" variable referenced above was just an unused variable that
+// SKARDAVNELNATE used in order to avoid needing a new VAR.VAR.  Per his request, adding
+// "Spawn_Carl" as a GLOBAL variable for this mod, and modifying the scripts to match.
+
+INCLUDE ~setup-pst-ub/PST-UB/utils/Q_VARMacros.tph~
+COPY_EXISTING ~VAR.VAR~ ~VAR.TMP~
+  SET Q_FileSize = %SOURCE_SIZE%
+  SPRINT "Q_NewVarType"  ~GLOBAL  ~
+  SPRINT "Q_NewVarName"  ~Spawn_Carl                      ~
+  SET    Q_NewVarValue = 0
+  LAUNCH_PATCH_MACRO Q_VarVar_AddNewRecord
+ BUT_ONLY_IF_IT_CHANGES
+COPY ~VAR.TMP~ ~VAR.VAR~
+
+// Qwinn:  These 2 files don't exist in the vanilla game, safe to simply copy.
+COPY ~setup-pst-ub/PST-UB/Parfidor/copy/0701OFF3.BCS~ ~override~
+     ~setup-pst-ub/PST-UB/Parfidor/copy/CRSTADMN.CRE~ ~override~
+
+<<<<<<<< .../inlinedfile/spawncarl.baf
+IF
+  !Global("Current_Area","GLOBAL",701)
+  GlobalLT("Spawn_Carl","GLOBAL",1)
+THEN
+  RESPONSE #100
+    CreateCreature("CRSTADMN",[1845.615])
+    SetGlobal("Spawn_Carl","GLOBAL",1)
+END
+>>>>>>>>
+EXTEND_TOP ~AR0701.BCS~ ~.../inlinedfile/spawncarl.baf~
+
+// ==============================================================================
+
+// The above is work by SKARDAVNELNATE.  The following is additional work by Qwinn so that
+// Kiri doesn't simply disappear and Parfidor doesn't get magically replaced.
+<<<<<<<< .../inlinedfile/0701KIRI.BAF
+IF
+  True()
+THEN
+  RESPONSE #100
+    MoveToPoint([1832.667])
+    PlaySequence(ANIM_TALK)
+    SendTrigger("CRSTADMN",1)
+    Wait(3)
+    PlaySequence(ANIM_TALK)
+    MoveToPoint([1743.534])
+    DestroySelf()
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/0701KIRI.BAF~
+
+<<<<<<<< .../inlinedfile/0701CARL.BAF
+IF
+  True()
+THEN
+  RESPONSE #100
+    PlaySequence(ANIM_TALK)
+    Wait(3)
+    MoveToPoint([1743.534])
+    SetGlobal("Spawn_Carl","GLOBAL",0)
+    DestroySelf()
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/0701CARL.BAF~
+
+
+<<<<<<<< .../inlinedfile/carlleave.baf
+IF
+  Trigger(1)
+THEN
+  RESPONSE #100
+    ChangeAIScript("0701CARL",DEFAULT)
+END
+>>>>>>>>
+EXTEND_TOP ~0701OFF3.BCS~ ~.../inlinedfile/carlleave.baf~

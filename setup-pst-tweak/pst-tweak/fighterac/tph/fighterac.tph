@@ -1,0 +1,54 @@
+
+
+// ================================================================================================
+//                               CLASS/ARMOR BALANCE TWEAK
+//                                BY QWINN (Paul Escalona)
+// ================================================================================================
+// Last Modification Date:  2008/06/11 - v3
+// ================================================================================================
+
+// Allows Fighters and Thieves to use Magus Guard, Magus Shield and Ring of Thex.
+// Also changes names and descriptions to reflect this.
+
+/*
+STRING_SET 6552 @6552 // ~Bracers of Guarding~
+STRING_SET 49043 @49043 /* ~BRACERS OF GUARDING
+Armor Class: 6
+Weight: 2
+
+Considered standard equipment for any unarmored adventurer, bracelets such as these can be found across the planes. Judging by the markings on this particular bracelet it appears to have been made in a style quite common to Sigil. Various glyphs of warding are meticulously carved along the surface producing an almost hypnotic effect when looked at. When worn this bracelet protects the wearer from normal attacks as if they were wearing scale armor.~ */
+*/
+
+/*
+COPY_EXISTING ~MAGGUARD.ITM~ ~override~
+  WRITE_LONG 0x1e 0
+ BUT_ONLY_IF_IT_CHANGES
+
+STRING_SET 64633 @64633 // ~Bracers of Shielding~
+STRING_SET 64634 @64634 /* ~BRACERS OF SHIELDING
+Armor Class: 4
+Weight: 2
+
+This bracelet is a variation of the Bracers of Guarding. Essentially using the same spells and glyphs as its predecessor, the Bracers of Shielding are better able to focus the energy of the enchantments placed upon it.~ */
+*/
+
+/*
+COPY_EXISTING ~MAGE4.ITM~ ~override~
+  WRITE_LONG 0x1e 0
+ BUT_ONLY_IF_IT_CHANGES
+
+STRING_SET 62394 @62394 /* ~RING OF THEX
+Special:
+   +20 to Base Hit Points
+   +4 to Armor Class
+   +2 to All Saving Throws
+Weight: 0
+
+This ornate silver ring is set with a single red stone of an unknown type. The ring is believed to have been created by an adventuring mage named Thex. Thex claimed she was tired of sitting back and flinging spells at enemies while the rest of her adventuring party was able to get into the thick of battle. She felt that the ring would allow her to become what she chose to call a Battlemage. The Ring of Thex was the crowning achievement of her short career.~ */
+*/
+
+/*
+COPY_EXISTING ~WRING.ITM~ ~override~
+  WRITE_LONG 0x1e 0
+ BUT_ONLY_IF_IT_CHANGES
+*/

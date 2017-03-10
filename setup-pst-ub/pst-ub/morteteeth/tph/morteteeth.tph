@@ -1,0 +1,20 @@
+
+
+// ================================================================================================
+//                         PLANESCAPE: TORMENT UNFINISHED BUSINESS
+//                    RESTORED MORTE & INGRESS'S TEETH BANTER COMPONENT
+//                                BY QWINN (Paul Escalona)
+// ================================================================================================
+// Last Modification Date:  June 4 2008 - v1.00
+// ================================================================================================
+
+
+COMPILE ~setup-pst-ub/PST-UB/MorteTeeth/dlg/MorteTeeth.d~ USING ~setup-pst-ub/PST-UB/tra/%LANGUAGE%/MorteTeeth.tra~
+
+// Note:  This is just StrRef #6166 with the combat stuff stripped off.
+COPY_EXISTING ~ICTEETH.ITM~ ~override/ITEETH.ITM~
+  SAY 0x54 @19 /* ~INGRESS' TEETH
+
+This is a handful of Ingress' living teeth. Apparently, they didn't want to go with her back through the portal to her home plane. They rattle amongst themselves whenever they are held close together; they remind you of a bunch of creepy ivory hopping bugs.~ */
+  WRITE_BYTE 0x21 23
+ BUT_ONLY_IF_IT_CHANGES

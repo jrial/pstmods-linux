@@ -1,0 +1,97 @@
+// ================================================================================================
+//                          QWINN'S PLANESCAPE: TORMENT TWEAK PACK
+//                                     QUICK LOAD
+//                                BY QWINN (Paul Escalona)
+// ================================================================================================
+// Last Modification Date:  Jan 5, 2010 - v4.00
+// ================================================================================================
+
+INCLUDE ~setup-pst-tweak/PST-Tweak/utils/Q_EnginePatcher.tph~
+
+COPY ~Torment.exe~ ~Torment.exe~
+
+  SET Q_VER = 0
+  PATCH_IF %SOURCE_SIZE% = 5697597
+  BEGIN
+     INNER_ACTION BEGIN FAIL ~Game version identified as 4CD v1.0. Please apply official PS:T patch 1.1 and rerun setup.~ END
+  END
+  ELSE
+  PATCH_IF %SOURCE_SIZE% = 5713981
+  BEGIN
+     SET Q_VER = 4
+     PATCH_PRINT ~Game version identified as 4CD v1.1. Proceeding with installation.~
+  END
+  ELSE
+  PATCH_IF %SOURCE_SIZE% = 5718077
+  BEGIN
+     SET Q_VER = 2
+     PATCH_PRINT ~Game version identified as 2CD v1.1. Proceeding with installation.~
+  END
+  ELSE
+  BEGIN
+     INNER_ACTION BEGIN FAIL ~Unknown version of game. Please seek assistance at the forums for this mod at Spellhold Studios.~ END
+  END
+
+  SET Q_Loop = 0
+
+  SPRINT "Q_Patch_Name" ~1. Setting up checks for F5/F9 virtual keycodes at start of hotkey switch.~
+
+// setting up checks for F5/F9 virtual keycodes at start of hotkey switch
+// search:  8A 94 01 FC 23 00 00 88 95 C4 FB FF FF
+// replace: 0F B6 84 08 FC 23 00 00 0F BF 4D 08 8B 95 98 FA FF FF 0F B6 9C 11 C4 0D 00 00 83 FB 74 75 0C 66 C7 45 E8 94 00 33 C9 B1 14 EB 25 83 FB 78 75 0B 66 C7 45 E8 94 00 E9 BA 1A 00 00 3B C3 0F 85 F6 22 00 00 0F BF 4D E8 83 F9 30 0F 87 F3 1A 00 00
+
+  SET Q_Starting_Offset = 0x3CD210
+  SET Q_Replace_Offset  = 0
+
+  SET searchlength = 13
+  SPRINT searchpattern  ~1234567890123~
+  SPRINT searchbytes  ~8A 94 01 FC 23 00 00 88 95 C4 FB FF FF~
+
+  SET replacelength = 80
+  SPRINT replacepattern ~12345678901234567890123456789012345678901234567890123456789012345678901234567890~
+  SPRINT replacebytes ~0F B6 84 08 FC 23 00 00 0F BF 4D 08 8B 95 98 FA FF FF 0F B6 9C 11 C4 0D 00 00 83 FB 74 75 0C 66 C7 45 E8 94 00 33 C9 B1 14 EB 25 83 FB 78 75 0B 66 C7 45 E8 94 00 E9 BA 1A 00 00 3B C3 0F 85 F6 22 00 00 0F BF 4D E8 83 F9 30 0F 87 F3 1A 00 00~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+  SPRINT "Q_Patch_Name" ~2. Shortening jump inside "Action Menu - Next" to match changes below.~
+// shortening jump inside "Action Menu - Next" to match changes below
+// search:  08 00 00 8B 85 98 FA FF FF 83 B8 90 0F 00 00 03 0F 85 CC
+// replace: 08 00 00 8B 85 98 FA FF FF 83 B8 90 0F 00 00 03 0F 85 86
+
+  SET Q_Starting_Offset = 0x3CEC70
+  SET Q_Replace_Offset  = 0
+
+  SET searchlength = 19
+  SPRINT searchpattern  ~1234567890123456789~
+  SPRINT searchbytes  ~08 00 00 8B 85 98 FA FF FF 83 B8 90 0F 00 00 03 0F 85 CC~
+
+  SET replacelength = 19
+  SPRINT replacepattern ~1234567890123456789~
+  SPRINT replacebytes ~08 00 00 8B 85 98 FA FF FF 83 B8 90 0F 00 00 03 0F 85 86~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+  SPRINT "Q_Patch_Name" ~3. Optimizing "Action Menu - Next" code and inserting Quick Load function.~
+// optimizing "Action Menu - Next" code and inserting Quick Load function based on BG1
+// search:       6A 0E 8B 8D D4 FE FF FF
+// replace 2cd:  6A 0E 8B C8 E8 7F 87 D2 FF 89 85 D8 FE FF FF 83 EC 08 8B F4 89 A5 1C FC FF FF 8B 8D 04 FC FF FF 51 8B 8D D4 FE FF FF E8 37 AE D3 FF 8B 10 8B 40 04 50 52 8D 85 FC FB FF FF 50 8B 0D 6C F9 96 00 81 C1 9A 32 00 00 E8 F8 04 D1 FF 8B 08 8B 50 04 89 0E 89 56 04 8B 8D D8 FE FF FF 8B 11 FF 52 54 EB 5E A1 68 F9 96 00 0F B6 88 02 0E 00 00 85 C9 75 3C 8B 4D EC 68 54 1A 97 00 E8 28 70 DF FF 85 C0 74 2B 6A 00 6A 01 8B 4D EC E8 EE BA DD FF 68 54 1A 97 00 8B 4D EC 81 C1 70 21 00 00 E8 80 DB 0C 00 6A 00 6A 01 8B 4D EC E8 4E 3B DE FF EB 10 0F BF 45 E8 83 F8 31 7C 07 3D 94 00 00 00
+// replace 4cd:  6A 0E 8B C8 E8 FF 85 D2 FF 89 85 D8 FE FF FF 83 EC 08 8B F4 89 A5 1C FC FF FF 8B 8D 04 FC FF FF 51 8B 8D D4 FE FF FF E8 B7 AC D3 FF 8B 10 8B 40 04 50 52 8D 85 FC FB FF FF 50 8B 0D 1C E8 96 00 81 C1 9A 32 00 00 E8 98 02 D1 FF 8B 08 8B 50 04 89 0E 89 56 04 8B 8D D8 FE FF FF 8B 11 FF 52 54 EB 5E A1 18 E8 96 00 0F B6 88 02 0E 00 00 85 C9 75 3C 8B 4D EC 68 04 09 97 00 E8 2D 70 DF FF 85 C0 74 2B 6A 00 6A 01 8B 4D EC E8 6E B9 DD FF 68 04 09 97 00 8B 4D EC 81 C1 70 21 00 00 E8 35 CE 0C 00 6A 00 6A 01 8B 4D EC E8 53 3B DE FF EB 10 0F BF 45 E8 83 F8 31 7C 07 3D 94 00 00 00
+
+  SET Q_Starting_Offset = 0x3CECA0
+  SET Q_Replace_Offset  = 0
+
+  SET searchlength = 8
+  SPRINT searchpattern  ~12345678~
+  SPRINT searchbytes  ~6A 0E 8B 8D D4 FE FF FF~
+
+  SET replacelength = 190
+  SPRINT replacepattern ~1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890~
+  PATCH_IF Q_VER = 2 BEGIN SPRINT replacebytes ~6A 0E 8B C8 E8 7F 87 D2 FF 89 85 D8 FE FF FF 83 EC 08 8B F4 89 A5 1C FC FF FF 8B 8D 04 FC FF FF 51 8B 8D D4 FE FF FF E8 37 AE D3 FF 8B 10 8B 40 04 50 52 8D 85 FC FB FF FF 50 8B 0D 6C F9 96 00 81 C1 9A 32 00 00 E8 F8 04 D1 FF 8B 08 8B 50 04 89 0E 89 56 04 8B 8D D8 FE FF FF 8B 11 FF 52 54 EB 5E A1 68 F9 96 00 0F B6 88 02 0E 00 00 85 C9 75 3C 8B 4D EC 68 54 1A 97 00 E8 28 70 DF FF 85 C0 74 2B 6A 00 6A 01 8B 4D EC E8 EE BA DD FF 68 54 1A 97 00 8B 4D EC 81 C1 70 21 00 00 E8 80 DB 0C 00 6A 00 6A 01 8B 4D EC E8 4E 3B DE FF EB 10 0F BF 45 E8 83 F8 31 7C 07 3D 94 00 00 00~ END
+                ELSE BEGIN SPRINT replacebytes ~6A 0E 8B C8 E8 FF 85 D2 FF 89 85 D8 FE FF FF 83 EC 08 8B F4 89 A5 1C FC FF FF 8B 8D 04 FC FF FF 51 8B 8D D4 FE FF FF E8 B7 AC D3 FF 8B 10 8B 40 04 50 52 8D 85 FC FB FF FF 50 8B 0D 1C E8 96 00 81 C1 9A 32 00 00 E8 98 02 D1 FF 8B 08 8B 50 04 89 0E 89 56 04 8B 8D D8 FE FF FF 8B 11 FF 52 54 EB 5E A1 18 E8 96 00 0F B6 88 02 0E 00 00 85 C9 75 3C 8B 4D EC 68 04 09 97 00 E8 2D 70 DF FF 85 C0 74 2B 6A 00 6A 01 8B 4D EC E8 6E B9 DD FF 68 04 09 97 00 8B 4D EC 81 C1 70 21 00 00 E8 35 CE 0C 00 6A 00 6A 01 8B 4D EC E8 53 3B DE FF EB 10 0F BF 45 E8 83 F8 31 7C 07 3D 94 00 00 00~ END
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+BUT_ONLY_IF_IT_CHANGES

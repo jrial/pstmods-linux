@@ -1,0 +1,293 @@
+
+// ================ SKARDAVNELNATE'S RESTORED ELYCE AND COMPANY QUEST ===================
+// =================== FROM SKARDAVNELNATE'S AIP VERSION 20080408 =======================
+
+// ============================ WEIDUIZATION BY QWINN ===================================
+
+// Last Revision by Qwinn:  20080423
+
+// From SKARDAVNELNATE's Longlist:
+// ------------------------------
+// Elyce & Company
+// Originally these characters would only play out their animations if you weren't there to see it.
+// As well as turn against you if you refuse to help. Now they play out their animations and kill
+// each other if you refuse to help.
+
+// ELYCE.CRE
+// Default script 0400ELY.BCS
+
+// MAETH.CRE
+// Default script 0400MAE.BCS
+
+// TARIN.CRE
+// Default script 0400TAR.BCS
+
+// DLTCEP
+// Edit Areas
+// Load Area AR0400
+// Actors
+// Add actor
+// Creature ELYCE
+// Refresh fields
+// Position 622 1058
+// Destination 622 1058
+// Direction 12
+
+// Add actor
+// Creature MAETH
+// Refresh fields
+// Position 722 884
+// Destination 722 884
+// Direction 1
+
+// Add actor
+// Creature TARIN
+// Refresh fields
+// Position 567 1165
+// Destination 567 1165
+// Direction 9
+
+// AR0400.ARE
+// Actor 33
+// Name Elyce
+// Actor 34
+// Name Maeth
+// Actor 35
+// Name Tarin
+
+// 0400ELY.BCS
+// Add
+// IF
+//	OnCreation()
+// THEN
+// 	RESPONSE #100
+//		SetTeam(Myself,TEAM_1)
+// END
+
+// IF
+//	Help([0.0.TEAM_2])
+// THEN
+// 	RESPONSE #100
+// 		Enemy()
+//		EscapeArea()
+// END
+
+// Line 51 Global("Elyce","AR0400",0) -> GlobalLT("Elyce","AR0400",4)
+// Add !Global("Elyce","AR0400",2) as line 52
+// Line 70 Global("Elyce","AR0400",1) -> Global("Elyce","AR0400",2)
+// Add !Global("Maeth_DEAD","KAPUTZ",1) as line 71
+// Add !Global("Tarin_DEAD","KAPUTZ",1) as line 72
+// Line 80 GlobalGT("Elyce","AR0400",2) -> GlobalGT("Elyce","AR0400",3)
+
+// 0400MAE.BCS
+// 0400TAR.BCS
+// Add
+// IF
+//	OnCreation()
+// THEN
+//	RESPONSE #100
+//		SetTeam(Myself,TEAM_2)
+// END
+
+// IF
+//	Help([0.0.TEAM_1])
+// THEN
+// 	RESPONSE #100
+//		Enemy()
+//		Attack(LastAttackerOf(LastHelp))
+// END
+
+// IF
+// 	Help([0.0.TEAM_2])
+// THEN
+// 	RESPONSE #100
+//		EscapeArea()
+// END
+
+// Line 57 Global("Elyce","AR0400",0) -> GlobalLT("Elyce","AR0400",4)
+// Add !Global("Elyce","AR0400",1) as line 58
+// Add !Global("Elyce","AR0400",2) as line 59
+// Line 104 GlobalGT("Elyce","AR0400",2) -> GlobalGT("Elyce","AR0400",3)
+
+// 0400MAE.BCS
+// Add MoveToPoint([602.1028]) as line 100
+
+// 0400TAR.BCS
+// Add MoveToPoint([602.1068]) as line 100
+
+// DELYCE.DLG
+// Action 0, 3, 6, 8
+// Remove Enemy()
+
+// DMAETH.DLG
+// DTARIN.DLG
+// Action 2, 4, 6
+// Remove Enemy()
+
+// =========================== BEGIN ELYCE'S COMPANY QUEST =====================
+
+
+COMPILE ~setup-pst-ub/PST-UB/Elyce/dlg/Elyce.d~
+
+// ELYCE.CRE - Default script 0400ELY.BCS
+COPY_EXISTING ~ELYCE.CRE~ ~override~
+  WRITE_ASCII 0x268 ~0400ELY~ #8
+ BUT_ONLY_IF_IT_CHANGES
+
+// MAETH.CRE - Default script 0400MAE.BCS
+COPY_EXISTING ~MAETH.CRE~ ~override~
+  WRITE_ASCII 0x268 ~0400MAE~ #8
+ BUT_ONLY_IF_IT_CHANGES
+
+// TARIN.CRE - Default script 0400TAR.BCS
+COPY_EXISTING ~TARIN.CRE~ ~override~
+  WRITE_ASCII 0x268 ~0400TAR~ #8
+ BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR0400.ARE~ ~override~
+  LAUNCH_PATCH_MACRO ~Q_ARE_InitVars~
+  LAUNCH_PATCH_MACRO ~Q_AREAdd_InitVars~
+  SET "Q_New_Actor" = 3
+  LAUNCH_PATCH_MACRO ~Q_AREAdd_Process~
+
+  WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0))         ~Elyce~        #32 // Name
+  WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x80  ~ELYCE~        #8  // CRE
+  WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x48  ~DELYCE~       #8  // DLG
+  WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x70  ~0400ELY~      #8  // Default Script
+  WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x38  0xffffffff         // Unknown
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x20  622                // Pos X
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x22  1058               // Pos Y
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x24  622                // Des X
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x26  1058               // Des Y
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x34  12                 // Orientation
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x28  1                  // Visible
+  WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x40  0x00ffffff         // Present
+
+  WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1))         ~Maeth~        #32 // Name
+  WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x80  ~MAETH~        #8  // CRE
+  WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x48  ~DMAETH~       #8  // DLG
+  WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x70  ~0400MAE~      #8  // Default Script
+  WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x38  0xffffffff         // Unknown
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x20  722                // Pos X
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x22  884                // Pos Y
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x24  722                // Des X
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x26  884                // Des Y
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x34  1                  // Orientation
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x28  1                  // Visible
+  WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x40  0x00ffffff         // Present
+
+
+  WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2))         ~Tarin~        #32 // Name
+  WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x80  ~TARIN~        #8  // CRE
+  WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x48  ~DTARIN~       #8  // DLG
+  WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x70  ~0400TAR~      #8  // Default Script
+  WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x38  0xffffffff         // Unknown
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x20  567                // Pos X
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x22  1165               // Pos Y
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x24  567                // Des X
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x26  1165               // Des Y
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x34  9                  // Orientation
+  WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x28  1                  // Visible
+  WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x40  0x00ffffff         // Present
+
+
+<<<<<<<< .../inlinedfile/addelyce.baf
+
+IF
+  OnCreation()
+THEN
+  RESPONSE #100
+    SetTeam(Myself,TEAM_1)
+END
+
+IF
+  Help([0.0.TEAM_2])
+THEN
+  RESPONSE #100
+    Enemy()
+    EscapeArea()
+END
+>>>>>>>>
+
+COPY_EXISTING ~0400ELY.BCS~ ~override~
+ DECOMPILE_BCS_TO_BAF
+  INSERT_FILE 0x0 ~.../inlinedfile/addelyce.baf~
+  REPLACE_TEXTUALLY
+~IF
+  Global("Elyce","AR0400",0)
+THEN~
+~IF
+  GlobalLT("Elyce","AR0400",4)
+  !Global("Elyce","AR0400",2)
+THEN~
+  REPLACE_TEXTUALLY
+~GlobalGT("Elyce","AR0400",2)~
+~GlobalGT("Elyce","AR0400",3)~
+  REPLACE_TEXTUALLY
+~Global("Elyce","AR0400",1)~
+~Global("Elyce","AR0400",2)
+ !Global("Maeth_DEAD","KAPUTZ",1)
+ !Global("Tarin_DEAD","KAPUTZ",1)~
+  COMPILE_BAF_TO_BCS
+ BUT_ONLY_IF_IT_CHANGES
+
+
+<<<<<<<< .../inlinedfile/addmaethtarin.baf
+IF
+  OnCreation()
+THEN
+  RESPONSE #100
+    SetTeam(Myself,TEAM_2)
+END
+
+IF
+  Help([0.0.TEAM_1])
+THEN
+  RESPONSE #100
+    Enemy()
+    Attack(LastAttackerOf(LastHelp))
+END
+
+IF
+  Help([0.0.TEAM_2])
+THEN
+  RESPONSE #100
+    EscapeArea()
+END
+>>>>>>>>
+
+COPY_EXISTING ~0400MAE.BCS~ ~override~
+              ~0400TAR.BCS~ ~override~
+ DECOMPILE_BCS_TO_BAF
+  INSERT_FILE 0x0 ~.../inlinedfile/addmaethtarin.baf~
+  REPLACE_TEXTUALLY
+~GlobalGT("Elyce","AR0400",2)~
+~GlobalGT("Elyce","AR0400",3)~
+  REPLACE_TEXTUALLY
+~Global("Elyce","AR0400",0)~
+~GlobalLT("Elyce","AR0400",4)
+ !Global("Elyce","AR0400",1)
+ !Global("Elyce","AR0400",2)~
+  COMPILE_BAF_TO_BCS
+ BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~0400MAE.BCS~ ~override~
+ DECOMPILE_BCS_TO_BAF
+  REPLACE_TEXTUALLY
+   ~Attack("Tarin")~
+   ~MoveToPoint([602.1028])
+    Attack("Tarin")~
+  COMPILE_BAF_TO_BCS
+ BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~0400TAR.BCS~ ~override~
+ DECOMPILE_BCS_TO_BAF
+  REPLACE_TEXTUALLY
+   ~Attack("Maeth")~
+   ~MoveToPoint([602.1068])
+    Attack("Maeth")~
+  COMPILE_BAF_TO_BCS
+ BUT_ONLY_IF_IT_CHANGES
+
+// String 33606 originally says "sister", should say "lover"
+STRING_SET 33606 @33606 /* ~"Your lover wanted me to stop the two of you from fighting."~ */

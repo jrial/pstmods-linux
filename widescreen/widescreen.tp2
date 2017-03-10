@@ -1,0 +1,26 @@
+BACKUP ~widescreen/backup~
+AUTHOR ~http://bit.ly/hf2XsG~
+
+ALLOW_MISSING ~ar1010.wed~
+
+VERSION ~Widescreen Mod v3.07~
+
+README ~widescreen/readme-widescreen-%LANGUAGE%.html~ ~widescreen/readme-widescreen.html~
+
+
+LANGUAGE ~English~ ~english~ ~widescreen/tra/english/setup.tra~
+LANGUAGE ~Francais (Isaya & Lothringen)~ ~french~ ~widescreen/tra/french/setup.tra~
+LANGUAGE ~Spanish (ghildrean & Ancalagon el Negro)~ ~spanish~ ~widescreen/tra/spanish/setup.tra~
+LANGUAGE ~Russian by Prowler & Njkzy (arcanecoast.ru)~ ~russian~ ~widescreen/tra/russian/setup.tra~
+LANGUAGE ~Italiano~ ~italian~ ~widescreen/tra/italian/setup.tra~
+LANGUAGE ~Portoguese by Felipe~ ~portoguese~ ~widescreen/tra/portoguese/setup.tra~
+
+BEGIN @26
+SUBCOMPONENT @1
+OUTER_SET patchExe = 1
+INCLUDE ~widescreen/core.tpa~
+
+BEGIN @27 // gemrb, skip the exe patching
+SUBCOMPONENT @1
+OUTER_SET patchExe = 0
+INCLUDE ~widescreen/core.tpa~

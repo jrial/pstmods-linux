@@ -1,0 +1,36 @@
+             //  0 No music							   
+MAIN.mus     //  1 Planescape Main Theme                
+CHAR_01.mus  //  2 Char - Nameless One                  
+CHAR_02.mus  //  3 Char - Transcendent One              
+CHAR_03.mus  //  4 Char - The Shadows                   
+CHAR_04.mus  //  5 Char - Deionarra                     
+CHAR_05.mus  //  6 Char - Ravel
+CHAR_06.mus  //  7 Char - Fhjull Forked-Tongue
+CHAR_07.mus  //  8 Char - Trias
+CHAR_09.mus  //  9 Char - Annah
+CHAR_10.mus  // 10 Char - Dak'kon
+CHAR_01.mus  // 11 Char - Morte
+CHAR_12.mus  // 12 Char - Nordom 
+CHAR_13.mus  // 13 Char - Fall-from-Grace
+CHAR_14.mus  // 14 Char - Vhailor
+CHAR_15.mus  // 15 Char - Ignus
+MORT.mus     // 16 Area - Mortuary
+SIG.mus      // 17 Area - Sigil
+SMOL.mus     // 18 Area - Smoldering Corpse Bar
+BONE.mus     // 19 Area - Bones of the Night
+CIVIC.mus    // 20 Area - Civic Festhall
+RAVE.mus     // 21 Area - Ravel's Maze
+MODR.mus     // 22 Area - Modron Maze
+CUR.mus      // 23 Area - Curst
+BAAT.mus     // 24 Area - Baator
+FORT.mus     // 25 Area - Fortress of Regrets
+CHAR13b.mus  // 26 Area - Fall-from-Grace
+BT1.mus      // 27 Battle - Sigil
+BT2.mus      // 28 Battle - Catacombs
+BT3.mus      // 29 Battle - Curst
+BT4.mus      // 30 Battle - Modron Cube
+BT5.mus      // 31 Battle - Fortress of Regrets
+BT5.mus      // 32 Battle - Fortress of Regrets - Final
+END_01G.mus  // 33 Ending - Good
+END_01B.mus  // 34 Ending - Bad
+END_02.mus   // 35 Ending - Indifferent

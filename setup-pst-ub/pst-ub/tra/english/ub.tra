@@ -1,0 +1,67 @@
+@-1000= "The %TP2_FILE_NAME% mod has"
+@-1001= "distinct optional components.\nTo save time, you can choose what to do with them at a high level rather\nthan being asked about each one.\n"
+@-1002= "What should be done with all components that are NOT YET installed?\n[I]nstall them, [S]kip them, [A]sk about each one? "
+@-1003= "What should be done with all components that are ALREADY installed?\n[R]e-install them, [U]ninstall them, [S]kip them, [A]sk about each one? "
+@-1004= "PLEASE email the file"
+@-1005= "to"
+@-1006= "Install "
+@-1007= "?
+[R]e-Install, [N]o Change or [U]ninstall or [Q]uit? "
+@-1008= "?
+[I]nstall, or [N]ot Install or [Q]uit? "
+@-1009= "Enter part of a module name: "
+@-1010= "Re-Installing ["
+@-1011= "] component "
+@-1012= "Re-Installing Using Language"
+@-1013= "Removing old installation of ["
+@-1014= "] first ..."
+@-1015= "SUCCESSFULLY REMOVED OLD"
+@-1016= "Installing"
+@-1017= "ERROR Installing ["
+@-1018= "], rolling back to previous state"
+@-1019= "SUCCESSFULLY INSTALLED"
+@-1020= "Skipping "
+@-1021= "Removing ["
+@-1022= "] (component #"
+@-1023= ")"
+@-1024= "SUCCESSFULLY REMOVED ["
+@-2000= "Readme Viewer"
+@-2001= "Would you like to view the Readme? [Y]es or [N]o:"
+@00001 = ~All Recommended PS:T Unfinished Business Components~
+@00002 = ~Restored Able Ponder-Thought Research~
+@00003 = ~Restored More Morte Mortuary Moments~
+@00004 = ~Restored Candlestick Quest~
+@00005 = ~Restored Deionarra's Truth Conversations~
+@00006 = ~Restored Pendant of Yemeth Quest~
+@00007 = ~Restored Elyce's Company~
+@00008 = ~Restored Curst Citizens~
+@00009 = ~Restored Curst Prisoners~
+@00010 = ~Restored Carl Parfidor~
+@00011 = ~Restored Morte-Ingress's Teeth Banter~
+@00012 = ~Restored Alley of Dangerous Angles Thugs~
+@00013 = ~Restored Items~
+@00014 = ~Restored Party Comments and Banters~
+@00015 = ~Restored Cheat Items (Not Recommended)~
+@00016 = ~   Already Successfully Installed!~
+@00017 = ~Examine the blue book.~
+@00018 = ~Examine the sword.~
+@00019 = ~INGRESS' TEETH
+Weight: 1
+
+This is a handful of Ingress' living teeth. Apparently, they didn't want to go with her back through the portal to her home plane. They rattle amongst themselves whenever they are held close together; they remind you of a bunch of creepy ivory hopping bugs.~
+@00020 = ~Restored Mebbeth~
+@00021 = ~Expanded Deionarra's Truth Mod~
+@00022 = ~Restored Lower Ward Encounters~
+@00023 = ~QUILL PEN
+Weight: 0
+
+You found this quill pen in a storage closet in your room in the Festhall. It appears quite ordinary.~
+@00024 = ~Sealed Closet~
+@00025 = ~Restored Bestiary Entries~
+@01117 = ~"Looks like directions..." Morte clears his throat. "Let's see. It starts with..."
+
+"I know you feel like you've been drinking a few kegs of Styx wash, but you need to CENTER yourself. Among your possessions is a JOURNAL that'll shed some light on the dark of the matter. PHAROD can fill you in on the rest of the chant, if he's not in the dead-book already."
+
+"Don't lose the journal or we'll be up the Styx again. And whatever you do, DO NOT tell anyone WHO you are or WHAT happens to you, or they'll put you on a quick pilgrimage to the crematorium. Do what I tell you: READ the journal, then FIND Pharod."~
+@33606 = ~"Your lover wanted me to stop the two of you from fighting."~
+@50577 = ~There are a number of chapters within the tome: Teleport Cheat, Rest Anywhere Cheat, Wealth Cheat, Attribute Score Cheat, Death Cheat, Experience Cheat, Word 'o Good and Evil Cheat, and Word o' Law and Chaos Cheat.~

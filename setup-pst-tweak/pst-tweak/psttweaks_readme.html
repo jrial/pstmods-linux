@@ -1,0 +1,636 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style type="text/css">
+    /*<![CDATA[*/
+    <!-- 
+      body {
+        margin: 0;
+        padding: 0;
+        cursor: default;
+        text-align: center;
+        color: #000;
+        background: #e3e3db url('http://spellholdstudios.net/images/sh_bg_main.jpg');
+      }
+
+      #wrap {
+        text-align: left;
+        margin: 0 auto;
+        margin-top: 20px;
+        width: 88%;
+        font-family: Verdana, Tahoma, Arial, sans-serif;
+        font-size: 12px;
+        color: #333;
+      }
+
+      #header {
+        text-align: center;
+        background: #e5e5e5;
+        border: 1px solid #781808;
+        border-top: 5px solid #781808;
+        border-bottom: 5px solid #781808;
+        padding: 5px 0 13px 0;
+      }
+      
+      #header .about {
+        margin: 7px 0 0 0;
+        padding: 0;
+        font-style: italic;
+        color: #555;
+      }
+
+      #header .menu {
+        font-weight: bold;
+        margin: 0;
+        color: #999;
+      }
+      
+      #header .menu a:link,
+      #header .menu a:visited {
+        color: #333;
+      }
+      
+      #maindiv {
+        margin: 0 auto;
+        margin-top: -20px;
+        width: 80%;
+      }
+      
+      #maindiv .content {
+        counter-increment: kman;
+        counter-reset: h2;
+        background-color: #e8e8e6;
+        padding: 0 0 25px 0;
+        margin: 50px auto;
+        border-width: 1px 1px 4px 10px;
+        border-style: solid;
+        border-color: #781808;
+        position: relative;
+        display: block;
+      }
+
+      #maindiv .content::before {
+        content: counter(kman, lower-roman);
+        font-size: 100%;
+        font-weight: bold;
+        text-align: center;
+        color: #eee;
+        background-color: #781808;
+        width: 35px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        display: block;
+      }
+      
+      h2 {
+        display: block;
+        font-family: Verdana, Trebuchet MS, Arial, serif;
+        text-align: left;
+        text-indent: 30px;
+        padding: 0px;
+        margin: 20px 0 0 0;
+        border-bottom: dotted 2px #d0d0d0;
+        border-top: dotted 2px #d0d0d0;
+        background: #deded9;
+        font-size: 160%;
+      }
+      
+      h2::first-letter {
+        color: #781808;
+        background-color: transparent;
+      }
+
+      #maindiv p {
+        font-size: 100%;
+        font-style: normal;
+        line-height: 150%;
+        padding: 0px;
+        margin: 10px auto;
+        width: 90%;
+        display: block;
+      }
+      
+      #maindiv address a:link,
+      #maindiv address a:visited {
+        font-weight: bold;
+        text-decoration: underline;
+        background-color: transparent;
+        color: #eaeaea !important;
+        padding-right: 5px;
+        padding-left: 6px;
+      }
+
+      #maindiv address a:focus,
+      #maindiv address a:hover {
+        text-decoration: none;
+        color: #F1F1F1;
+        border: 0;
+      }
+      
+      #maindiv address a:active {
+        color: #fff;
+        text-decoration: line-through;
+        border: none;
+      }
+      
+      #maindiv address {
+        font-size: 95%;
+        font-style: normal;
+        font-weight: bold;
+        text-decoration: none;
+        color: #BBB;
+        background-color: #781808;
+        padding: 3px 0px 0px;
+        margin: 0px;
+        width: 100%;
+        position: absolute;
+        bottom: -1px;
+        left: 0px;
+        display: block;
+        text-align: right;
+      }
+
+      #maindiv .important {
+        font-size: 95%;
+        font-family: Verdana;
+        text-align: left;
+        background-color: #F1F1F1;
+        border-top: solid 1px #aaa;
+        border-bottom: solid 1px #aaa;
+        border-left: solid 6px #aaa;
+        border-right: solid 6px #aaa;
+        padding: 10px;
+        margin: 20px auto;
+        width: 80%;
+        line-height: 160%;
+      }
+      
+      #maindiv .important::before {
+        display: none;
+      }
+      
+      #maindiv .important p {
+        font-size: 100%;
+        text-indent: 0px;
+        margin: 5px 0 10px 0;
+      }
+
+      #maindiv ul {
+        margin: -10px 0 0 30px;
+        *margin-left: 65px;
+      }
+      
+      #maindiv ol {
+        margin: -10px 0 0 35px;
+        *margin-left: 70px;
+      }
+      
+      #maindiv .important ul {
+        margin: -10px 0 0 15px;
+      }
+
+      #maindiv .important ol {
+        margin: -10px 0 0 20px;
+      }
+      
+      #maindiv ul li {
+        list-style-type: square;
+        line-height: 150%;
+      }
+
+      #maindiv ol li {
+        line-height: 150%;
+      }
+
+      .t1 {
+        font-weight: bold;
+        width: 26%;
+        text-align: right;
+        clear: right;
+        float: left;
+        *float: none;
+        *margin-left: 65px;
+        line-height: 22px;
+      }
+      
+      .t2 {
+        text-align: left;
+        width: 73%;
+        float: right;
+        *float: none;
+        line-height: 22px;
+      }
+      
+      hr {
+        margin: 10px 0 10px 0;
+        padding: 0;
+        height: 1px;
+        border: 0;
+        color: #aaa;
+        background-color: #aaa;
+      }
+      
+      hr.floatfix {
+        clear: both;
+        color: #e8e8e6;
+        background-color: #e8e8e6;
+        *margin: 0;
+        *padding: 0;
+      }
+
+      h1 {
+        font-size: 225%;
+        color: #444;
+        padding: 5px 0 5px 0;
+        margin: 0;
+        width: 100%;
+      }
+
+      h3,
+      h4,
+      h5 {
+        margin: 10px 40px 10px 40px;
+        padding: 0;
+      }
+      
+      h3 {
+        font-size: 125%;
+        font-style: italic;
+      }
+
+      h4 {
+        font-size: 125%;
+      }
+      
+      h5 {
+        font-size: 100%;
+      }
+      
+      h6 {
+        width: 100%;
+        margin: 10px 0 15px 0;
+        background-color: #ECECEC;
+        text-align: left;
+        text-indent: 30px;
+        font-size: 100%;
+        font-style: italic;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        border-bottom: solid 1px #bbb;
+        border-top: solid 1px #bbb;
+      }
+
+      a:link,
+      a:visited {
+        color: #781808;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      a:hover,
+      a:active {
+        color: #222;
+        border-bottom: 1px solid black;
+      }
+
+    -->
+    /*]]>*/
+    </style>
+    <title>SPELLHOLD STUDIOS - Planescape: Torment Tweak Pack</title>
+  </head>
+  <body>
+    <a name="top" id="top"></a>
+    <div id="wrap">
+      <div id="header">
+        <h1>Planescape: Torment Tweak Pack</h1>
+        <strong>A Spellhold Studios mod for Planescape: Torment</strong>
+        <hr />
+        <p class="about">
+          Author:  Qwinn (Paul Escalona)
+        </p>
+        <p class="about">
+          Engine Tweaks by:  scient (Brendan Casey)
+        </p>
+        <p class="about">
+          <a href="http://www.spellholdstudios.net/ie/pst-qtweaks">Mod Website</a> &#8226;
+          <a href="http://www.shsforums.net/index.php?showforum=554">Mod Forum</a> &#8226;
+          Version: 4.12
+        </p>
+        <hr />
+        <p class="menu">
+          <a href="#intro">Introduction</a> &middot;
+          <a href="#installation">Installation</a> &middot;
+          <a href="#components">Component List</a> &middot;
+          <a href="#faq">FAQ</a> &middot;
+          <a href="#credits">Credits</a> &middot;
+          <a href="#version">Version History</a>
+        </p>
+      </div>
+      <div id="maindiv">
+
+        <!-- ================== I n t r o d u c t i o n ================== -->
+        <a name="intro" id="intro"></a>
+        <div class="content">
+          <h2>Introduction</h2>
+
+          <p>This WeiDU mod adds a few ease-of-use tweaks to your Planescape: Torment install.</p>
+
+          <p>Here's the short list of Tweaks.  As of Version 4.12, there are 19. Click <a href="#components">here</a> for a detailed description of each.</p>
+
+          <br />
+
+<ul>
+<li>Banter Accelerator (STRONGLY recommended) - by Qwinn</li>
+<li>BG2-Style THAC0 Display - by scient</li>
+<li>Stackable Rings, Charms, Bracelets, Scrolls - by Qwinn</li>
+<li>QuickSave/QuickLoad (Not Recommended) - by scient</li>
+<li>Explore City Areas - by Qwinn</li>
+<li>Scale of Souls - by scient</li>
+<li>Save Nordom! - by Qwinn</li>
+<li>Disabled Stat Minimums - by scient</li>
+<li>Maximized Hit Points per Level for TNO and Party - by Qwinn and scient</li>
+<li>Maximized Friends Spell - by Qwinn</li>
+<li>No Battle Music - by Qwinn</li>
+<li>Use Floating Text Font Globally - by Qwinn</li>
+<li>Identify All Items - by Qwinn</li>
+<li>Early Glabrezu - by Qwinn</li>
+<li>Power Action Leprechaun Annah - by Black Isle</li>
+<li>Easter Egg Morte - by Black Isle</li>
+<li>Rest Anywhere (Not Recommended) - by Qwinn</li>
+<li>Tome of Cheats (Not Recommended) - by Qwinn</li>
+<li>Dustman Robes - by scient</li>
+
+ <br />
+</ul>
+
+
+            <address>
+            <span class="footer">Mod title &gt; Introduction</span> &#8226;<a href="#top">BACK TO TOP</a>
+          </address>
+        </div>
+
+        <!-- ================== I n s t a l l a t i o n ================== -->
+        <a name="installation" id="installation"></a>
+        <div class="content">
+          <h2>Installation</h2>
+
+          <p>PS:T Tweak Pack was created and tested on a clean install of the 4-CD version of Planescape: Torment, followed by the application of the <a href="http://www.sorcerers.net/Games/Torment/index_misc.php">Official PS:T Patch 1.1 available at Sorcerer's Place</a>, followed by the <a href="http://spellholdstudios.net/ie/pst-fixpack">PS:T Ultimate WeiDU Fixpack</a>.
+
+          <p>Installing the PS:T Fixpack prior to PS:T Tweak Pack is very strongly recommended. The PS:T Fixpack readme contains instructions for creating a good base for all other mods, including how to patch the game if you have the 4CD version and installing your language pack if necessary.</p>
+
+         <p>Once that base of a patched and bug-fixed install is laid down, any other WeiDU mods you wish to install can be installed in any order.  For example, after installing the Fixpack, feel free to install <a href="http://www.spellholdstudios.net/ie/pst-ub">PS:T Unfinished Business</a> before or after PS:T Tweak Pack, it should make no difference.  All WeiDU mods are designed to play well together and introduce no conflicts with one another.</p>
+
+          <p><strong>To install PS:T Tweak Pack</strong>, simply extract psttweak.rar into the main directory of your Planescape: Torment game (probably C:\Program Files\Black Isle\Torment).  Click Setup-PST-Tweak.exe and follow the prompts, selecting the tweaks you wish to use.</p>
+
+          <p><strong>To uninstall</strong>, simply click Setup-PST-Tweak.exe once more and follow the prompts.</p>
+
+           <address>
+            <span class="footer">PS:T Tweak Pack &gt; Installation</span> &#8226;<a href="#top">BACK TO TOP</a>
+          </address>
+        </div>
+
+
+        <!-- =========================== C O M P O N E N T   L I S T  ======================== -->
+        <a name="components" id="components"></a>
+        <div class="content">
+          <h2>Detailed Component List</h2>
+
+<h4>1. Banter Accelerator</h4>
+
+<p>This almost made it into the Ultimate WeiDU Fixpack, because without this, the vast majority of banters simply will -not- appear in your game.  They come very rarely... for a while I thought you -couldn't- get banters by Morte or Annah.  By the end of a slow and thorough game, you might see, if you're quite fortunate, perhaps 12 out of the 78 fully voiced banters that shipped with the game - and if you play multiple games, it'll likely be the -same- 12 each game.  With this component added, you can see them all.</p>
+
+<p>When considering installing this tweak, note that PS:T had some serious all-star voice acting. For those who were unaware, here's some highlights:  Annah is voiced by Sheenah Easton (Scottish pop singer and actress).  Nordom is voiced by Dan Castellaneta (Homer Simpson).  Dak'kon is voiced by Mitch Pileggi (X-Files Assistant Director Skinner).  Trias is voiced by John de Lancie ("Q" from Star Trek: The Next Generation). Morte is voiced by Rob Paulsen (Arthur from "The Tick", Pinky of "and the Brain" fame, Kivan in Baldur's Gate, Anomen in BG2). Fall from Grace and Deionarra are voiced by Jennifer Hale (Dynaheir in Baldur's Gate, Mazzy in BG2).</p>
+
+<p>Important notes:</p>
+
+<ul>
+<li>This tweak makes banters appear based on game time, not real time. This means that travelling the world map or resting could trigger a banter, depending on the interval you've selected.</li>
+<li>As of Tweak Pack version 3.5, the game's normal method of making banters appear -is- completely deactivated via an engine fix provided by scient. This has actually seemed to cure several persistent problems such as occasionally being unable to talk to party members until you save/reload or enter a new area. In that sense, the Banter Accelerator can now be considered even more of a Fix, but for consistency's sake it will remain in the Tweak Pack.</li>
+<li>You can turn off accelerated banters by deactivating Party AI. If you want to see banters but do not want party combat AI, leave the Party AI on and use the "T" key to toggle Combat AI on and off.</li>
+</ul>
+
+<h4>2. BG2-Style THAC0 Display</h4>
+
+<p>PS:T's THAC0 display is, frankly, terrible. It only gives you one number, it includes factors most players would agree it shouldn't, and it doesn't include factors most would agree it should. Thanks to scient, our incredibly talented PS:T engine guru, you can now have your character's THAC0 display as two separate lines, base and adjusted THAC0, just as they do in Baldur's Gate 2. Very highly recommended.</p>
+
+<h4>3. Stackable Rings, Charms, Bracelets, Scrolls</h4>
+
+<p>What it sounds like. Makes inventory management much easier, as multiple instances of the same item can be stacked and kept in a single inventory slot.</p>
+
+<h4>4. QuickSave/QuickLoad (Not Recommended)</h4>
+
+<p>This adds QuickLoad functionality to PS:T (vanilla game only has QuickSave). You can choose F9 or F10 for Quickload functionality, and Quicksave functionality is mapped to the F5 key in addition to its normal setup. Please note, per scient, that this tweak is still under development. For the time being, if you QuickLoad while the mouse is hovering over anything clickable (like character portraits, GUI buttons, etc.) it may cause the game to crash.  There are also some game state issues after loading a game. These will hopefully be fixed in a future version.</p>
+
+<h4>5. Explore City Areas</h4>
+
+<p>This tweak removes the Fog of War from all city areas in game. The previous version which existed in PS:T Tweak Pack v1.00-2.00, Explore <i>All</i> Areas, is no longer supported. Don't use it.</p>
+
+<h4>6. Scale of Souls</h4>
+
+<p>This mini-mod used to introduce a new item, available very early in the game, called the Scale of Souls.  It allowed TNO to see a numerical representation of his alignment, thus making it possible to see what effect his actions have on his alignment.</p>
+
+<p>As of Tweak Pack v3.51, this tweak now instead installs an engine fix, produced by Engine Guru scient, that allows you to see your numerical alignment when hovering the mouse cursor over the alignment button on your character sheet. As of v4.0, it also shows your party member's morale directly on their character information display.</p>
+
+<p>TNO starts the game with a "Good" and "Law" rating of 0.  Evil acts subtract from the "Good" rating, and good acts add to it.  Chaotic acts subtract from the "Law" rating, and lawful acts add to it.  Dropping a rating from -20 to -21 makes a character's alignment change from Neutral to Chaotic or Evil, and raising a rating from 14 to 15 makes a character's alignment change from Neutral to Good or Lawful.</p>
+
+<p>Tassadar88 at Spellhold Studios kindly provided the excellent inventory icons for the Scale, which fit well with the overall PS:T graphics style, and even though the graphic is no longer in use, his work remains greatly appreciated.</p>
+
+<h4>7. Save Nordom!</h4>
+
+<p>Most sociable players without metagaming knowledge will leave Sigil with a full party, especially if they've found Nordom by then. When you encounter Vhailor in the Curst Underground, you are then forced to make a horrible decision: leave Vhailor where he is (which basically just writes all his content out of the game) or strand one of your current party members in Vhailor's prison with no way out forever (usually poor Nordom). Not for any good reason, just because of the arbitrary party size limit of 6.</p>
+
+<p>This tweak allows you to... Save Nordom! The requirements are this:  You must be in the area where you found Vhailor. You must have Vhailor in your party. Nordom must *not* be in your party. And you must have the Modron Cube with you. If you meet those requirements, talk to Nordom before you leave, and he will suggest the means by which he may be saved, so that you can get him back when you finally return to Sigil.</p>
+
+<p>This is a completely original work created by me (Qwinn).  It contains new dialogue, I hope you like it and find it in character.</p>
+
+<h4>8. Disabled Stat Minimums</h4>
+
+<p>The vanilla game sets all of TNO's stats at a minimum of 9. This tweak by our engine guru, scient, lowers the minimum of each stat down to 3. The decision to set the minimums to 9 must have come late in the development process, because some original dialogue checks require 9 in a stat, so that in the original game you'd always pass them. However, with this tweak you might fail these checks if you lower the relevant stat too much. You are also required to have 9 INT to be trained as a mage, and 9 DEX to be trained as a thief. Lower your stats below 9 at your own risk!</p>
+
+<h4>9. Maximum Hit Points per Level for TNO and Party</h4>
+
+<p>Takes the randomness out of the hit points gained when TNO or a party member gains a level.  They are instead simply assigned the maximum HP they can get for their class.</p>
+
+<h4>10. Maximized Friends Spell</h4>
+
+<p>Takes the randomness out of the charisma boost granted by the Friends spell.  When cast, the spell will grant a temporary 8 point boost to charisma, rather than a random 2-8 point boost.</p>
+
+<h4>11. No Battle Music</h4>
+
+<p>This removes the battle music from all areas except near the end of the game. Credit to Platter for coming up with the methodology on this one.</p>
+
+<h4>12. Use Floating Text Font Globally</h4>
+
+<p>This replaces the font which is used everywhere except in floating text with the font used only for floating text. Some may consider it easier to read. I, personally, do not.</p>
+
+<p>I'd strongly recommend NOT using this if you are using Ghostdog's excellent PS:T UI mod. His mod offers many font options, all superior to this tweak.</p>
+
+<h4>13. Identify All Items</h4>
+
+<p>Self-explanatory. Sets the lore value needed to identify every item in the game to 0.<p>
+
+<h4>14. Early Glabrezu</h4>
+
+<p>By popular demand, this tweak will cause UnderSigil to spawn Glabrezu just as it does after you return to Sigil near the end of the game.  Though I wouldn't use it because it can be unbalancing, I can appreciate the desire for it... there's some wonderful rare drops off the Glabrezu that, by the point you can get them without the tweak, you really don't have anywhere left to use them.  The Glabrezu spawns, however, remain exceedingly rare, and to lower the unbalancing aspect of the tweak, Early Glabrezu have their 70,000 xp reward nerfed to 12,000 to remain in line with experience point gains available at that point in the game.  Glabrezu near the end game will give the full 70,000 experience reward.</p>
+
+<h4>15. Power Action Leprechaun Annah, by Black Isle</h4>
+
+<p>The folks at Black Isle provided this alternate wardrobe for Annah, including clover-leafs for punch daggers.</p>
+
+<h4>16. Easter Egg Morte</h4>
+
+<p>In the same spirit as Power Action Leprechaun Annah, this tweak (also by the folks at Black Isle) gives Morte new graphics and even sounds for you to enjoy your game with.</p>
+
+<h4>17. Rest Anywhere (Not Recommended)</h4>
+
+<p>Fairly self-explanatory. You will no longer be denied by the message "It is too dangerous to rest here." when using the Rest button. Not recommended - it makes the game trivially easy.</p>
+
+<h4>18. Tome o' Cheats (Not Recommended)</h4>
+
+<p>Based on an item description that came with the original game files, this tweak adds the Tome o' Cheats to the game, a useful tool when testing mods for the game but otherwise can empower TNO so greatly as to make the game trivial.  It is most strongly -not- recommended for casual play, as it will remove any challenge whatosever from game.<p>
+
+<p>The version of the Tome o' Cheats contains the Teleport Cheat, Rest Anywhere Cheat, Wealth Cheat, Attribute Score Cheat, Death Cheat, Experience Cheat, Word 'o Good and Evil Cheat, and Word o' Law and Chaos Cheat.</p>
+
+<p>It should be noted that <a href="http://www.spellholdstudios.net/ie/pst-ub">PS:T Unfinished Business</a> also contains a Tome o' Cheats tweak, the difference being that with this Tweak Pack component you start the game with the Tome o' Cheats in your possession, whereas in the Unfinished Business component you have to wait until you get to Vrischika (as was... *cough*... "intended") a fair ways into the game before you can buy the Tome.  And Vrischika makes it rather expensive too, and not in terms of jink either.</p>
+
+<h4>19. Dustman Robes</h4>
+
+<p>This tweak disables the area restriction for the Dustman Robes by allowing it to be worn outside the Mortuary (AR0201, AR0202, AR0203).  Without this tweak, if you enter an area outside the Mortuary the robes will be automatically unequiped.  This is a much nicer solution than Platter's method that edits the RESDATA.ini forcing TNO into always looking like he has the robes equipped.  This tweak just gives you the ability to wear the robes anywhere you want. 
+
+           <address>
+            <span class="footer">PS:T Tweak Pack &gt;Component List</span> &#8226;<a href="#top">BACK TO TOP</a>
+          </address>
+        </div>
+
+        <!-- ================== F A Q ================== -->
+        <a name="faq" id="faq"></a>
+        <div class="content">
+          <h2>Frequently Asked Questions</h2>
+
+          <p><strong>Q: I've been playing quite a while now, and I haven't seen any "interparty banters" - what are you talking about?</strong><br />A: One of two things is happening here. A) At some point, you disabled Party AI (a small button near the bottom right of the main screen). Game limitations require me to implement the banter scripts in the Party AI. If you don't care for the game's Combat AI for your characters, I've provided the ability to toggle it on or off by pressing the "T" key on your keyboard (but only when Party AI is active).  B) You need to wait a bit longer. Dak'kon doesn't start any banters - he's the quiet sort. That means you're not going to see any banters until you've picked up a fourth party member, which can take a while.  If you've had any two characters with banter (Morte, Annah, Grace, Nordom) in your party for longer than the interval you chose at install, and you have your Party AI turned on, please report it at the forums.</p>
+
+          <p><strong>Q: While playing one of these components, I ran into a bug.  What can I do?</strong><br />A: Report the bug here at the <a href="http://www.shsforums.net/index.php?showforum=554">PS:T Tweak Pack Mod Forum</a> at Spellhold Studios, and I'll do everything I can to resolve your issues in a timely manner.</p>
+
+          <p><strong>Q: I had problems installing PS:T Tweak Pack.  Help?</strong><br />A: Before installing PS:T Tweak Pack, did you install the Official Patch 1.1 (only if you have the 4-CD version) and then the <a href="http://www.spellholdstudios.net/ie/pst-fixpack">PS:T Ultimate WeiDU Fixpack</a>, as described in the <a href="#installation">Installation Procedure</a>?</p>
+
+          <p>If you believe you did, please report the issue here at the <a href="http://www.shsforums.net/index.php?showforum=554">PS:T Tweak Pack Mod Forum</a> at Spellhold Studios, and I'll do everything I can to resolve your issues in a timely manner.  It would be helpful if, in your post describing your problem, you attach the SETUP-PST-Tweak.DEBUG file which you'll find in your Torment folder.</p>
+
+
+          <address>
+            <span class="footer">Mod title &gt; FAQ</span> &#8226;<a href="#top">BACK TO TOP</a>
+          </address>
+        </div>
+
+        <!-- ================== C r e d i t s ================== -->
+        <a name="credits" id="credits"></a>
+        <div class="content">
+          <h2>Credits</h2>
+
+<p>Unless noted otherwise, all work in this mod is original work by myself (Qwinn).  This mod bears no direct relationship or inheritance from other mods that perform similar functions.  For example, the Tome o' Cheats component bears no relationship to Platter's Tome o' Cheats mod, which I've never seen or even downloaded, besides the name which came from the game files.  Nor does it bear any relationship or inherit anything from the G3 Tweak Pack except that I am complying with the standard they established for WeiDU PS:T mods of creating files in the override directory that will allow different WeiDU mods to detect each other's presence.</p>
+
+<p>Many many thanks to <strong>Tassadar88</strong> at the Spellhold Studios forums, for providing me with the excellent .BAM graphic file that you see in game when you look at the Scale of Souls in your inventory screen.</p>
+
+<p>Many thanks also go to the various modders over at the Gibberlings 3 forums who patiently answered many of my dumber questions as I learned how to mod, particularly <strong>Miloch, Isaya, devsin and Nythrun</strong> who pointed me in the right direction at a couple of tricky points, and to the various players who encouraged me to keep up the project over at G3 as well (particularly, but definitely not limited to, <strong>Icendoan, Daulmakan, and Bearwere)</strong>. I'd also like to extend credit to Spellhold Studios, and <strong>K'aeloree</strong> and <strong>SConrad</strong> in particular, for graciously permitting me to host all three mods here and to grant them a prominent position on the main forum page. Finally, thanks to <strong>thebigg</strong> over at the Pocket Plane Group for hearing out and implementing my wish list for additional features to include in WeiDU 207 that made my job easier.</p>
+
+<p>Version 3.00:</p>
+
+<p>Thanks to the many kind players who lent their hard work to translating these mods. <strong>Ghildrean</strong> provided the Spanish translation, <strong>Yakkuz</strong> provided the Italian translation, and the German translation was produced by cooperation between (in alphabetical order) <strong>Arkain, Avantenor, Doctor Who, HomiSite, and Zenju</strong>, with HomiSite and Zenju leading the project. Zenju, incidentally, also did the most recent revisions for the german translation of the game, and as such I am especially grateful for his help.</p>
+
+<p>Version 3.50:</p>
+
+<p>Great thanks to <strong>scient</strong>, who provided the engine fixes that allowed the problematic old method of creating banters to be deactivated, and for providing a slick engine fix to replace the Scale of Souls component with a numerical display of alignment and morale on the character screen.</p>
+
+<p>I hope you enjoy your best Planescape: Torment experience yet!  As fickle as memories can be (as TNO could well assert), may the memory of this, the best CRPG ever written, never die.</p>
+
+<p>Version 4.00:</p>
+
+<p>Even more thanks to scient, this time for the truly excellent BG2 Style THAC0 Display tweak and the Disabled Stat Minimums tweak. Thanks, scient!</p>
+
+<p>Also thanks to forum posters <strong>yarpen</strong> and <strong>W. Irving</strong> for the new Polish translation.</p>
+
+<p>Version 4.10:
+
+<p>Many thanks to <strong>tanman</strong> for updating the Italian translation, and <strong>Macbeth</strong> and <strong>Refiler</strong> for the new Russian translation!</p>
+
+<p>Version 4.12
+
+<p>Thanks to <strong>mirandir</strong> for the French translation and to <strong>Zyl</strong> for proofreading!</p>
+
+
+          <hr class="floatfix" /><!-- Don't remove the <hr /> unless you have text following the last "t2" in this <div>! -->
+          <address>
+            <span class="footer">Mod title &gt; Credits</span> &#8226;<a href="#top">BACK TO TOP</a>
+          </address>
+        </div>
+
+        <!-- ================== V e r s i o n   H i s t o r y ================== -->
+        <a name="version" id="version"></a>
+        <div class="content">
+          <h2>Version history</h2>
+          <h6>04 June 2008 - Version 1.00</h6>
+          <ul>
+            <li>Initial Release</li>
+          </ul>
+
+          <h6>07 June 2008 - Version 2.00</h6>
+            <p>Added 7 more tweaks:</p><br />
+          <ul>
+<li>Power Action Leprechaun Annah, by Black Isle</li>
+<li>Easter Egg Morte, by Black Isle</li>
+<li>Explore All Areas</li>
+<li>Rest Anywhere</li>
+<li>Identify All Items</li>
+<li>Use Floating Text Font Globally</li>
+<li>No Battle Music</li>
+           </ul>
+
+          <h6>12 August 2008 - Version 3.00</h6>
+            <ul>
+            <li>Replaced "Explore All Areas" Tweak with "Explore City Areas".</li>
+            <li>Added Spanish, English and German Translations.</li>
+          </ul>
+
+          <h6>20 December 2008 - Version 3.50</h6>
+            <ul>
+            <li>scient provided an engine tweak allowing the deactivation of the problematic original method of producing banters.</li>
+            <li>scient provided an engine tweak allowing the Scale of Souls methodology to be replaced with displaying alignment and morale numerically on the character screen.</li>
+            <li>Early Glabrezu tweak added.</li>
+          </ul>
+
+          <h6>1 January 2009 - Version 3.51</h6>
+            <ul>
+            <li>Minor fixes to the Banter Accelerator. Restores a couple of banters being skipped, and makes absolutely sure an NPC can't get stuck in banter mode.</li>
+          </ul>
+
+          <h6>15 January 2010 - Version 4.00</h6>
+            <ul>
+            <li>Added QuickLoad, BG2-Style THAC0 Display and Disabled Stat Minimums tweaks. Also, morale display in the Scale of Souls tweak is moved from the alignment button to the main character info sheet.</li>
+          </ul>
+
+          <h6>11 April 2010 - Version 4.10</h6>
+          <ul>
+            <li>Updated Italian translation, and added Russian translation.</li>
+          </ul>
+		  
+		  <h6>8 August 2011 - Version 4.11</h6>
+          <ul>
+            <li>Updated Russian translation.</li>
+          </ul>
+		  
+		  <h6>5 August 2012 - Version 4.12</h6>
+          <ul>
+            <li>Added an engine patch to disable the check that prevents TNO from wearing the Dustman Robes outside the Mortuary.</li>
+			<li>Added French translation.</li>
+          </ul>
+
+
+          <address>
+            <span class="footer">Mod title &gt; Version History</span> &#8226;<a href="#top">BACK TO TOP</a>
+          </address>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,217 @@
+// ======================== QWINN'S RESTORED CURST PRISONERS ========================
+
+// Modification by SKARDAVNELNATE as of AIP v 20080408
+// WeiDUization by Qwinn
+
+// =================================================================================
+
+INCLUDE ~setup-pst-ub/PST-UB/utils/Q_AREMacros.tph~
+COMPILE ~setup-pst-ub/PST-UB/CurstPrisoners/dlg/CurstPrisoners.d~
+
+STRING_SET 57437 ~Kemak~
+COPY_EXISTING ~KENAK.CRE~ ~override/KEMAK.CRE~
+  WRITE_LONG 0x8 57437 // Kemak
+  WRITE_LONG 0xc 57437 // Kemak
+ BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~CRSTMAL3.CRE~ ~override/GIB2.CRE~
+  WRITE_LONG 0x8 50455 // Gib
+  WRITE_LONG 0xc 50455 // Gib
+ BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~CRSTFEM2.CRE~ ~override/YELAAN2.CRE~
+  WRITE_LONG 0x8 50453 // Yelaan
+  WRITE_LONG 0xc 50453 // Yelaan
+ BUT_ONLY_IF_IT_CHANGES
+
+// Turn alignment/murder hits off for Carceri Prisoners.
+// Also set character type.
+COPY_EXISTING ~DYLANA.CRE~  ~override~
+              ~KEMAK.CRE~   ~override~
+              ~ELDAN.CRE~   ~override~
+              ~GERIK.CRE~   ~override~
+              ~PEATO.CRE~   ~override~
+              ~RAE.CRE~     ~override~
+              ~YELAAN2.CRE~ ~override~
+              ~GIB2.CRE~    ~override~
+              ~BINIAN.CRE~  ~override~
+  WRITE_BYTE 0x2e1 0
+  WRITE_ASCII 0x2bc ~curst_prisoner~ (32)
+  READ_BYTE 0x2e0 "AppearanceFlags"
+  PATCH_IF "AppearanceFlags" < 64 BEGIN WRITE_BYTE 0x2e0 "AppearanceFlags" + 64 END
+ BUT_ONLY_IF_IT_CHANGES
+
+
+COPY_EXISTING ~AR0702.ARE~ ~override~
+  LAUNCH_PATCH_MACRO ~Q_ARE_InitVars~
+  LAUNCH_PATCH_MACRO ~Q_AREAdd_InitVars~
+  SET "Q_New_Actor" = 9
+  LAUNCH_PATCH_MACRO ~Q_AREAdd_Process~
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0))           ~Binian~         #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x80    ~BINIAN~         #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x48    ~DBINIAN~        #8  // DLG
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x20    1422                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x22    1595                 // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x24    1422                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x26    1595                 // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x34    1                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x28    1                    // Visible
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x70    ~0702PRIS~        #8 // Default Script
+
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1))           ~Dylana~         #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x80    ~DYLANA~         #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x48    ~DDYLANA~        #8  // DLG
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x20    1862                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x22    2530                 // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x24    1862                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x26    2530                 // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x34    8                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x28    1                    // Visible
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x70    ~0702PRIS~        #8 // Default Script
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2))           ~Eldan~ #32          // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x80    ~ELDAN~          #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x48    ~DELDAN~         #8  // DLG
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x20    1023                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x22    1864                 // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x24    1023                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x26    1864                 // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x34    1                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x28    1                    // Visible
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3))           ~Gerik~          #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x80    ~GERIK~          #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x48    ~DGERIK~         #8  // DLG
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x20    1136                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x22    2758                 // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x24    1136                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x26    2758                 // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x34    8                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x28    1                    // Visible
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x70    ~0702PRIS~        #8 // Default Script
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4))           ~Gib~ #32            // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x80    ~GIB2~           #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x48    ~DGIB~           #8  // DLG
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x20    1838                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x22    1826                 // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x24    1838                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x26    1826                 // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x34    1                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x28    1                    // Visible
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x70    ~0702PRIS~        #8 // Default Script
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5))           ~Kemak~          #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x80    ~KEMAK~          #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x48    ~DKEMAK~         #8  // DLG
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x20    155                  // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x22    2196                 // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x24    155                  // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x26    2196                 // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x34    12                   // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x28    1                    // Visible
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x70    ~0702PRIS~        #8 // Default Script
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6))           ~Peato~          #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x80    ~PEATO~          #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x48    ~DPEATO~         #8  // DLG
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x20    2142                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x22    2179                 // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x24    2142                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x26    2179                 // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x34    12                   // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x28    1                    // Visible
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x70    ~0702PRIS~        #8 // Default Script
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7))           ~Rae~            #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x80    ~RAE~            #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x48    ~DRAE~           #8  // DLG
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x20    1494                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x22    2795                 // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x24    1494                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x26    2795                 // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x34    14                   // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x28    1                    // Visible
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x70    ~0702PRIS~        #8 // Default Script
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8))           ~Yelaan~        #32  // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x80    ~YELAAN2~        #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x48    ~DYELAAN~        #8  // DLG
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x20    1600                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x22    2400                 // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x24    1600                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x26    2400                 // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x34    1                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x28    1                    // Visible
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x70    ~0702PRIS~        #8 // Default Script
+ BUT_ONLY_IF_IT_CHANGES
+
+
+// Make it so all the prisoners you can talk to - including Roberta, Azi'Izium and Siabha, if they're down
+// there, try to escape the area when the doors open.  Jailbreak!
+<<<<<<<< .../inlinedfile/0702PRIS.BAF
+IF
+  Global("Despawn_Prisoners","AR0702",1)
+THEN
+  RESPONSE #100
+    Deactivate(Myself)
+END
+
+IF
+  AttackedBy([PC],DEFAULT)
+THEN
+  RESPONSE #100
+    Enemy()
+    Help()
+    Attack(LastAttackerOf(Myself))
+END
+
+IF
+  Global("Cassius","GLOBAL",10)
+THEN
+  RESPONSE #100
+    SetDialog("")
+    Wait(5)
+    RunToPoint([750.1430])
+    RunToPoint([1621.423])
+    RunToPoint([3650.1527])
+    RunToPoint([4600.3300])
+    EscapeArea()
+END
+>>>>>>>>
+EXTEND_TOP ~0702TOWN.BCS~ ~.../inlinedfile/0702PRIS.BAF~
+COMPILE ~.../inlinedfile/0702PRIS.BAF~
+
+// In Version 4.0, despawn prisoners variable added so that, if you leave area and come back after jailbreak, prisoners are gone rather
+// than running back toward the jail.
+<<<<<<<< .../inlinedfile/DespawnPrisoners.BAF
+IF
+  !Global("Current_Area","GLOBAL",702)
+  Global("Cassius","GLOBAL",10)
+  Global("Despawn_Prisoners","AR0702",0)
+THEN
+  RESPONSE #100
+    SetGlobal("Despawn_Prisoners","AR0702",1)
+END
+>>>>>>>>
+EXTEND_TOP ~AR0702.BCS~ ~.../inlinedfile/DespawnPrisoners.BAF~

@@ -1,0 +1,322 @@
+// =================== QWINN'S RESTORED LOWER WARD ========================
+// ============Coded:  December 1, 2008 for UB Version 3.0 ================
+
+
+INCLUDE ~setup-pst-ub/PST-UB/utils/Q_AREMacros.tph~
+INCLUDE ~setup-pst-ub/PST-UB/utils/Q_VARMacros.tph~
+COMPILE ~setup-pst-ub/PST-UB/LowerWard/dlg/LowerWard.d~
+
+// Add Hailcin'n and the 6 Deran customers
+
+COPY_EXISTING ~AR0500.ARE~ ~override~
+  LAUNCH_PATCH_MACRO ~Q_ARE_InitVars~
+  LAUNCH_PATCH_MACRO ~Q_AREAdd_InitVars~
+  SET "Q_New_Actor" = 9
+  LAUNCH_PATCH_MACRO ~Q_AREAdd_Process~
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0))           ~Hailcin'n~      #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x80    ~HAILCII~        #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x48    ~DHAILCII~       #8  // DLG
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x70    ~0500HAIL~       #8  // Default BCS
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x20    1000                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x22    1754                 // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x24    1000                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x26    1754                 // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x34    14                   // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x28    1                    // Visible
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1))           ~Deran Customer 1~       #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x80    ~LWCUSF~         #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x48    ~DDERFEM~        #8  // DLG
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x70    ~0500DCUS~       #8  // Default BCS
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x20    2190                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x22    880                  // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x24    2190                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x26    880                  // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x34    9                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 1)) + 0x28    1                    // Visible
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2))           ~Deran Customer 2~       #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x80    ~LWSECRE~        #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x48    ~DDERMALE~       #8  // DLG
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x70    ~0500DCUS~       #8  // Default BCS
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x20    2278                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x22    902                  // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x24    2278                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x26    902                  // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x34    9                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 2)) + 0x28    1                    // Visible
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3))           ~Deran Customer 3~       #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x80    ~LWTIEFF~        #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x48    ~DDERFEM~        #8  // DLG
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x70    ~0500DCUS~       #8  // Default BCS
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x20    2331                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x22    935                  // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x24    2331                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x26    935                  // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x34    8                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 3)) + 0x28    1                    // Visible
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4))           ~Deran Customer 4~       #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x80    ~LWTALKA~        #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x48    ~DDERMALE~       #8  // DLG
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x70    ~0500DCUS~       #8  // Default BCS
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x20    2367                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x22    911                  // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x24    2367                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x26    911                  // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x34    8                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 4)) + 0x28    1                    // Visible
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5))           ~Deran Customer 5~       #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x80    ~LWCUSF3~        #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x48    ~DDERFEM~        #8  // DLG
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x70    ~0500DCUS~       #8  // Default BCS
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x20    2438                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x22    880                  // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x24    2438                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x26    880                  // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x34    7                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 5)) + 0x28    1                    // Visible
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6))           ~Deran Customer 6~       #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x80    ~LWTIEFM~        #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x48    ~DDERMALE~       #8  // DLG
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x70    ~0500DCUS~       #8  // Default BCS
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x20    2565                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x22    789                  // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x24    2565                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x26    789                  // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x34    4                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 6)) + 0x28    1                    // Visible
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7))           ~Worker 1~       #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x80    ~LABOR~          #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x48    ~DLWGM~          #8  // DLG
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x70    ~0500WRKR~       #8  // Default BCS
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x68    ~0500WRKG~       #8  // General BCS
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x20    2172                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x22    2441                 // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x24    2172                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x26    2441                 // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x34    4                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 7)) + 0x28    1                    // Visible
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8))           ~Worker 2~       #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x80    ~LABOR2~         #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x48    ~DC_WORK~        #8  // DLG
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x70    ~0500WRK2~       #8  // Default BCS
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x68    ~0500WRKG~       #8  // General BCS
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x20    2925                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x22    2170                 // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x24    2925                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x26    2170                 // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x34    2                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 8)) + 0x28    1                    // Visible
+
+ BUT_ONLY_IF_IT_CHANGES
+
+<<<<<<<< .../inlinedfile/0500DCUS.BAF
+IF
+  OnCreation()
+THEN
+  RESPONSE #100
+    SetTeam(Myself,TEAM_2)
+END
+
+IF
+  Die()
+THEN
+  RESPONSE #100
+    Help()
+END
+
+IF
+  AttackedBy([PC],DEFAULT)
+THEN
+  RESPONSE #100
+    Enemy()
+    Help()
+    RunAwayFrom(LastAttackerOf(Myself),50)
+END
+
+IF
+  Help([0.0.TEAM_2])
+THEN
+  RESPONSE #100
+    Enemy()
+    Help()
+    RunAwayFrom(NearestEnemyOf(LastHelp),50)
+END
+
+IF
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    Help()
+    RunAwayFrom(NearestEnemyOf(Myself),50)
+END
+
+IF
+  WasInDialog()
+THEN
+  RESPONSE #100
+    ReturnToSavedPlace()
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/0500DCUS.BAF~ ~override~
+
+
+// Add the 2 workers near Lenny
+<<<<<<<< .../inlinedfile/0500WRKG.BAF
+IF
+  OnCreation()
+THEN
+  RESPONSE #100
+    SetTeam(Myself,TEAM_3)
+END
+
+IF
+  Die()
+THEN
+  RESPONSE #100
+    Help()
+END
+
+IF
+  AttackedBy([PC],DEFAULT)
+THEN
+  RESPONSE #100
+    Enemy()
+    Help()
+    RunAwayFrom(LastAttackerOf(Myself),50)
+END
+
+IF
+  Help([0.0.TEAM_3])
+THEN
+  RESPONSE #100
+    Enemy()
+    Help()
+    RunAwayFrom(NearestEnemyOf(LastHelp),50)
+END
+
+IF
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    Help()
+    RunAwayFrom(NearestEnemyOf(Myself),50)
+END
+
+IF
+  WasInDialog()
+THEN
+  RESPONSE #100
+    ReturnToSavedPlace()
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/0500WRKG.BAF~ ~override~
+
+<<<<<<<< .../inlinedfile/0500WRK2.BAF
+IF
+  True()
+THEN
+  RESPONSE #150
+    Continue()
+  RESPONSE #20
+    FloatMessage(Myself,29247)
+    Continue()
+  RESPONSE #20
+    FloatMessage(Myself,29248)
+    Continue()
+  RESPONSE #20
+    FloatMessage(Myself,29249)
+    Continue()
+  RESPONSE #20
+    FloatMessage(Myself,29250)
+    Continue()
+  RESPONSE #20
+    FloatMessage(Myself,29251)
+    Continue()
+  RESPONSE #20
+    FloatMessage(Myself,29252)
+    Continue()
+END
+
+IF
+  True()
+THEN
+  RESPONSE #100
+    PlaySequence(ANIM_STANDFIDGET1)
+    WaitRandom(3,6)
+    Continue()
+  RESPONSE #100
+    PlaySequence(ANIM_ATTACK1)
+    WaitRandom(3,6)
+    Continue()
+  RESPONSE #100
+    PlaySequence(ANIM_STANCETOSTAND)
+    WaitRandom(3,6)
+    Continue()
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/0500WRK2.BAF~ ~override~
+
+COPY_EXISTING ~0500WRKR.BCS~ ~override~
+  DECOMPILE_BCS_TO_BAF
+   REPLACE_TEXTUALLY ~Face(10)~ ~Face(14)~
+  COMPILE_BAF_TO_BCS
+ BUT_ONLY_IF_IT_CHANGES
+ 
+
+// Return Kii'na after eight days game time
+// First, create her timer variable
+COPY_EXISTING ~VAR.VAR~ ~VAR.TMP~
+  SET Q_FileSize = %SOURCE_SIZE%
+
+  SPRINT "Q_NewVarType"  ~GLOBAL  ~
+  SPRINT "Q_NewVarName"  ~Kiina_Return                    ~
+  SET    "Q_NewVarValue" = 0
+  LAUNCH_PATCH_MACRO Q_VarVar_AddNewRecord
+ BUT_ONLY_IF_IT_CHANGES
+COPY ~VAR.TMP~ ~VAR.VAR~
+
+// Second, give her CRE a script name and default script
+COPY_EXISTING ~KIINA.CRE~ ~override~
+  WRITE_ASCII 0x324 ~Kiina~ (18)
+  WRITE_ASCII 0x268 ~0500KINA~ (8)
+ BUT_ONLY_IF_IT_CHANGES
+
+// Lastly, add to the Lower Ward area script the code for her return
+<<<<<<<< .../inlinedfile/KiinaReturn.baf
+IF
+  !Exists("Kiina")
+  !Dead("Kiina")
+  Global("Vristigor","GLOBAL",2)
+  GlobalTimerExpired("Kiina_Return","GLOBAL")
+THEN
+  RESPONSE #100
+    CreateCreature("Kiina",[801.2495])
+END
+>>>>>>>>
+EXTEND_BOTTOM ~AR0500.BCS~ ~.../inlinedfile/KiinaReturn.baf~

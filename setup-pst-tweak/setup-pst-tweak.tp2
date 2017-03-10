@@ -1,0 +1,270 @@
+
+
+// ================================================================================================
+//                        	  PLANESCAPE: TORMENT TWEAK PACK
+//                                BY QWINN (Paul Escalona)
+//                                BY scient (Brendan Casey)
+// ================================================================================================
+// Last Modification Date:  June 15, 2012 - v4.12
+// ================================================================================================
+
+// All components of this work are completely original work by Qwinn, bearing no direct relation to
+// or inheritance from previous works with similar purposes, unless specified otherwise.
+
+
+BACKUP ~setup-pst-tweak/PST-Tweak/backup~
+AUTHOR ~pescalona@verizon.net~
+// MODDER
+VERSION ~v4.12~
+
+NO_IF_EVAL_BUG
+
+ASK_EVERY_COMPONENT
+
+LANGUAGE
+  ~English~  ~english~             ~setup-pst-tweak/PST-Tweak/tra/english/qtweak.tra~
+                                   ~setup-pst-tweak/PST-Tweak/tra/english/qtweak.tra~
+LANGUAGE
+  ~German~   ~german~              ~setup-pst-tweak/PST-Tweak/tra/english/qtweak.tra~
+                                   ~setup-pst-tweak/PST-Tweak/tra/german/qtweak.tra~
+LANGUAGE
+  ~Spanish~  ~spanish~             ~setup-pst-tweak/PST-Tweak/tra/english/qtweak.tra~
+                                   ~setup-pst-tweak/PST-Tweak/tra/spanish/qtweak.tra~
+LANGUAGE
+  ~Italian~  ~italian~             ~setup-pst-tweak/PST-Tweak/tra/english/qtweak.tra~
+                                   ~setup-pst-tweak/PST-Tweak/tra/italian/qtweak.tra~
+LANGUAGE
+  ~Polish~   ~polish~              ~setup-pst-tweak/PST-Tweak/tra/english/qtweak.tra~
+                                   ~setup-pst-tweak/PST-Tweak/tra/polish/qtweak.tra~
+LANGUAGE
+  ~Russian~  ~russian~             ~setup-pst-tweak/PST-Tweak/tra/english/qtweak.tra~
+                                   ~setup-pst-tweak/PST-Tweak/tra/russian/qtweak.tra~
+LANGUAGE
+  ~French~  ~french~               ~setup-pst-tweak/PST-Tweak/tra/english/qtweak.tra~
+                                   ~setup-pst-tweak/PST-Tweak/tra/french/qtweak.tra~
+
+
+BEGIN @-2000  // Readme Viewer
+INSTALL_BY_DEFAULT
+NO_LOG_RECORD
+DESIGNATED 100
+
+PRINT @-2001 // Would you like to view the Readme? [Y]es or [N]o:
+ACTION_READLN ~view_readme~
+
+OUTER_WHILE NOT(~%view_readme%~ STRING_EQUAL ~Y~) AND
+            NOT(~%view_readme%~ STRING_EQUAL ~y~) AND
+            NOT(~%view_readme%~ STRING_EQUAL ~N~) AND
+            NOT(~%view_readme%~ STRING_EQUAL ~n~) BEGIN
+ PRINT @-2001 // Would you like to view the Readme? [Y]es or [N]o:
+ ACTION_READLN ~view_readme~
+END
+
+ACTION_IF (~%view_readme%~ STRING_EQUAL ~Y~ OR ~%view_readme%~ STRING_EQUAL ~y~) THEN
+BEGIN
+  ACTION_IF ~%LANGUAGE%~ STRING_EQUAL ~english~ THEN
+    BEGIN  AT_INTERACTIVE_NOW ~VIEW setup-pst-tweak/PST-Tweak/PSTTweaks_Readme.html~ END
+  ACTION_IF ~%LANGUAGE%~ STRING_EQUAL ~spanish~ THEN
+    BEGIN  AT_INTERACTIVE_NOW ~VIEW setup-pst-tweak/PST-Tweak/PSTTweaks_Leeme.html~ END
+  ACTION_IF ~%LANGUAGE%~ STRING_EQUAL ~italian~ THEN
+    BEGIN  AT_INTERACTIVE_NOW ~VIEW setup-pst-tweak/PST-Tweak/PSTTweaks_Leggermi.html~ END
+  ACTION_IF ~%LANGUAGE%~ STRING_EQUAL ~german~  THEN
+    BEGIN  AT_INTERACTIVE_NOW ~VIEW setup-pst-tweak/PST-Tweak/PSTTweaks_LiesMich.html~ END
+  ACTION_IF ~%LANGUAGE%~ STRING_EQUAL ~polish~  THEN
+    BEGIN  AT_INTERACTIVE_NOW ~VIEW setup-pst-tweak/PST-Tweak/PSTTweaks_Dokumentacja.html~ END
+  ACTION_IF ~%LANGUAGE%~ STRING_EQUAL ~french~  THEN
+    BEGIN  AT_INTERACTIVE_NOW ~VIEW setup-pst-tweak/PST-Tweak/PSTTweaks_LisezMoi.html~ END
+END
+
+
+// ==================================== BANTER ACCELERATOR ========================================
+
+BEGIN @2 // ~Interparty Banter Every 4 game hours (20 minutes)~
+DESIGNATED 0
+  SUBCOMPONENT @1 // ~Banter Accelerator?  If so, Choose interval between banters.~
+    COPY_EXISTING ~SCALPEL.itm~ ~override/Q!B4HRS.xxx~
+    INCLUDE ~setup-pst-tweak/PST-Tweak/Banter/tph/Banter.tph~
+    OUTER_SET "BANTER-INTERVAL" = 1200
+    COMPILE EVALUATE_BUFFER ~setup-pst-tweak/PST-Tweak/Banter/dlg/Banter.d~
+    EXTEND_BOTTOM ~PCNAME.BCS~ ~setup-pst-tweak/PST-Tweak/Banter/baf/BANTER.BAF~
+
+BEGIN @3 // ~Interparty Banter Every 6 game hours (30 minutes) <Recommended>~
+DESIGNATED 1
+  SUBCOMPONENT @1 // ~Banter Accelerator?  If so, Choose interval between banters.~
+    COPY_EXISTING ~SCALPEL.itm~ ~override/Q!B6HRS.xxx~
+    INCLUDE ~setup-pst-tweak/PST-Tweak/Banter/tph/Banter.tph~
+    OUTER_SET "BANTER-INTERVAL" = 1800
+    COMPILE EVALUATE_BUFFER ~setup-pst-tweak/PST-Tweak/Banter/dlg/Banter.d~
+    EXTEND_BOTTOM ~PCNAME.BCS~ ~setup-pst-tweak/PST-Tweak/Banter/baf/BANTER.BAF~
+
+BEGIN @4 // ~Interparty Banter Every 10 game hours (50 minutes)~
+DESIGNATED 2
+  SUBCOMPONENT @1 // ~Banter Accelerator?  If so, Choose interval between banters.~
+    COPY_EXISTING ~SCALPEL.itm~ ~override/Q!B10HRS.xxx~
+    INCLUDE ~setup-pst-tweak/PST-Tweak/Banter/tph/Banter.tph~
+    OUTER_SET "BANTER-INTERVAL" = 3000
+    COMPILE EVALUATE_BUFFER ~setup-pst-tweak/PST-Tweak/Banter/dlg/Banter.d~
+    EXTEND_BOTTOM ~PCNAME.BCS~ ~setup-pst-tweak/PST-Tweak/Banter/baf/BANTER.BAF~
+
+BEGIN @5 // ~Interparty Banter Every 15 game hours (75 minutes)~
+DESIGNATED 3
+  SUBCOMPONENT @1 // ~Banter Accelerator?  If so, Choose interval between banters.~
+    COPY_EXISTING ~SCALPEL.itm~ ~override/Q!B15HRS.xxx~
+    INCLUDE ~setup-pst-tweak/PST-Tweak/Banter/tph/Banter.tph~
+    OUTER_SET "BANTER-INTERVAL" = 4500
+    COMPILE EVALUATE_BUFFER ~setup-pst-tweak/PST-Tweak/Banter/dlg/Banter.d~
+    EXTEND_BOTTOM ~PCNAME.BCS~ ~setup-pst-tweak/PST-Tweak/Banter/baf/BANTER.BAF~
+
+BEGIN @6 // ~Interparty Banter Every 20 game hours (100 minutes)~
+DESIGNATED 4
+  SUBCOMPONENT @1 // ~Banter Accelerator?  If so, Choose interval between banters.~
+    COPY_EXISTING ~SCALPEL.itm~ ~override/Q!B20HRS.xxx~
+    INCLUDE ~setup-pst-tweak/PST-Tweak/Banter/tph/Banter.tph~
+    OUTER_SET "BANTER-INTERVAL" = 6000
+    COMPILE EVALUATE_BUFFER ~setup-pst-tweak/PST-Tweak/Banter/dlg/Banter.d~
+    EXTEND_BOTTOM ~PCNAME.BCS~ ~setup-pst-tweak/PST-Tweak/Banter/baf/BANTER.BAF~
+
+BEGIN @26 // ~Dustman Robes~
+DESIGNATED 19
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!DUSROB.xxx~
+INCLUDE ~setup-pst-tweak/PST-Tweak/DustRobe/tph/DustRobe.tph~
+
+BEGIN @22 // ~BG2-Style THAC0 Display~
+DESIGNATED 22
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!UITHAC.xxx~
+INCLUDE ~setup-pst-tweak/PST-Tweak/UITHAC0/tph/UITHAC0.tph~
+
+BEGIN @9 // ~Stackable Rings, Charms, Bracelets, Scrolls~
+DESIGNATED 7
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!STACK.xxx~
+INCLUDE ~setup-pst-tweak/PST-Tweak/Stacking/tph/Stacking.tph~
+
+BEGIN @16 // ~Explore City Areas~
+DESIGNATED 14
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!EXPLOR.xxx~
+COPY_EXISTING ~AR0100.BCS~ ~override~
+              ~AR0101.BCS~ ~override~
+              ~AR0109.BCS~ ~override~
+              ~AR0200.BCS~ ~override~
+              ~AR0300.BCS~ ~override~
+              ~AR0400.BCS~ ~override~
+              ~AR0500.BCS~ ~override~
+              ~AR0501.BCS~ ~override~
+              ~AR0600.BCS~ ~override~
+              ~AR0700.BCS~ ~override~
+              ~AR0701.BCS~ ~override~
+              ~AR1101.BCS~ ~override~
+  DECOMPILE_BCS_TO_BAF
+   SNPRINT 6 "AreaName" "%SOURCE_FILE%"
+   REPLACE_TEXTUALLY ~GlobalSet("%AreaName%_Visited","GLOBAL",1)~ ~SetGlobal("%AreaName%_Visited","GLOBAL",1) Explore()~
+  COMPILE_BAF_TO_BCS
+ BUT_ONLY_IF_IT_CHANGES
+
+BEGIN @10 // ~Scale of Souls~
+DESIGNATED 8
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!SCALE.xxx~
+INCLUDE ~setup-pst-tweak/PST-Tweak/ScaleSouls/tph/ScaleSouls.tph~
+
+BEGIN @12 // ~Save Nordom! Tweak~
+DESIGNATED 10
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!SVNRDM.xxx~
+INCLUDE ~setup-pst-tweak/PST-Tweak/SaveNordom/tph/SaveNordom.tph~
+
+BEGIN @24 // ~Disabled Stat Minimums~
+DESIGNATED 24
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!MINSTT.xxx~
+INCLUDE ~setup-pst-tweak/PST-Tweak/MinStats/tph/MinStats.tph~
+
+BEGIN @7 // ~Maximized HP Per Level for TNO and Party~
+DESIGNATED 5
+// This file does nothing, it just allows other mods to detect this component
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!MAXHP.xxx~
+INCLUDE ~setup-pst-tweak/PST-Tweak/MaxHP/tph/MaxHP.tph~
+
+BEGIN @8 // ~Maximized Friends Spell~
+DESIGNATED 6
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!MAXFRN.xxx~
+INCLUDE ~setup-pst-tweak/PST-Tweak/MaxFriends/tph/MaxFriends.tph~
+
+BEGIN @11 // ~Class/Armor Balance Tweak~
+DEPRECATED ~This tweak should no longer be used and has been deprecated.~
+DESIGNATED 9
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!MAGEAC.xxx~
+INCLUDE ~setup-pst-tweak/PST-Tweak/FighterAC/tph/FighterAC.tph~
+
+BEGIN @20 // ~No Battle Music~
+DESIGNATED 18
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!NOMUSC.xxx~
+COPY ~setup-pst-tweak/PST-Tweak/NoBattleMusic~ ~Music~
+COPY_EXISTING ~Music/SPC.ACM~ ~Music/BT1/BT1A.ACM~
+COPY_EXISTING ~Music/SPC.ACM~ ~Music/BT2/BT2A.ACM~
+COPY_EXISTING ~Music/SPC.ACM~ ~Music/BT3/BT3A.ACM~
+COPY_EXISTING ~Music/SPC.ACM~ ~Music/BT4/BT4A.ACM~
+
+BEGIN @19 // ~Use Floating Text Font Globally~
+DESIGNATED 17
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!FONT.xxx~
+COPY_EXISTING ~TRMTFONT.BAM~ ~override/FONTDLG.BAM~
+
+BEGIN @18 // ~Identify All Items~
+DESIGNATED 16
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!IDALL.xxx~
+COPY_EXISTING_REGEXP GLOB ~.+\.ITM$~ ~override~
+  WRITE_SHORT 0x42 0
+ BUT_ONLY_IF_IT_CHANGES
+
+BEGIN @21 // ~Early Glabrezu~
+DESIGNATED 20
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!ERLGLA.xxx~
+COPY_EXISTING ~GLABREZX.CRE~ ~override/GLABREZL.CRE~
+  WRITE_LONG 0x14 12000
+ BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~AR2000A.BCS~ ~override/AR2000EA.BCS~
+  DECOMPILE_BCS_TO_BAF
+   REPLACE_TEXTUALLY ~GlabrezX~ ~GlabrezL~
+  COMPILE_BAF_TO_BCS
+ BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~AR2000B.BCS~ ~override/AR2000EB.BCS~
+  DECOMPILE_BCS_TO_BAF
+   REPLACE_TEXTUALLY ~GlabrezX~ ~GlabrezL~
+  COMPILE_BAF_TO_BCS
+ BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~AR2000C.BCS~ ~override/AR2000EC.BCS~
+  DECOMPILE_BCS_TO_BAF
+   REPLACE_TEXTUALLY ~GlabrezX~ ~GlabrezL~
+  COMPILE_BAF_TO_BCS
+ BUT_ONLY_IF_IT_CHANGES
+
+BEGIN @14 // ~Power Action Leprechaun Annah, by Black Isle~
+DESIGNATED 12
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!LEPANN.xxx~
+COPY ~setup-pst-tweak/PST-Tweak/LeprechaunAnnah~ ~override~
+
+BEGIN @15 // ~Easter Egg Morte, by Black Isle~
+DESIGNATED 13
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!EGGMOR.xxx~
+COPY ~setup-pst-tweak/PST-Tweak/EggMorte~ ~override~
+
+BEGIN ~F5 QuickSave, F9 QuickLoad~
+DESIGNATED 25
+  SUBCOMPONENT @25   
+    COPY_EXISTING ~SCALPEL.itm~ ~override/Q!QLOAD.xxx~
+    INCLUDE ~setup-pst-tweak/PST-Tweak/QuickLoad/tph/QuickLoad5-9.tph~
+
+BEGIN ~F5 QuickSave, F10 QuickLoad~
+DESIGNATED 26
+  SUBCOMPONENT @25   
+    COPY_EXISTING ~SCALPEL.itm~ ~override/Q!QLOAD.xxx~
+    INCLUDE ~setup-pst-tweak/PST-Tweak/QuickLoad/tph/QuickLoad5-10.tph~
+
+BEGIN @17 // ~Rest Anywhere (Not Recommended)~
+DESIGNATED 15
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!RESTAW.xxx~
+COPY_EXISTING_REGEXP GLOB ~AR.*.ARE~ ~override~
+  WRITE_SHORT 0x14 0
+ BUT_ONLY_IF_IT_CHANGES
+
+BEGIN @13 // ~Tome Of Cheats (Not Recommended)~
+DESIGNATED 11
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!TCHEAT.xxx~
+INCLUDE ~setup-pst-tweak/PST-Tweak/TomeCheats/tph/TomeCheats.tph~

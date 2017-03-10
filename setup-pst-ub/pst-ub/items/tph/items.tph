@@ -1,0 +1,94 @@
+
+
+// =============================== RESTORED ITEMS =====================================
+
+// RESTORED FIEND'S TEETH
+// Restores Murk the Merchant in Curst, which makes the Fiend's Teeth (for Morte) accessible.
+// Resto Pack set price to 4000, I'm setting to 5000, they're almost as good as Teeth of the
+// Fire Drake which is 6500.
+// Resto Pack created a MURK.CRE which wasn't necessary, he already had one, it's CMERCH1.CRE
+// Originally restored in Restoration Pack, though about the only thing I'm doing the same is
+// putting him in the same spot.
+
+INCLUDE ~setup-pst-ub/PST-UB/utils/Q_AREMacros.tph~
+
+COPY_EXISTING ~FTEETH.ITM~ ~override~
+  WRITE_LONG 0x34 5000 // Price
+
+COPY_EXISTING ~AR0701.ARE~ ~override~
+  LAUNCH_PATCH_MACRO ~Q_ARE_InitVars~
+  LAUNCH_PATCH_MACRO ~Q_AREAdd_InitVars~
+  SET "Q_New_Actor" = 1
+  LAUNCH_PATCH_MACRO ~Q_AREAdd_Process~
+
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0))           ~Murk~           #32 // Name
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x80    ~CMERCH1~        #8  // CRE
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x48    ~DMURK~          #8  // DLG
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x58    ~0701RUN~        #8  // Class
+WRITE_ASCII ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x70    ~0701TALK~       #8  // Default
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x38    0xffffffff           // Unknown
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x20    1950                 // Pos X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x22    1444                 // Pos Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x24    1950                 // Des X
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x26    1444                 // Des Y
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x34    2                    // Orientation
+WRITE_LONG  ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x40    0x00ffffff           // Present
+WRITE_SHORT ("Q_NewOffset_Actor" + ("Q_Siz_Actor" * 0)) + 0x28    1                    // Visible
+ BUT_ONLY_IF_IT_CHANGES
+
+// ====================================================================================
+
+// RESTORED EYE OF VECNA
+// Originally restored in Restoration Pack by Cilantro.
+
+// Makes it available in Vrischika's store, old check was for Regret > 1, impossible to get.
+// Now you just have to have talked to Trias
+STRING_SET 68425 ~GlobalGT("Regret","GLOBAL",0)~
+
+// Price set to 500, also set cursed flag and removed useless ability so that it cannot be equipped
+// to quick item slot
+COPY_EXISTING ~EYEVECNA.ITM~ ~override~
+  WRITE_LONG 0x34 500
+  WRITE_LONG 0x18 0x0000007c
+  READ_LONG 0x64 "AbilityOffset"
+  READ_SHORT 0x68 "NumAbilities"
+  READ_LONG 0x6a "EffectsOffset"
+  PATCH_IF "NumAbilities" > 0 THEN
+  BEGIN
+    WRITE_LONG 0x68 "NumAbilities" - 1
+    WRITE_LONG 0x6a "EffectsOffset" - 0x38
+    DELETE_BYTES "AbilityOffset" 0x38
+  END
+ BUT_ONLY_IF_IT_CHANGES
+
+// Eye was originally set as an infinite supply item in the store, this fixes it
+COPY_EXISTING ~VRIS.STO~ ~override~
+  READ_LONG 0x34 "ItemSoldOffset"
+  WRITE_LONG ("ItemSoldOffset" + (16 * 0x58) + 0x18) 0
+ BUT_ONLY_IF_IT_CHANGES
+
+// ======================================================================================
+
+// RESTORED DEVIL'S DUE AND CHAOS FEATHER
+// Both placed in the Lady's Maze Campsite with the Bone Framed Journal, as Restoration Pack did
+// I'm not getting rid of the Brimstone Hammer there though
+
+COPY_EXISTING ~AR1900.ARE~ ~override~
+  LAUNCH_PATCH_MACRO ~Q_ARE_InitVars~
+  LAUNCH_PATCH_MACRO ~Q_AREAdd_InitVars~
+  SET "Q_New_Items" = 2
+  LAUNCH_PATCH_MACRO ~Q_AREAdd_Process~
+
+  READ_LONG   "Q_Off_Conta" + 0x44 "NumItemsInConta"
+  WRITE_LONG  "Q_Off_Conta" + 0x44 "NumItemsInConta" + 2
+  WRITE_ASCII "Q_NewOffset_Items" + ("Q_Siz_Items" * 0) ~FEATHER~ #8
+  WRITE_SHORT "Q_NewOffset_Items" + ("Q_Siz_Items" * 0) + 0xa 1
+  WRITE_ASCII "Q_NewOffset_Items" + ("Q_Siz_Items" * 1) ~DEVILDUE~ #8
+  WRITE_SHORT "Q_NewOffset_Items" + ("Q_Siz_Items" * 1) + 0xa 1
+ BUT_ONLY_IF_IT_CHANGES
+
+// ======================================================================================
+
+// RESTORED RAT CHARM
+// Realized this was a fix and not a restoration.  Put back in Fixpack PFixPack.d in v4.0.
+

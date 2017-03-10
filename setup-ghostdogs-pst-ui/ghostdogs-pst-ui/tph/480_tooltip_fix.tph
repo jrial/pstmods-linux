@@ -1,0 +1,4 @@
+//This edits the invetory window to avoid tooltip flickering.
+
+COPY_EXISTING ~guiinv.chu~ ~override~
+WRITE_SHORT "0x00000070" 640 + (Xnew - 640)/2

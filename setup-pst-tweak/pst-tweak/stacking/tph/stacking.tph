@@ -1,0 +1,179 @@
+
+
+// ================================================================================================
+//                        STACKABLE RINGS, BRACELETS, CHARMS, SCROLLS
+//                                BY QWINN (Paul Escalona)
+// ================================================================================================
+// Last Modification Date:  2008/05/15 - v1
+// ================================================================================================
+
+INCLUDE ~setup-pst-tweak/PST-Tweak/utils/Q_AREMacros.tph~
+
+// Priest Scrolls
+COPY_EXISTING_REGEXP GLOB ~SPPR.*.ITM~ ~override~
+  WRITE_SHORT 0x38 255
+ BUT_ONLY_IF_IT_CHANGES
+
+// Mage Scrolls
+COPY_EXISTING_REGEXP GLOB ~SPWI.*.ITM~ ~override~
+  WRITE_SHORT 0x38 255
+ BUT_ONLY_IF_IT_CHANGES
+
+// Everything else... no equippable items (other than in quick slots), charged items,
+// or items which only exist once in game.
+COPY_EXISTING ~ACLUE.ITM~     ~override~     //A Clue!
+              ~ADDRTEAR.ITM~  ~override~     //Adder's Tear
+              ~AGOODY.ITM~    ~override~     //A Goody!
+              ~BAGOCOIN.ITM~  ~override~     //Bag of Coins
+              ~BANDAGE.ITM~   ~override~     //Bandages
+// Tweak Pack 4.0 - removed BBCHRM and BBSEED, as if you put stack in quick slot and use, the entire stack disappears (sometimes).
+//            ~BBCHRM.ITM~    ~override~     //Black-Barbed Charm
+//            ~BBSEED.ITM~    ~override~     //Black-Barbed Seed
+              ~BLOOCHRM.ITM~  ~override~     //Blood Charm
+              ~BLOODFLY.ITM~  ~override~     //Blood Fly Charm
+              ~BOLT01.ITM~    ~override~     //Bolts of Acheron
+              ~BOLT02.ITM~    ~override~     //Acidic Sponge Bolts
+              ~BOLT03.ITM~    ~override~     //"Rule-Of-Three" Bolts
+              ~BOLT04.ITM~    ~override~     //Zephyr Bolts
+              ~BOLT05.ITM~    ~override~     //Bolts of Whistling Doom
+              ~BOLT06.ITM~    ~override~     //Bolts of Wincing
+              ~BOLT07.ITM~    ~override~     //Winged Bolts
+              ~BOLT08.ITM~    ~override~     //Jagged Bolts
+              ~BOLT09.ITM~    ~override~     //Bolts of Kessek the Devourer
+              ~BONECHRM.ITM~  ~override~     //Bone Charm
+              ~BROBRA.ITM~    ~override~     //Bronze Bracelet
+              ~BRORING.ITM~   ~override~     //Bronze Ring
+              ~C_1101.ITM~    ~override~     //Blessed Candy
+              ~C_1106.ITM~    ~override~     //Holy Candy
+              ~C_1301.ITM~    ~override~     //Mechanus Candy
+              ~C_2102.ITM~    ~override~     //Crunchity Candy
+              ~C_2114.ITM~    ~override~     //Frosty Mint Candy
+              ~C_2211.ITM~    ~override~     //Quivering Candy
+              ~C_2212.ITM~    ~override~     //Minaurosian Chocolate
+              ~C_2214.ITM~    ~override~     //Lucky Candy
+              ~C_2501.ITM~    ~override~     //Stinky Chocolate
+              ~CEREPARA.ITM~  ~override~     //Kasseg, Cerebral Parasite
+              ~CFLYCHRM.ITM~  ~override~     //Corpse Fly Charm
+              ~CHARCHRM.ITM~  ~override~     //Charcoal Charm
+              ~CHCHAR.ITM~    ~override~     //Charcoal Charm
+              ~CHEESE.ITM~    ~override~     //Cheese
+              ~CLIPCOP.ITM~   ~override~     //Clipped Copper Coin
+              ~CLOTCHRM.ITM~  ~override~     //Clot Charm
+              ~COPEAR.ITM~    ~override~     //Copper Earring
+              ~CRATCHRM.ITM~  ~override~     //Cranium Rat Charm
+              ~DRATCHRM.ITM~  ~override~     //Dirty Rat Charm
+              ~EMBALM.ITM~    ~override~     //Jar of Embalming Fluid
+              ~GOLBRA.ITM~    ~override~     //Gold Bracelet
+              ~GOLEAR.ITM~    ~override~     //Gold Earring
+              ~GOLRING.ITM~   ~override~     //Gold Ring
+              ~HEARCHRM.ITM~  ~override~     //Heart Charm
+              ~JUNK.ITM~      ~override~     //Junk
+              ~KNOTCHRM.ITM~  ~override~     //Knot Charm
+              ~LORE.ITM~      ~override~     //Charm of Infinite Recall
+              ~MAGITM.ITM~    ~override~     //A Magic Item!
+              ~NEEDLE.ITM~    ~override~     //Needle and Thread
+              ~ROCHCHRM.ITM~  ~override~     //Cockroach Charm
+              ~SILBRA.ITM~    ~override~     //Silver Bracelet
+              ~SILEAR.ITM~    ~override~     //Silver Earring
+              ~SILRING.ITM~   ~override~     //Silver Ring
+              ~SPICE.ITM~     ~override~     //Whispering Flask
+              ~TAIL.ITM~      ~override~     //Cranium Rat Tail
+              ~TBCHRM.ITM~    ~override~     //Thrice-Blind Charm
+              ~TSILBRA.ITM~   ~override~     //Tarnished Silver Bracelet
+  WRITE_SHORT 0x38 255
+ BUT_ONLY_IF_IT_CHANGES
+
+// ================================= CONTAINER FIXES ======================================
+// Certain items strewn about the game have odd values in the quantity/charges1 field.  This does
+// nothing when the items aren't stackable, but when they are made stackable, that odd value becomes
+// the number found.  In one case, that value is 11865.  Heh.
+// This section addresses the issue globally for all items that this mod makes stackable that were
+// -not- stackable at all in the vanilla game (except SPICE.ITM, which does not have this issue in the
+// few places it's found).  When applied to the vanilla game, it only changes AR0506, AR0605, AR0701, and AR1700.
+COPY_EXISTING_REGEXP GLOB ~AR.*.ARE~ ~override~
+  SET "Siz_Items" = 0x14
+  READ_SHORT 0x76 "Num_Items"
+  READ_LONG  0x78 "Off_Items"
+  FOR ("i" = 0; "i" < "Num_Items"; "i" += 1)
+  BEGIN
+    READ_ASCII "Off_Items" + ("Siz_Items" * i) "ItemName" (6)
+    PATCH_FOR_EACH "Item1" IN
+      ~BROBRA~  //Bronze Bracelet
+      ~COPEAR~  //Copper Earring
+      ~GOLBRA~  //Gold Bracelet
+      ~GOLEAR~  //Gold Earring
+      ~SILBRA~  //Silver Bracelet
+      ~SILEAR~  //Silver Earring
+    BEGIN
+      PATCH_IF ~%ItemName%~ STRING_EQUAL ~%Item1%~ THEN
+        BEGIN WRITE_SHORT "Off_Items" + ("Siz_Items" * i) + 0xa 1 END
+    END
+    READ_ASCII "Off_Items" + ("Siz_Items" * i) "ItemName" (7)
+    PATCH_FOR_EACH "Item1" IN
+      ~BRORING~ //Bronze Ring
+      ~GOLRING~ //Gold Ring
+      ~SILRING~ //Silver Ring
+      ~TSILBRA~ //Tarnished Silver Bracelet
+    BEGIN
+      PATCH_IF ~%ItemName%~ STRING_EQUAL ~%Item1%~ THEN
+        BEGIN WRITE_SHORT "Off_Items" + ("Siz_Items" * i) + 0xa 1 END
+    END
+  END
+ BUT_ONLY_IF_IT_CHANGES
+
+
+// ================================ STORE FIXES ========================================
+// Essentially the same fix applied to stores.  It only applies to two stores, but without
+// this fix, the affected items sold are still unstackable and worth only 1 gold.
+COPY_EXISTING ~BROKAH.STO~ ~override~
+              ~GILTSPUR.STO~ ~override~
+  SET "Siz_Items" = 0x58
+  READ_LONG 0x34 "Off_Items"  // For Sale
+  READ_LONG 0x38 "Num_Items"  // For Sale
+  FOR ("i" = 0; "i" < "Num_Items"; "i" += 1)
+  BEGIN
+    READ_ASCII "Off_Items" + ("Siz_Items" * i) "ItemName" (6)
+    PATCH_FOR_EACH "Item1" IN
+      ~BROBRA~  //Bronze Bracelet
+      ~COPEAR~  //Copper Earring
+      ~GOLBRA~  //Gold Bracelet
+      ~GOLEAR~  //Gold Earring
+      ~SILBRA~  //Silver Bracelet
+      ~SILEAR~  //Silver Earring
+      ~CHEESE~  //Cheese
+    BEGIN
+      PATCH_IF ~%ItemName%~ STRING_EQUAL ~%Item1%~ THEN
+        BEGIN WRITE_SHORT "Off_Items" + ("Siz_Items" * i) + 0xa 1 END
+    END
+    READ_ASCII "Off_Items" + ("Siz_Items" * i) "ItemName" (7)
+    PATCH_FOR_EACH "Item1" IN
+      ~BRORING~ //Bronze Ring
+      ~GOLRING~ //Gold Ring
+      ~SILRING~ //Silver Ring
+      ~TSILBRA~ //Tarnished Silver Bracelet
+    BEGIN
+      PATCH_IF ~%ItemName%~ STRING_EQUAL ~%Item1%~ THEN
+        BEGIN WRITE_SHORT "Off_Items" + ("Siz_Items" * i) + 0xa 1 END
+    END
+  END
+ BUT_ONLY_IF_IT_CHANGES
+
+// Version 2.0:  Apparently the store issue applies to the healing charms in Murk's store also.
+COPY_EXISTING ~CRSTG1.STO~ ~override~
+  SET "Siz_Items" = 0x58
+  READ_LONG 0x34 "Off_Items"  // For Sale
+  READ_LONG 0x38 "Num_Items"  // For Sale
+  FOR ("i" = 0; "i" < "Num_Items"; "i" += 1)
+  BEGIN
+    READ_ASCII "Off_Items" + ("Siz_Items" * i) "ItemName" (8)
+    PATCH_FOR_EACH "Item1" IN
+      ~BLOOCHRM~  //Bronze Bracelet
+      ~HEARCHRM~  //Copper Earring
+      ~CLOTCHRM~  //Gold Bracelet
+    BEGIN
+      PATCH_IF ~%ItemName%~ STRING_EQUAL ~%Item1%~ THEN
+        BEGIN WRITE_SHORT "Off_Items" + ("Siz_Items" * i) + 0xa 1 END
+    END
+  END
+ BUT_ONLY_IF_IT_CHANGES
+

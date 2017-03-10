@@ -1,0 +1,69 @@
+// ================================================================================================
+//                          QWINN'S PLANESCAPE: TORMENT TWEAK PACK
+//                                   BANTER ACCELERATOR
+//                                BY QWINN (Paul Escalona)
+// ================================================================================================
+// Last Modification Date:  December 20 2008 - v3.50
+// ================================================================================================
+
+INCLUDE ~setup-pst-tweak/PST-Tweak/utils/Q_VARMacros.tph~
+
+INCLUDE ~setup-pst-tweak/PST-Tweak/utils/Q_EnginePatcher.tph~
+
+
+COPY ~Torment.exe~ ~Torment.exe~
+  SPRINT "Q_Patch_Name" ~Disabling Engine Banters.~
+  SET Q_Starting_Offset = 0x36D000
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop            = 0
+
+  SET searchlength = 8
+  SPRINT searchpattern  ~12345678~
+  SPRINT searchbytes    ~4F 6C 6C 6C 6C 6C 50 51~
+
+  SET replacelength = 1
+  SPRINT replacepattern ~1~
+  SPRINT replacebytes   ~00~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~VAR.VAR~ ~VAR.TMP~
+  SET Q_FileSize = %SOURCE_SIZE%
+
+  SPRINT "Q_NewVarType"  ~GLOBAL  ~
+  SPRINT "Q_NewVarName"  ~Banter_Timer                    ~
+  SET    "Q_NewVarValue" = 0
+  LAUNCH_PATCH_MACRO Q_VarVar_AddNewRecord
+
+  SPRINT "Q_NewVarType"  ~GLOBAL  ~
+  SPRINT "Q_NewVarName"  ~Banter_Attempt                  ~
+  SET    "Q_NewVarValue" = 0
+  LAUNCH_PATCH_MACRO Q_VarVar_AddNewRecord
+
+  SPRINT "Q_NewVarType"  ~GLOBAL  ~
+  SPRINT "Q_NewVarName"  ~CombatScriptsActive             ~
+  SET    "Q_NewVarValue" = 1
+  LAUNCH_PATCH_MACRO Q_VarVar_AddNewRecord
+ BUT_ONLY_IF_IT_CHANGES
+COPY ~VAR.TMP~ ~VAR.VAR~
+
+STRING_SET CombatActive ~Combat Scripts Activated~
+STRING_SET CombatInactive ~Combat Scripts Deactivated~
+
+COPY_EXISTING ~PCNAME.BCS~   ~override~
+              ~PCMORTE.BCS~  ~override~
+              ~PCANNAH.BCS~  ~override~
+              ~PCDAKKON.BCS~ ~override~
+              ~PCGRACE.BCS~  ~override~
+              ~PCNORDOM.BCS~ ~override~
+              ~PCIGNUS.BCS~  ~override~
+              ~PCVHAIL.BCS~  ~override~
+  DECOMPILE_BCS_TO_BAF
+    REPLACE_TEXTUALLY
+    ~Global("PartyScriptsActive","GLOBAL",1)~
+    ~Global("PartyScriptsActive","GLOBAL",1)
+     Global("CombatScriptsActive","GLOBAL",1)~
+  COMPILE_BAF_TO_BCS
+ BUT_ONLY_IF_IT_CHANGES

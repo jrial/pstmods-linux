@@ -1,0 +1,4 @@
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Main_files~ ~override~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Main_files2~ ~override~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/720_files/720_MOS~ ~override~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/720_files/720_CHU~ ~override~

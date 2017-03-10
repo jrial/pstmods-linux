@@ -1,0 +1,212 @@
+
+// ================================================================================================
+//                         PLANESCAPE: TORMENT UNFINISHED BUSINESS
+//                               RESTORED BESTIARY ENTRIES
+//                BY QWINN (Paul Escalona), Alu-fiend portrait by Leila and Maebe
+// ================================================================================================
+// Last Modification Date:  June 11 2009 - v4.00
+// ================================================================================================
+
+
+// These were moved from Fixpack for release 4.0
+
+COPY_EXISTING ~beast.ini~ ~beast.ini~
+  REPLACE_TEXTUALLY
+~desc0=3598~
+~desc0=3598
+desc1=64131
+global=Annah~
+  REPLACE_TEXTUALLY
+~desc0=3586~
+~desc0=3586
+desc1=64143
+desc2=64143
+global=Dakkon~
+  REPLACE_TEXTUALLY
+~desc0=3534~
+~desc0=3534
+desc1=3528
+global=Dhall~
+  REPLACE_TEXTUALLY
+~desc0=3533~
+~desc0=3533
+desc1=3527
+desc2=3527
+global=Know_Dustmen~
+  REPLACE_TEXTUALLY
+~desc0=3583~
+~desc0=3583
+desc1=3583
+desc2=64144
+global=Grace~
+  REPLACE_TEXTUALLY
+~desc0=3613~
+~desc0=3613
+desc1=64196
+desc2=64196
+global=Ignus~
+  REPLACE_TEXTUALLY
+~desc0=3608~
+~desc0=3608
+desc1=64197
+global=Know_Ravel~
+  REPLACE_TEXTUALLY
+~desc0=3605~
+~desc0=3605
+desc1=64198
+desc2=64200
+global=Nordom~
+  REPLACE_TEXTUALLY
+~desc0=3633~
+~desc0=3633
+desc1=64207
+global=Talk_To_Betrayer~
+  REPLACE_TEXTUALLY
+~desc0=3629~
+~desc0=3629
+desc1=64199
+global=Vhailor~
+ BUT_ONLY_IF_IT_CHANGES
+
+
+// Alu-fiend entry, original portrait based on Aasimar portrait, reworked by Leila and Maebe.
+
+COPY ~setup-pst-ub/PST-UB/Bestiary/JRALUKN.BMP~ ~override~
+
+COPY_EXISTING ~RESDATA.INI~ ~override~
+  INNER_PATCH ~12~ BEGIN
+    WRITE_BYTE 0 0x0d
+    WRITE_BYTE 1 0x0a
+    READ_ASCII 0 mnl (1)
+    READ_ASCII 1 lnl (1)
+    READ_ASCII 0 wnl (2)
+  END
+  REPLACE_TEXTUALLY ~%mnl%~ ~~
+  REPLACE_TEXTUALLY EXACT_MATCH
+  ~[558]~
+  ~[101] // (cl 4)  Alu-Fiend%lnl%hitsound=aasif01,aasif02,aasif03%lnl%hitframe=0%lnl%dfbsound=aasifd01,assifd02,aasifd03%lnl%dfbframe=0%lnl%At1Sound=swi_01a,swi_01,swi_01d%lnl%At1frame=5%lnl%At2Sound=swi_01a,swi_01b,swi_01c%lnl%At2frame=5%lnl%attack1=dat1aaf%lnl%attack2=dat2aaf%lnl%stance2stand=dc2saaf%lnl%diebackward=ddfbaaf%lnl%gethit=dhitaaf%lnl%run=drunaaf%lnl%spell1=dsp1aaf%lnl%spell2=dsp1aaf%lnl%stand2stance=ds2caaf%lnl%standfidget1=dsf1aaf%lnl%stance=dstcaaf%lnl%stand=dstdaaf%lnl%talk1=dtk1aaf%lnl%walk=dwlkaaf%lnl%walkscale=6.0%lnl%runscale=15.0%lnl%bestiary=88%lnl%armor=0%lnl%%lnl%[558]~
+ BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~ANIMATE.IDS~ ~override~
+  REPLACE_TEXTUALLY EXACT_MATCH ~0x6064 (cl 4) Townie, UC Female 2~ ~0x6064 (cl 4) Townie, UC Female 2%lnl%0x6065 (cl 4) Alu-Fiend~
+  REPLACE_TEXTUALLY ~128~ ~129~
+ BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~VRSCHKA.CRE~  ~override~
+  WRITE_SHORT 0x28 24677
+ BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~beast.ini~ ~beast.ini~
+  INNER_PATCH ~12~ BEGIN
+    WRITE_BYTE 0 0x0d
+    WRITE_BYTE 1 0x0a
+    READ_ASCII 0 wnl (2)
+  END
+  REPLACE_TEXTUALLY ~beastcount=88~ ~beastcount=89~
+  REPLACE_TEXTUALLY ~imageKnown=jrghfkn%wnl%imageUnknown=image%wnl%killvar=Kill_Ghoul~
+                    ~imageKnown=jrghfkn%wnl%imageUnknown=image%wnl%killvar=Kill_Ghoul%wnl%%wnl%[88]  // Alu-Fiend%lnl%name=30702%wnl%desc0=3643%wnl%class=1%wnl%imageKnown=jralukn%wnl%imageUnknown=image%wnl%~
+ BUT_ONLY_IF_IT_CHANGES
+
+
+// Restoring updated TO pic in bestiary. This requires engine tweak by scient, and new variable Met_TO.
+INCLUDE ~setup-pst-ub/PST-UB/utils/Q_VARMacros.tph~
+INCLUDE ~setup-pst-ub/PST-UB/utils/Q_EnginePatcher.tph~
+
+COPY_EXISTING ~VAR.VAR~ ~VAR.TMP~
+  SET Q_FileSize = %SOURCE_SIZE%
+  PATCH_FOR_EACH "S1" IN
+    ~Met_TO                          ~
+  BEGIN
+    SPRINT "Q_NewVarType"  ~GLOBAL  ~
+    SPRINT "Q_NewVarName"  ~%S1%~
+    SET    "Q_NewVarValue" = 0
+    LAUNCH_PATCH_MACRO Q_VarVar_AddNewRecord
+  END
+ BUT_ONLY_IF_IT_CHANGES
+COPY ~VAR.TMP~ ~VAR.VAR~
+
+COPY ~Torment.exe~ ~Torment.exe~
+  SET Q_VER = 0
+  PATCH_IF %SOURCE_SIZE% = 5697597
+  BEGIN
+     INNER_ACTION BEGIN FAIL ~Game version identified as 4CD v1.0. Please apply official PS:T patch 1.1 and rerun setup.~ END
+  END
+  ELSE
+  PATCH_IF %SOURCE_SIZE% = 5713981
+  BEGIN
+     SET Q_VER = 4
+     PATCH_PRINT ~Game version identified as 4CD v1.1. Proceeding with installation.~
+  END
+  ELSE
+  PATCH_IF %SOURCE_SIZE% = 5718077
+  BEGIN
+     SET Q_VER = 2
+     PATCH_PRINT ~Game version identified as 2CD v1.1. Proceeding with installation.~
+  END
+  ELSE
+  BEGIN
+     INNER_ACTION BEGIN FAIL ~Unknown version of game. Please seek assistance at the forums for this mod at Spellhold Studios.~ END
+  END
+
+  SPRINT "Q_Patch_Name" ~Restoring updated TO bestiary pic. Patch 1.~
+
+// Set TO bestiary image from JRTRZKN to JRSHTKN if global MET_TO is set to 1.
+// search:  8B 8D 74 FF FF FF 83 B9 EE 91 0D 00 00
+// replace: 83 BA EE 91 0D 00 00 0F 85 2B 01 00 00 81 BC 11 06 49 00 00 C9 0C 00 00 75 08 E8 C0 FE 12 00 90 90 90 8B 85 74 FF FF FF
+
+  SET Q_Starting_Offset = 0x232B40
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop            = 0
+
+  SET searchlength = 13
+  SPRINT searchpattern  ~1234567890123~
+  SPRINT searchbytes    ~8B 8D 74 FF FF FF 83 B9 EE 91 0D 00 00~
+
+  SET replacelength = 40
+  SPRINT replacepattern ~1234567890123456789012345678901234567890~
+  SPRINT replacebytes   ~83 BA EE 91 0D 00 00 0F 85 2B 01 00 00 81 BC 11 06 49 00 00 C9 0C 00 00 75 08 E8 C0 FE 12 00 90 90 90 8B 85 74 FF FF FF~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+
+
+  SPRINT "Q_Patch_Name" ~Restoring updated TO bestiary pic. Patch 2.~
+
+// search:      25 8B 55 F8 33 C0 8A 82 27 07 00 00
+// replace 2cd: 4D 45 54 5F 54 4F 00 51 6A 00 68 22 2A 76 00 8D 4D C0 E8 CB 9D 13 00 50 68 18 FF 96 00 E8 7F 14 D0 FF 59 83 78 28 00 74 03 83 C1 08 C3
+// replace 4cd: 4D 45 54 5F 54 4F 00 51 6A 00 68 E2 2B 76 00 8D 4D C0 E8 80 90 13 00 50 68 C8 ED 96 00 E8 FF 12 D0 FF 59 83 78 28 00 74 03 83 C1 08 C3
+
+
+  SET Q_Starting_Offset = 0x362A20
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop            = 0
+
+  SET searchlength = 12
+  SPRINT searchpattern  ~123456789012~
+  SPRINT searchbytes    ~25 8B 55 F8 33 C0 8A 82 27 07 00 00~
+
+  SET replacelength = 45
+  SPRINT replacepattern ~123456789012345678901234567890123456789012345~
+  PATCH_IF Q_VER = 2 BEGIN SPRINT replacebytes ~4D 45 54 5F 54 4F 00 51 6A 00 68 22 2A 76 00 8D 4D C0 E8 CB 9D 13 00 50 68 18 FF 96 00 E8 7F 14 D0 FF 59 83 78 28 00 74 03 83 C1 08 C3~ END
+                ELSE BEGIN SPRINT replacebytes ~4D 45 54 5F 54 4F 00 51 6A 00 68 E2 2B 76 00 8D 4D C0 E8 80 90 13 00 50 68 C8 ED 96 00 E8 FF 12 D0 FF 59 83 78 28 00 74 03 83 C1 08 C3~ END
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+ BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~beast.ini~ ~beast.ini~
+  INNER_PATCH ~12~ BEGIN
+    WRITE_BYTE 0 0x0d
+    WRITE_BYTE 1 0x0a
+    READ_ASCII 0 wnl (2)
+  END
+  REPLACE_TEXTUALLY ~imageKnown=jrtrzkn%wnl%imageUnknown=image~
+                    ~imageKnown=jrtrzkn%wnl%imageUnknown=jrshtkn~
+ BUT_ONLY_IF_IT_CHANGES
+ 
+COPY_EXISTING ~1204TRIG.BCS~ ~override~
+  DECOMPILE_BCS_TO_BAF
+   REPLACE_TEXTUALLY ~StartMovie("t1enter")~ ~SetGlobal("Met_TO","GLOBAL",1)StartMovie("t1enter")~
+  COMPILE_BAF_TO_BCS
+ BUT_ONLY_IF_IT_CHANGES

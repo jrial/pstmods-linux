@@ -1,0 +1,429 @@
+
+COMPILE ~setup-pst-ub/PST-UB/XPDeionarra/dlg/XPDeionarra.d~ USING ~setup-pst-ub/PST-UB/tra/%LANGUAGE%/XPDeionarra.tra~
+
+INCLUDE ~setup-pst-ub/PST-UB/utils/Q_VARMacros.tph~
+INCLUDE ~setup-pst-ub/PST-UB/utils/Q_AREMacros.tph~
+
+COPY_EXISTING ~VAR.VAR~ ~VAR.TMP~
+  SET Q_FileSize = %SOURCE_SIZE%
+
+  PATCH_FOR_EACH "S1" IN
+    ~Kesai_Timer                     ~
+    ~Kesai_Dream_Quest               ~
+    ~Kesai_Attracted                 ~
+    ~Ravel_Kesai_Regret              ~
+    ~Dream2_Sequence                 ~
+    ~Dream_Death_Count               ~
+    ~Dream_Victory                   ~
+    ~Dream_Exit                      ~
+    ~Dream_Kill_Count                ~
+    ~Dream_Pen_Used                  ~
+  BEGIN
+    SPRINT "Q_NewVarType"  ~GLOBAL  ~
+    SPRINT "Q_NewVarName"  ~%S1%~
+    SET    "Q_NewVarValue" = 0
+    LAUNCH_PATCH_MACRO Q_VarVar_AddNewRecord
+  END
+
+ BUT_ONLY_IF_IT_CHANGES
+COPY ~VAR.TMP~ ~VAR.VAR~
+
+COPY ~setup-pst-ub/PST-UB/XPDeionarra/copy/DRMMORTE.CRE~ ~override~
+COPY ~setup-pst-ub/PST-UB/XPDeionarra/copy/DRMXACH.CRE~  ~override~
+COPY ~setup-pst-ub/PST-UB/XPDeionarra/copy/DRMDAKKO.CRE~ ~override~
+COPY ~setup-pst-ub/PST-UB/XPDeionarra/copy/DRMDEION.CRE~ ~override~
+COPY ~setup-pst-ub/PST-UB/XPDeionarra/copy/DRMKESA1.CRE~ ~override~
+COPY ~setup-pst-ub/PST-UB/XPDeionarra/copy/DRMKESA2.CRE~ ~override~
+COPY ~setup-pst-ub/PST-UB/XPDeionarra/copy/DRMGLAB1.CRE~ ~override~
+COPY ~setup-pst-ub/PST-UB/XPDeionarra/copy/DRMGLAB2.CRE~ ~override~
+COPY ~setup-pst-ub/PST-UB/XPDeionarra/copy/AR3017A.ARE~  ~override~
+COPY ~setup-pst-ub/PST-UB/XPDeionarra/copy/AR3017B.ARE~  ~override~
+COPY ~setup-pst-ub/PST-UB/XPDeionarra/copy/AR3017C.ARE~  ~override~
+COPY ~setup-pst-ub/PST-UB/XPDeionarra/copy/AR3017C.INI~  ~override~
+COPY ~setup-pst-ub/PST-UB/XPDeionarra/copy/QUILLJNL.ITM~ ~override~
+
+COPY_EXISTING ~QUILLJNL.ITM~ ~override~
+  SAY 0x50 @23
+  SAY 0x54 @23
+ BUT_ONLY_IF_IT_CHANGES
+
+
+COPY_EXISTING ~AR0602.ARE~ ~override~
+  LAUNCH_PATCH_MACRO ~Q_ARE_InitVars~
+
+// Moving the dodecahedron and the other item in the closet over to the shelf to the left
+// Pointing closet inventory at new items
+
+  READ_LONG   "Q_Off_Conta" + ("Q_Siz_Conta" * 11) + 0x44 "Shelf_Count"
+  WRITE_LONG  "Q_Off_Conta" + ("Q_Siz_Conta" * 11) + 0x44 ("Shelf_Count" + 2)
+  WRITE_LONG  "Q_Off_Conta" + ("Q_Siz_Conta" * 12) + 0x40 ("Q_Num_Items")  // First Item Index
+  WRITE_LONG  "Q_Off_Conta" + ("Q_Siz_Conta" * 12) + 0x44 3                // Number of New Items
+
+// Make changes to the closet door
+
+  WRITE_ASCII "Q_Off_Doors" + ("Q_Siz_Doors" * 4) + 0x80    ~0602DTRP~  #8
+  WRITE_SHORT "Q_Off_Doors" + ("Q_Siz_Doors" * 4) + 0x8C    100  // Lock Difficulty
+  SAY "Q_Off_Doors" + ("Q_Siz_Doors" * 4) + 0xB4 @24
+  WRITE_ASCII "Q_Off_Doors" + ("Q_Siz_Doors" * 4) + 0xB8    ~DDRMTRAP~  #8
+
+
+// Add the 3 new items
+  LAUNCH_PATCH_MACRO ~Q_AREAdd_InitVars~
+  SET "Q_New_Items" = 3
+  LAUNCH_PATCH_MACRO ~Q_AREAdd_Process~
+
+//  Add 3 Items
+  WRITE_ASCII "Q_NewOffset_Items" + (0 * "Q_Siz_Items")            ~EYEGLAS1~                   #8
+  WRITE_SHORT "Q_NewOffset_Items" + (0 * "Q_Siz_Items") + 0xA      1
+  WRITE_ASCII "Q_NewOffset_Items" + (1 * "Q_Siz_Items")            ~HEAVEN~                     #8
+  WRITE_SHORT "Q_NewOffset_Items" + (1 * "Q_Siz_Items") + 0xA      1
+  WRITE_ASCII "Q_NewOffset_Items" + (2 * "Q_Siz_Items")            ~QUILLJNL~                   #8
+  WRITE_SHORT "Q_NewOffset_Items" + (2 * "Q_Siz_Items") + 0xA      1
+ BUT_ONLY_IF_IT_CHANGES
+
+
+
+
+<<<<<<<< .../inlinedfile/0502DCT2.BAF
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneId("Nameless")
+    JumpToPoint([460.1550])
+    MoveViewPoint([460.1550],VERY_FAST)
+    FaceObject("Kesai")
+END
+
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneId("Kesai")
+    TimedMoveToPoint([508.1551],120)
+    FaceObject("Nameless")
+    Dialogue("Nameless")
+END
+
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneId(Player2)
+    TimedMoveToPoint([415.1644],75)
+    FaceObject("Nameless")
+    LeaveParty()
+END
+
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneId(Player3)
+    TimedMoveToPoint([618.1550],75)
+    FaceObject("Nameless")
+    LeaveParty()
+END
+
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneId(Player4)
+    TimedMoveToPoint([596.1607],75)
+    FaceObject("Nameless")
+    LeaveParty()
+END
+
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneId(Player5)
+    TimedMoveToPoint([460.1640],75)
+    FaceObject("Nameless")
+    LeaveParty()
+END
+
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneId(Player6)
+    TimedMoveToPoint([543.1687],75)
+    FaceObject("Nameless")
+    LeaveParty()
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/0502DCT2.BAF~
+
+
+<<<<<<<< .../inlinedfile/AR0502ADD.BAF
+IF
+  Global("Kesai_Dream_Quest","GLOBAL",5)
+THEN
+  RESPONSE #100
+    CreateCreature("Kesai",[544.1706])
+    ActionOverride("Kesai",ChangeAIScript("0502KESA",DEFAULT))
+    SetGlobal("Kesai_Dream_Quest","GLOBAL",6)
+    StartCutSceneMode()
+    StartCutScene("0502DCT2")
+END
+
+IF
+  Global("Dream_Exit","GLOBAL",1)
+THEN
+  RESPONSE #100
+    SetGlobal("Dream_Exit","GLOBAL",2)
+    ActionOverride("Kesai",StartDialog("DKESAI",Protagonist))
+    Continue()
+END
+>>>>>>>>
+EXTEND_BOTTOM ~AR0502.BCS~ ~.../inlinedfile/AR0502ADD.BAF~
+
+
+<<<<<<<< .../inlinedfile/AR3017A.BAF
+IF
+  Global("Dream2_Sequence","GLOBAL",2)
+THEN
+  RESPONSE #100
+    SetGlobal("Dream2_Sequence","GLOBAL",3)
+    StartCutSceneMode()
+    StartCutScene("3017ADR1")
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/AR3017A.BAF~
+
+
+<<<<<<<< .../inlinedfile/AR3017B.BAF
+IF
+  Global("Dream2_Sequence","GLOBAL",4)
+THEN
+  RESPONSE #100
+    SetGlobal("Dream2_Sequence","GLOBAL",5)
+    StartCutSceneMode()
+    StartCutScene("3017ADR1")
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/AR3017B.BAF~
+
+
+<<<<<<<< .../inlinedfile/AR3017C.BAF
+IF
+  Global("Dream2_Sequence","GLOBAL",7)
+THEN
+  RESPONSE #100
+    SetGlobal("Dream2_Sequence","GLOBAL",8)
+    SetGlobal("Dream_Exit","GLOBAL",1)
+    StartCutSceneMode()
+    StartCutScene("3017ADR1")
+END
+
+IF
+  Global("Dream2_Sequence","GLOBAL",10)
+  Global("Dream_Exit","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("Dream_Exit","GLOBAL",1)
+    StartCutSceneMode()
+    StartCutScene("3017ADR1")
+END
+
+IF
+  Global("Dream_Kill_Count","GLOBAL",2)
+THEN
+  RESPONSE #100
+    SetGlobal("Dream2_Sequence","GLOBAL",11)
+    SetGlobal("Dream_Victory","GLOBAL",1)
+    ActionOverride("Nameless",StartDialog("DDREAM","Nameless"))
+    ActionOverride("Nameless",SetDialog("DPLACE"))
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/AR3017C.BAF~
+
+
+<<<<<<<< .../inlinedfile/3017ADR1.BAF
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneID("Nameless")
+    Wait(2)
+    ActionOverride("Nameless",StartDialog("DDREAM","Nameless"))
+    SetDialog("DPLACE")
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/3017ADR1.BAF~
+
+
+<<<<<<<< .../inlinedfile/3017BDR1.BAF
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneID("Nameless")
+    Wait(2)
+    MoveViewPoint([2776.747],VERY_FAST)
+    TimedMoveToPoint([2776.747],80)
+    Face(8)
+    Wait(6)
+    OpenDoor("AR0602D5")
+    Wait(3)
+    ActionOverride("Nameless",StartDialog("DDREAM","Nameless"))
+    SetDialog("DPLACE")
+END
+
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneID("Kesai")
+    Wait(4)
+    TimedMoveToPoint([2720.761],160)
+    FaceObject("Nameless")
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/3017BDR1.BAF~
+
+
+<<<<<<<< .../inlinedfile/3017CDR1.BAF
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneID("Nameless")
+    Wait(2)
+    MoveViewPoint([1300.920],VERY_FAST)
+    TimedMoveToPoint([1300.920],80)
+    Wait(1)
+    ActionOverride("Nameless",StartDialog("DDREAM","Nameless"))
+    SetDialog("DPLACE")
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/3017CDR1.BAF~
+
+
+<<<<<<<< .../inlinedfile/3017GLAZ.BAF
+IF
+  Die()
+THEN
+  RESPONSE #100
+    IncrementGlobal("Dream_Kill_Count","GLOBAL",1)
+END
+
+IF
+  OnCreation()
+THEN
+  RESPONSE #100
+    Face(-1)
+    SavePlace()
+END
+
+IF
+  See([PC])
+THEN
+  RESPONSE #100
+    Enemy()
+    Help()
+    Attack(NearestEnemyOf(Myself))
+END
+
+IF
+  Help([ANYONE])
+  !Help([PC])
+THEN
+  RESPONSE #100
+    Enemy()
+    Attack(NearestEnemyOf(LastHelp))
+END
+
+IF
+  AttackedBy([PC],DEFAULT)
+THEN
+  RESPONSE #100
+    Enemy()
+    Help()
+    Attack(LastAttackerOf(Myself))
+END
+
+IF
+  !NearSavedLocation(5)
+THEN
+  RESPONSE #100
+    ReturnToSavedPlace()
+END
+
+IF
+  True()
+THEN
+  RESPONSE #100
+    RandomWalk()
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/3017GLAZ.BAF~
+
+
+<<<<<<<< .../inlinedfile/0502KESA.BAF
+IF
+  True()
+THEN
+  RESPONSE #50
+    WaitRandom(10,15)
+    Face(7)
+    PlaySequence(ANIM_TALK)
+    FloatMessage(Myself,@142)
+  RESPONSE #50
+    WaitRandom(10,15)
+    Face(7)
+    PlaySequence(ANIM_TALK2)
+    FloatMessage(Myself,@143)
+  RESPONSE #50
+    WaitRandom(10,15)
+    Face(7)
+    PlaySequence(ANIM_TALK3)
+    FloatMessage(Myself,@144)
+  RESPONSE #50
+    WaitRandom(10,15)
+    Face(7)
+    PlaySequence(ANIM_TALK3)
+    FloatMessage(Myself,@145)
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/0502KESA.BAF~ USING ~setup-pst-ub/PST-UB/tra/%LANGUAGE%/XPDeionarra.tra~
+
+<<<<<<<< .../inlinedfile/0602DTRP.BAF
+IF
+  HarmlessOpened([PC])
+THEN
+  RESPONSE #100
+    Dialogue([PC])
+END
+
+IF
+  FailedToOpen([PC])
+THEN
+  RESPONSE #100
+    Dialogue([PC])
+END
+>>>>>>>>
+COMPILE ~.../inlinedfile/0602DTRP.BAF~
+
+COPY_EXISTING ~AR0502.BCS~ ~override~
+  DECOMPILE_BCS_TO_BAF
+   REPLACE_TEXTUALLY ~SetDoorLocked("ar0502d1",TRUE)~ ~~
+  COMPILE_BAF_TO_BCS
+ BUT_ONLY_IF_IT_CHANGES
+ 
+// Version 4.0:  Make sure Kesai doesn't respawn in brothel
+<<<<<<<< .../inlinedfile/despawnkesai.BAF
+IF
+  GlobalGT("Kesai_Dream_Quest","GLOBAL",4)
+THEN
+  RESPONSE #100
+    Deactivate(Myself)
+END
+>>>>>>>>
+EXTEND_TOP ~0605KES1.BCS~ ~.../inlinedfile/despawnkesai.BAF~
+EXTEND_TOP ~0605KES2.BCS~ ~.../inlinedfile/despawnkesai.BAF~
+EXTEND_TOP ~0605KES3.BCS~ ~.../inlinedfile/despawnkesai.BAF~
+EXTEND_TOP ~0605KES4.BCS~ ~.../inlinedfile/despawnkesai.BAF~

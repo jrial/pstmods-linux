@@ -1,0 +1,26 @@
+//=============================================================================
+// This edits the chu files in order to use the new fonts.
+//=============================================================================
+
+
+
+COPY_EXISTING ~GUIJRNL.CHU~ ~override~
+
+WRITE_SHORT "0x00000208" "49"
+WRITE_SHORT "0x00000210" "49"	
+WRITE_SHORT "0x0000025E" "49"	
+WRITE_SHORT "0x00000266" "49"	
+WRITE_SHORT "0x000002D8" "49"	
+WRITE_SHORT "0x000002FC" "49"	
+WRITE_SHORT "0x0000039C" "49"	
+WRITE_SHORT "0x000003A4" "49"	
+WRITE_SHORT "0x000003F2" "49"	
+WRITE_SHORT "0x000003FA" "49"	
+WRITE_SHORT "0x00000448" "49"	
+WRITE_SHORT "0x00000450" "49"	
+
+
+COPY_EXISTING ~guiworld.chu~ ~override~
+
+WRITE_SHORT "0X00000814" "49"	
+WRITE_SHORT "0X0000081C" "49"	

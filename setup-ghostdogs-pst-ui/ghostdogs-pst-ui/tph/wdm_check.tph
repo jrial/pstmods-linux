@@ -1,0 +1,29 @@
+COPY ~torment.exe~ ~torment.exe~
+
+PATCH_IF (CDver = 4) THEN BEGIN
+
+READ_SHORT "0x432300" X
+READ_SHORT "0x432307" Y
+
+END
+
+ELSE BEGIN
+PATCH_IF (CDver = 2) THEN BEGIN
+
+READ_SHORT "0x432f60" X
+READ_SHORT "0x432f67" Y
+
+END
+
+ELSE BEGIN
+PATCH_IF (CDver = 5) THEN BEGIN  //Chinese 4CD version
+
+READ_SHORT "0x425640" X
+READ_SHORT "0x425647" Y
+
+END ELSE BEGIN
+END END END
+
+ACTION_IF (X < 799) BEGIN 
+FAIL ~ Widescreen Mod not detected. You must have Bigg's Widescreen Mod installed with a resolution >= 800x480 pixels, prior to installing this mod. ~
+END

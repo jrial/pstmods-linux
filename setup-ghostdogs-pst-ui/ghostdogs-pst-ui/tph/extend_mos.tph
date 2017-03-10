@@ -1,0 +1,39 @@
+//============================================================================
+// This extends various background images to the new resolution.
+//============================================================================
+
+
+COPY_EXISTING_REGEXP ~GUICACHE.MOS~ ~override~
+~GUIDS10.MOS~ ~override~
+~GUI[ls][sg].*.MOS~ ~override~
+~GUIID.MOS~ ~override~
+~WMMOSX.mos~ ~override~
+EXTEND_MOS ~HCENT~ ~Xnew~
+EXTEND_MOS ~VCENT~ ~Ynew~
+
+
+COPY_EXISTING ~MAPANEL.MOS~ ~override~
+EXTEND_MOS ~HCENT~ ~Xnew~
+EXTEND_MOS ~VCENT~ Ynew - 73
+
+COPY_EXISTING ~OSMOS.MOS~ ~override~
+EXTEND_MOS ~HCENT~ ~Xnew~
+EXTEND_MOS ~VCENT~ ~Ynew~
+
+COPY_EXISTING ~GUIJRN2.MOS~ ~override~
+EXTEND_MOS ~HCENT~ ~Xnew~
+EXTEND_MOS ~VCENT~ ~Ynew~
+
+COPY_EXISTING ~GUIJRNL.MOS~ ~override~
+EXTEND_MOS ~HCENT~ ~Xnew~
+EXTEND_MOS ~VCENT~ ~Ynew~
+
+COPY_EXISTING ~GPMO10.MOS~ ~override~
+EXTEND_MOS ~HCENT~ ~Xnew~
+EXTEND_MOS ~VCENT~ ~Ynew~
+
+COPY_EXISTING ~SGMOS2.mos~ ~override~
+EXTEND_MOS ~HCENT~ ~Xnew~
+EXTEND_MOS ~VCENT~ ~Ynew~
+
+

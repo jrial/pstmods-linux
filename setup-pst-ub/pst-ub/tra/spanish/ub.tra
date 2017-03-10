@@ -1,0 +1,67 @@
+@-1000= "El mod %TP2_FILE_NAME% tiene"
+@-1001= "distintos componentes opcionales.\nPara ahorrar tiempo, puedes elegir que hacer ahora a nivel general con ellos\nen lugar de ir uno por uno.\n"
+@-1002= "Que quieres hacer con todos los componentes que TODAVIA NO estan instalados?\n[I]Instalarlos, [S]Saltarlos, [A]Preguntar uno por uno? "
+@-1003= "Que quieres hacer con todos los componentes que YA ESTAN instalados?\n[R]Reinstalarlos, [U]Desinstalarlos, [S]Saltarlos, [A]Preguntar uno por uno? "
+@-1004= "POR FAVOR enviar el archivo"
+@-1005= "a"
+@-1006= "Instalar ["
+@-1007= "]?
+[R]Reinstalar, [N]Sin cambios o [U]Desinstalar o [Q]Salir? "
+@-1008= "]?
+[I]Instalar, o [N]No instalar o [Q]Salir? "
+@-1009= "Introduce parte de un nombre de modulo: "
+@-1010= "Reinstalando componente ["
+@-1011= "] "
+@-1012= "Reinstalando usando idioma"
+@-1013= "Eliminando la vieja instalacion de ["
+@-1014= "] primero..."
+@-1015= "ANTIGUO ELIMINADO CON EXITO"
+@-1016= "Instalando"
+@-1017= "ERROR instalando ["
+@-1018= "], volviendo al estado anterior"
+@-1019= "INSTALADO CON EXITO"
+@-1020= "Saltando "
+@-1021= "Eliminando ["
+@-1022= "] (componente #"
+@-1023= ")"
+@-1024= "ELIMINADO CON EXITO ["
+@-2000= "Visor de leeme"
+@-2001= "Te gustaria ver el leeme (traducido al espaniol por Ghildrean)? [Y]Si, [N]No:"
+@00001 = ~Todos los componentes recomendados de PS:T Unfinished Business~
+@00002 = ~Investigacion de Capaz de Ponderar Pensamientos restaurado~
+@00003 = ~Mas momentos de Morte en el mortuorio restaurados~
+@00004 = ~Busqueda del candelero restaurada~
+@00005 = ~Conversaciones verdaderas de Deionarra restauradas~
+@00006 = ~Busqueda del Pendiente de Yemeth restaurada~
+@00007 = ~Compania de Elyce restaurada~
+@00008 = ~Ciudadanos de Curst restaurados~
+@00009 = ~Prisioneros de Curst restaurados~
+@00010 = ~Carl Parfidor restaurado~
+@00011 = ~Banter Morte-Dientes de Ingress restaurado~
+@00012 = ~Matones del Callejon de los Angulos Peligrosos restaurados~
+@00013 = ~Objetos restaurados~
+@00014 = ~Comentarios y banters del grupo restaurados~
+@00015 = ~Objetos de trucos restaurados (No recomendado)~
+@00016 = ~   Ya esta instalado con exito!~
+@00017 = ~Examina el libro azul.~
+@00018 = ~Examina la espada.~
+@00019 = ~DIENTES DE INGRESS
+Peso: 1
+
+Éste es un puñado de dientes vivientes de Ingress. Al parecer, no desearon ir con ella al traspasar el portal hacia su plano natal. Los dientes se agitan cada vez que se acercan unos a otros; te recuerdan a un puñado de horribles bichos saltarines de color marfil.~
+@00020 = ~Mebbeth restaurada~
+@00021 = ~La verdad de Deionarra expandida~
+@00022 = ~Encuentros del Barrio Inferior restaurados~
+@00023 = ~PLUMA DE ESCRIBIR
+Peso: 0
+
+Encontraste esta pluma de escribir en un armario de tu habitación en el Salón de Fiestas Cívicas. Parece bastante corriente.~
+@00024 = ~Armario Sellado~
+@00025 = ~Entradas del bestiario restauradas~
+@01117 = ~"Parecen instrucciones..." Morte se aclara la garganta. "Veamos. Empieza tal que así..."
+
+"Ya sé que te sientes como si te hubieras estado bebiendo unos cuantos barriles de agua del Estigia, pero necesitas CENTRARTE. Entre tus posesiones hay un DIARIO que arrojará algo de luz sobre el oscuro de este asunto. PHAROD puede ponerte al corriente del resto de la cruda realidad, si es que no se encuentra ya en el libro de los muertos."
+
+"No pierdas el diario, o estaremos otra vez en el Estigia, ¿vale? Y hagas lo que hagas, NO le digas a nadie QUIÉN eres, QUÉ te ha pasado, o de DÓNDE vienes, o te verás inmerso en un rápido viaje al crematorio. Haz lo que te digo: LEE el diario, después ENCUENTRA a Pharod."~
+@33606 = ~"Tu amante me pidió que detuviera esta pelea."~
+@50577 = ~Hay un número de capítulos dentro del tomo: Truco de Teletransporte, Truco de Descansar en Cualquier Lugar, Truco de Riqueza, Truco de Puntuación de Atributo, Truco de Muerte, Truco de Experiencia, Truco de Palabra Buena y Maligna, y Truco de Palabra Legal y Caótica.~

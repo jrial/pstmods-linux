@@ -1,0 +1,31 @@
+// ================================================================================================
+//                         		 PLANESCAPE: TORMENT TWEAK PACK
+//                              	DUSTROBE AREA RESTRICTIONS
+//                                   BY scient (Brendan Casey)
+// ================================================================================================
+// Last Modification Date:  June 15, 2012 - v4.12
+// ================================================================================================
+
+INCLUDE ~setup-pst-tweak/PST-Tweak/utils/Q_EnginePatcher.tph~
+
+// Disable zone restrictions on DUSTROBE to allow it to be worn/displayed outside Mortuary (AR0201/AR0202/AR0203)
+// search:  E9 57 FF FF FF 8B 45 F4 8B E5 5D C3 55 8B EC 51
+// replace: E9 57 FF FF FF 8B 45 F4 8B E5 5D C3 33 C0 40 C3
+
+COPY ~Torment.exe~ ~Torment.exe~
+  SPRINT "Q_Patch_Name" ~Disabling DUSTROBE ARE check.~
+  SET Q_Starting_Offset = 0x003BD500
+  SET Q_Replace_Offset  = 12
+  SET Q_Loop            = 0
+
+  SET searchlength = 16
+  SPRINT searchpattern  ~1234567890123456~
+  SPRINT searchbytes    ~E9 57 FF FF FF 8B 45 F4 8B E5 5D C3 55 8B EC 51~
+
+  SET replacelength = 4
+  SPRINT replacepattern ~1234~
+  SPRINT replacebytes   ~33 C0 40 C3~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+BUT_ONLY_IF_IT_CHANGES

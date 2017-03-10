@@ -1,0 +1,41 @@
+COPY ~Torment.exe~ ~Torment.exe~
+SET fail = 0
+READ_SHORT 0x00293a96 ~offset_0x00293a96~
+PATCH_IF (~offset_0x00293a96~ = 20992) THEN BEGIN
+PATCH_PRINT ~4CD version~
+
+READ_SHORT "0x432300" Xnew
+READ_SHORT "0x432307" Ynew
+
+SET CDver = 4
+
+END
+
+ELSE BEGIN
+READ_SHORT 0x00289ad6 ~offset_0x00289ad6~
+PATCH_IF (~offset_0x00289ad6~ = 20992) THEN BEGIN
+PATCH_PRINT ~Chinese 4CD version~
+
+READ_SHORT "0x425640" Xnew
+READ_SHORT "0x425647" Ynew
+
+SET CDver = 5
+
+END
+
+ELSE BEGIN
+READ_SHORT 0x0056da27 ~offset_0x0056da27~
+PATCH_IF (~offset_0x0056da27~ = 20992) THEN BEGIN
+PATCH_PRINT ~2CD version~
+
+READ_SHORT "0x432f60" Xnew
+READ_SHORT "0x432f67" Ynew
+
+SET CDver = 2
+
+END ELSE BEGIN
+SET fail = 1 
+END END END
+ACTION_IF fail = 1 BEGIN
+FAIL ~Unknown version~
+END

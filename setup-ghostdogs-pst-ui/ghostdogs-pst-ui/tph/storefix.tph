@@ -1,0 +1,6 @@
+//============================================================================
+// This is the store fix provided by taplonaplo that fixes most of the
+// flickering issues that happened when the centered store dialog opens.
+//============================================================================
+
+COMPILE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/tph/storefix.d~

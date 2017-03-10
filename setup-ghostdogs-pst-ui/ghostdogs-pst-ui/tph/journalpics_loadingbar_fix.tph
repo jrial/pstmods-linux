@@ -1,0 +1,320 @@
+//=============================================================================
+// This will correctly place the journal bestiary pics and the
+// loading bar. Credit goes to qwinn for the replace script, scient for the
+// modified code and Taplonaplo for adjusting the script for the mod.
+//=============================================================================
+
+DEFINE_PATCH_MACRO ~Q_Engine_Patcher~ BEGIN
+  SET i = 0
+  SET Q_SaveLoop = Q_Loop
+  WHILE (i < 0x10001) BEGIN //search 0x10000 bytes from the starting point for our search pattern.
+    SET offset = "Q_Starting_Offset" + "%i%"
+    READ_ASCII "%offset%" pattern_current (%searchlength%)
+    PATCH_IF ("%pattern_current%" STRING_EQUAL "%searchpattern%") THEN BEGIN
+      INNER_PATCH_SAVE hexoffsetstring ~0x000000~
+      BEGIN
+         SET hexoffset = offset + Q_Replace_Offset
+         SET byte = hexoffset / 1048576
+         PATCH_IF byte < 10 BEGIN WRITE_BYTE 0x2 byte + 48 END
+         PATCH_IF byte >  9 BEGIN WRITE_BYTE 0x2 byte + 55 END
+         SET hexoffset = hexoffset - (byte * 1048576)
+         SET byte = hexoffset / 65536
+         PATCH_IF byte < 10 BEGIN WRITE_BYTE 0x3 byte + 48 END
+         PATCH_IF byte >  9 BEGIN WRITE_BYTE 0x3 byte + 55 END
+         SET hexoffset = hexoffset - (byte * 65536)
+         SET byte = hexoffset / 4096
+         PATCH_IF byte < 10 BEGIN WRITE_BYTE 0x4 byte + 48 END
+         PATCH_IF byte >  9 BEGIN WRITE_BYTE 0x4 byte + 55 END
+         SET hexoffset = hexoffset - (byte * 4096)
+         SET byte = hexoffset / 256
+         PATCH_IF byte < 10 BEGIN WRITE_BYTE 0x5 byte + 48 END
+         PATCH_IF byte >  9 BEGIN WRITE_BYTE 0x5 byte + 55 END
+         SET hexoffset = hexoffset - (byte * 256)
+         SET byte = hexoffset / 16
+         PATCH_IF byte < 10 BEGIN WRITE_BYTE 0x6 byte + 48 END
+         PATCH_IF byte >  9 BEGIN WRITE_BYTE 0x6 byte + 55 END
+         SET byte = hexoffset - (byte * 16)
+         PATCH_IF byte < 10 BEGIN WRITE_BYTE 0x7 byte + 48 END
+         PATCH_IF byte >  9 BEGIN WRITE_BYTE 0x7 byte + 55 END
+      END
+      WRITE_EVALUATED_ASCII ("%offset%" + "Q_Replace_Offset") "%replacepattern%" (%replacelength%)
+      PATCH_IF Q_Loop = 0 BEGIN SET i = 0x10001 END
+                     ELSE BEGIN SET Q_Loop = Q_Loop - 1 END
+      PATCH_PRINT ~%Q_Patch_Name%~
+      PATCH_PRINT ~Engine Patched at Offset: %hexoffsetstring%~
+    END
+    SET i += 1
+    PATCH_IF ("%i%" = 0x10001) AND ( Q_SaveLoop = 0 OR Q_Loop > 0 )  BEGIN
+      INNER_ACTION BEGIN
+        FAIL ~No pattern for %Q_Patch_Name% found.~
+      END
+    END
+  END
+END
+
+DEFINE_PATCH_MACRO ~Q_Pattern_Maker~
+BEGIN
+  PATCH_IF searchlength > 0
+  BEGIN
+     FOR (i = 0; i < searchlength; i += 1)
+     BEGIN
+       INNER_PATCH ~%searchbytes%~
+       BEGIN
+          READ_BYTE ((i * 3) + 0) byte1
+          READ_BYTE ((i * 3) + 1) byte2
+       END
+       INNER_PATCH_SAVE searchpattern ~%searchpattern%~
+       BEGIN
+          PATCH_IF byte1 >= 48 AND byte1 <= 57 THEN BEGIN SET byte1 = (byte1 - 48) * 16 END ELSE BEGIN SET byte1 =(byte1 - 55) * 16 END
+          PATCH_IF byte2 >= 48 AND byte2 <= 57 THEN BEGIN SET byte2 = (byte2 - 48)      END ELSE BEGIN SET byte2 =(byte2 - 55)      END
+          SET byte = byte1 + byte2
+          WRITE_BYTE i byte
+       END
+     END
+  END
+
+  PATCH_IF replacelength > 0
+  BEGIN
+     FOR (i = 0; i < replacelength; i += 1)
+     BEGIN
+       INNER_PATCH ~%replacebytes%~
+       BEGIN
+          READ_BYTE ((i * 3) + 0) byte1
+          READ_BYTE ((i * 3) + 1) byte2
+       END
+       INNER_PATCH_SAVE replacepattern ~%replacepattern%~
+       BEGIN
+          PATCH_IF byte1 >= 48 AND byte1 <= 57 THEN BEGIN SET byte1 = (byte1 - 48) * 16 END ELSE BEGIN SET byte1 =(byte1 - 55) * 16 END
+          PATCH_IF byte2 >= 48 AND byte2 <= 57 THEN BEGIN SET byte2 = (byte2 - 48)      END ELSE BEGIN SET byte2 =(byte2 - 55)      END
+          SET byte = byte1 + byte2
+          WRITE_BYTE i byte
+       END
+     END
+  END
+END
+
+
+
+
+
+
+COPY ~torment.exe~ ~torment.exe~
+
+READ_SHORT 0x4203F 4cdgbarcap
+READ_SHORT 0x41FFF 2cdgbarcap
+READ_SHORT 0x415AF 4cdchinagbarcap
+
+PATCH_IF 4cdgbarcap = 0x9C THEN BEGIN
+PATCH_PRINT ~4CDver~
+
+READ_SHORT "0x432300" Xnew
+READ_SHORT "0x432307" Ynew
+
+WRITE_SHORT 0x4203F Xnew / 2 - 164
+WRITE_SHORT 0x42328 Ynew / 2 + 128
+WRITE_SHORT 0x4232D Xnew / 2 + 125
+WRITE_SHORT 0x42356 Ynew / 2 + 128
+WRITE_SHORT 0x4235B Xnew / 2 + 125
+WRITE_SHORT 0x424BB Ynew / 2 + 185
+
+WRITE_SHORT 0X00232FC0 2560
+
+ END ELSE BEGIN
+PATCH_IF 2cdgbarcap = 0x9C THEN BEGIN
+PATCH_PRINT ~2CDver~
+
+READ_SHORT "0x432f60" Xnew
+READ_SHORT "0x432f67" Ynew
+
+WRITE_SHORT 0x41FFF Xnew / 2 - 164
+WRITE_SHORT 0x422E8 Ynew / 2 + 128
+WRITE_SHORT 0x422ED Xnew / 2 + 125
+WRITE_SHORT 0x42316 Ynew / 2 + 128
+WRITE_SHORT 0x4231B Xnew / 2 + 125
+WRITE_SHORT 0x4247B Ynew / 2 + 185
+
+WRITE_SHORT 0x00232E00 2560
+
+ END ELSE BEGIN
+PATCH_IF 4cdchinagbarcap = 0x9C THEN BEGIN
+PATCH_PRINT ~4CDver Chinese~
+
+READ_SHORT "0x425640" Xnew
+READ_SHORT "0x425647" Ynew
+
+WRITE_SHORT 0x415AF Xnew / 2 - 164
+WRITE_SHORT 0x41898 Ynew / 2 + 128
+WRITE_SHORT 0x4189D Xnew / 2 + 125
+WRITE_SHORT 0x418C6 Ynew / 2 + 128
+WRITE_SHORT 0x418CB Xnew / 2 + 125
+WRITE_SHORT 0x41A2B Ynew / 2 + 185
+
+WRITE_SHORT 0X00229C70 2560
+
+END END END
+
+
+
+// for value conversion use base converter of HEXworkshop : intel - short
+
+
+//journal x720
+//search: C7 45 E0 00 00 00 00 C7 45 E4 00 00 00 00 C7 45 E8 80 02 00 00
+//replace: 33 C9 89 4D E0 89 4D E4 C7 45 E8 80 02 00 00 C7 45 EC E0 01 00 00 6A 00 6A 00 8D 4D E0 51 68 B3 00 00 00 68 53 01 00 00
+// 1024= 00 04 00 00
+// (1024-480)/2 + 19 = 291 : 23 01 00 00
+// 720y -> 139 = 8B 00 00 00
+
+  SPRINT "Q_Patch_Name" ~bmp patching~
+
+
+  PATCH_IF (CDver = 4) OR (CDver = 2) THEN BEGIN
+  SET Q_Starting_Offset = 0x232DCC
+  END ELSE BEGIN
+  PATCH_IF (CDver = 5) THEN BEGIN
+  SET Q_Starting_Offset = 0x229C5F
+  END ELSE BEGIN
+  END END
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop = 0
+
+  SET searchlength = 21
+  SPRINT searchpattern  ~123456789012345678901~
+  SPRINT searchbytes    ~C7 45 E0 00 00 00 00 C7 45 E4 00 00 00 00 C7 45 E8 00 0A 00 00~
+
+  SET replacelength = 40
+  SPRINT replacepattern ~1234567890123456789012345678901234567890~
+  SPRINT replacebytes   ~33 C9 89 4D E0 89 4D E4 C7 45 E8 00 0A 00 00 C7 45 EC 00 08 00 00 6A 00 6A 00 8D 4D E0 51 68 23 03 00 00 68 D3 03 00 00~
+
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+
+
+
+
+//lsgbarforex720
+//search: 83 E9 6F 89 4D CC C7 85 44 FF FF FF 6F 00 00 00 8B 95 54 FF FF FF 89 95 4C FF FF FF 6A 01 6A 01 8D 85 44 FF FF FF 50 8D 4D C4 51 68 9F 01 00 00 6A 6F
+//replace: 89 8D 4C FF FF FF 83 E9 6F 89 4D CC C7 85 44 FF FF FF 6F 00 00 00 6A 01 6A 01 8D 85 44 FF FF FF 50 8D 4D C4 51 68 3F 02 00 00 68 AF 01 00 00 90 90 90
+// 1024y = AF 02 00 00
+// 720y = 687-152= 535 = 17 02 00 00
+
+  SPRINT "Q_Patch_Name" ~gbarfore patching~
+
+  PATCH_IF (CDver = 4) OR (CDver = 2) THEN BEGIN
+  SET Q_Starting_Offset = 0x42340
+  END ELSE BEGIN
+  PATCH_IF (CDver = 5) THEN BEGIN
+  SET Q_Starting_Offset = 0x418FD
+  END ELSE BEGIN
+  END END
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop = 0
+
+  SET searchlength = 50
+  SPRINT searchpattern  ~12345678901234567890123456789012345678901234567890~
+  SPRINT searchbytes    ~83 E9 6F 89 4D CC C7 85 44 FF FF FF 6F 00 00 00 8B 95 54 FF FF FF 89 95 4C FF FF FF 6A 01 6A 01 8D 85 44 FF FF FF 50 8D 4D C4 51 68 9F 01 00 00 6A 6F~
+
+  SET replacelength = 50
+  SPRINT replacepattern ~12345678901234567890123456789012345678901234567890~
+  SPRINT replacebytes   ~89 8D 4C FF FF FF 83 E9 6F 89 4D CC C7 85 44 FF FF FF 6F 00 00 00 6A 01 6A 01 8D 85 44 FF FF FF 50 8D 4D C4 51 68 AF 04 00 00 68 2F 04 00 00 90 90 90~
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+
+
+
+//lsgbarbackx720
+//search: 8B 8D 68 FE FF FF 89 4D CC 8B 95 6C FE FF FF 89 55 D0 6A 01
+//replace: 8B 85 68 FE FF FF 89 45 CC 89 4D D0 6A 01 6A 01 8D 85 44 FF FF FF 50 8D 4D C4 51 68 18 02 00 00 68 9D 01 00 00 90 90 90
+// 1024y = 88 02 00 00
+// 720y = 648-182= 496 = F0 01 00 00
+
+  SPRINT "Q_Patch_Name" ~gbarback patching~
+
+  PATCH_IF (CDver = 4) OR (CDver = 2) THEN BEGIN
+  SET Q_Starting_Offset = 0x42151
+  END ELSE BEGIN
+  PATCH_IF (CDver = 5) THEN BEGIN
+  SET Q_Starting_Offset = 0x41713
+  END ELSE BEGIN
+  END END
+  SET Q_Replace_Offset  = 0
+  SET Q_Loop = 0
+
+  SET searchlength = 20
+  SPRINT searchpattern  ~12345678901234567890~
+  SPRINT searchbytes    ~8B 8D 68 FE FF FF 89 4D CC 8B 95 6C FE FF FF 89 55 D0 6A 01~
+
+  SET replacelength = 40
+  SPRINT replacepattern ~1234567890123456789012345678901234567890~
+  SPRINT replacebytes   ~8B 85 68 FE FF FF 89 45 CC 89 4D D0 6A 01 6A 01 8D 85 44 FF FF FF 50 8D 4D C4 51 68 88 04 00 00 68 1D 04 00 00 90 90 90~
+
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+
+
+
+
+COPY ~Torment.exe~ ~Torment.exe~
+SET ~failure~ = 0
+PATCH_IF (CDver = 4) THEN BEGIN
+  PATCH_PRINT ~4CDver position fix~
+
+READ_SHORT "0x432300" Xnew
+READ_SHORT "0x432307" Ynew
+
+WRITE_SHORT "0x00232FBA" Xnew
+WRITE_SHORT "0x00232FC1" Ynew
+WRITE_SHORT "0x00232FCE" (Ynew - 480) / 2 + 19
+WRITE_SHORT "0x00232FD3" (Xnew - 640) / 2 + 19
+
+WRITE_SHORT "0x000423B8" (Xnew - 640) / 2 + 111
+WRITE_SHORT "0x000423B3" (Ynew - 480) / 2 + 415
+
+WRITE_SHORT "0x000421C4" (Xnew - 640) / 2 + 93
+WRITE_SHORT "0x000421BF" (Ynew - 480) / 2 + 376
+ END 
+
+ELSE BEGIN
+PATCH_IF (CDver = 2) THEN BEGIN
+PATCH_PRINT ~2CDver position fix~
+
+READ_SHORT "0x432f60" Xnew
+READ_SHORT "0x432f67" Ynew
+
+WRITE_SHORT "0x00232DFA" Xnew
+WRITE_SHORT "0x00232E01" Ynew
+WRITE_SHORT "0x00232E0E" (Ynew - 480) / 2 + 19
+WRITE_SHORT "0x00232E13" (Xnew - 640) / 2 + 19
+
+WRITE_SHORT "0x00042378" (Xnew - 640) / 2 + 111
+WRITE_SHORT "0x00042373" (Ynew - 480) / 2 + 415
+
+WRITE_SHORT "0x00042184" (Xnew - 640) / 2 + 93
+WRITE_SHORT "0x0004217F" (Ynew - 480) / 2 + 376
+END
+
+ELSE BEGIN
+PATCH_IF (CDver = 5) THEN BEGIN
+  PATCH_PRINT ~4CDver Chinese position fix~
+
+READ_SHORT "0x425640" Xnew
+READ_SHORT "0x425647" Ynew
+
+WRITE_SHORT "0x00229C6A" Xnew
+WRITE_SHORT "0x00229C71" Ynew
+WRITE_SHORT "0x00229C7E" (Ynew - 480) / 2 + 19
+WRITE_SHORT "0x00229C83" (Xnew - 640) / 2 + 19
+
+WRITE_SHORT "0x00041928" (Xnew - 640) / 2 + 111
+WRITE_SHORT "0x00041923" (Ynew - 480) / 2 + 415
+
+WRITE_SHORT "0x00041734" (Xnew - 640) / 2 + 93
+WRITE_SHORT "0x0004172F" (Ynew - 480) / 2 + 376
+
+END END END

@@ -1,0 +1,42 @@
+
+
+
+// ================================================================================================
+//                              MAXIMUM HIT POINTS PER LEVEL
+//                                BY QWINN (Paul Escalona)
+// ================================================================================================
+// Last Modification Date:  2009/05/03 - v4
+// ================================================================================================
+
+COPY ~setup-pst-tweak/PST-Tweak/MaxHP/copy/HPWAR.2DA~ ~override~
+COPY ~setup-pst-tweak/PST-Tweak/MaxHP/copy/HPPRS.2DA~ ~override~
+COPY ~setup-pst-tweak/PST-Tweak/MaxHP/copy/HPROG.2DA~ ~override~
+COPY ~setup-pst-tweak/PST-Tweak/MaxHP/copy/HPWIZ.2DA~ ~override~
+COPY ~setup-pst-tweak/PST-Tweak/MaxHP/copy/HPCONBON.2DA~ ~override~
+
+// Following added in version 4.0, to patch scient's method of changing HP progression for TNO.
+
+
+ACTION_IF FILE_EXISTS ~override/Q!FIXPAK.xxx~ THEN
+BEGIN
+  INCLUDE ~setup-pst-tweak/PST-Tweak/utils/Q_EnginePatcher.tph~
+
+  COPY ~Torment.exe~ ~Torment.exe~
+    SPRINT "Q_Patch_Name" ~Maximize patched TNO HP progression .~
+
+    SET Q_Starting_Offset = 0x183000
+    SET Q_Replace_Offset  = 0
+    SET Q_Loop            = 0
+
+    SET searchlength = 6
+    SPRINT searchpattern  ~123456~
+    SPRINT searchbytes    ~73 1A 6A 01 6A 0B~
+
+    SET replacelength = 6
+    SPRINT replacepattern ~123456~
+    SPRINT replacebytes   ~73 1A 6A 0B 6A 0B~
+
+    LAUNCH_PATCH_MACRO Q_Pattern_Maker
+    LAUNCH_PATCH_MACRO Q_Engine_Patcher
+  BUT_ONLY_IF_IT_CHANGES
+END

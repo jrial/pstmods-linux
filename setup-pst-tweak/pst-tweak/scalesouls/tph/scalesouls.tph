@@ -1,0 +1,115 @@
+
+
+// ================================================================================================
+//                                   SCALE OF SOULS MOD
+//                                BY QWINN (Paul Escalona)
+// ================================================================================================
+// Last Modification Date:  2008/05/15 - v1
+// ================================================================================================
+
+// This introduces a new item into the game to measure alignment, along with some background and
+// history.
+// See the PS:T Tweak Pack readme for details.
+
+// VERSION 4.0:
+// The method of using an item called the Scale of Souls is being replaced with scient's engine tweak that simply displays it on your character sheet.
+// BONUS!  It will also display the morale of NPC's.
+
+
+INCLUDE ~setup-pst-tweak/PST-Tweak/utils/Q_EnginePatcher.tph~
+
+// 15. Display numeric values of GOOD/LAW globals as well as morale inside alignment profile window
+// call function that takes over outputting alignment/morale
+
+COPY ~Torment.exe~ ~Torment.exe~
+  SET Q_VER = 0
+  PATCH_IF %SOURCE_SIZE% = 5697597
+  BEGIN
+     INNER_ACTION BEGIN FAIL ~Game version identified as 4CD v1.0. Please apply official PS:T patch 1.1 and rerun setup.~ END
+  END
+  ELSE
+  PATCH_IF %SOURCE_SIZE% = 5713981
+  BEGIN
+     SET Q_VER = 4
+     PATCH_PRINT ~Game version identified as 4CD v1.1. Proceeding with installation.~
+  END
+  ELSE
+  PATCH_IF %SOURCE_SIZE% = 5718077
+  BEGIN
+     SET Q_VER = 2
+     PATCH_PRINT ~Game version identified as 2CD v1.1. Proceeding with installation.~
+  END
+  ELSE
+  BEGIN
+     INNER_ACTION BEGIN FAIL ~Unknown version of game. Please seek assistance at the forums for this mod at Spellhold Studios.~ END
+  END
+
+  SET Q_Loop = 0
+
+
+  SPRINT "Q_Patch_Name" ~1. Call New Function that Outputs Alignment/Morale to Character Screen~
+
+// For TNO, display GOOD/LAW globals inside alignment display.  For other PC's display morale inside profile window below current states.
+// Call function below to updated alignment display
+// search:      00 8B 85 7C FF FF FF 50 68
+// replace 2cd: 00 8B 8D 6C FF FF FF 81 C1 94 04 00 00 FF B5 7C FF FF FF FF B5 84 FA FF FF E8 2E 80 E4 FF 90 90
+// replace 4cd: 00 8B 8D 6C FF FF FF 81 C1 94 04 00 00 FF B5 7C FF FF FF FF B5 84 FA FF FF E8 6E 7E E4 FF 90 90
+
+  SET Q_Starting_Offset = 0x1F2410
+  SET Q_Replace_Offset  = 0
+
+  SET searchlength = 9
+  SPRINT searchpattern  ~123456789~
+  SPRINT searchbytes    ~00 8B 85 7C FF FF FF 50 68~
+
+  SET replacelength = 32
+  SPRINT replacepattern ~12345678901234567890123456789012~
+  PATCH_IF Q_VER = 2 BEGIN SPRINT replacebytes ~00 8B 8D 6C FF FF FF 81 C1 94 04 00 00 FF B5 7C FF FF FF FF B5 84 FA FF FF E8 2E 80 E4 FF 90 90~ END
+                ELSE BEGIN SPRINT replacebytes ~00 8B 8D 6C FF FF FF 81 C1 94 04 00 00 FF B5 7C FF FF FF FF B5 84 FA FF FF E8 6E 7E E4 FF 90 90~ END
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+
+  SPRINT "Q_Patch_Name" ~2. Call New Function that Outputs Alignment/Morale to Character Screen~
+
+// Check if PC is not TNO and call to function below
+// search:      83 C4 0C C7 45 F0 00 00 00 00 68 E9 05 01 00
+// replace 2cd: 8B 45 D4 85 C0 74 13 8B 95 1C FF FF FF 0F B6 82 27 07 00 00 E8 BD CC E4 FF 90 83 C4 0C 33 C0 89 45 F0 68 E9 05 01 00 8D 8D 90 FE FF FF 51 E8 2D E3 E4 FF 83 C4 08 C6 45 FC 23
+// replace 4cd: 8B 45 D4 85 C0 74 13 8B 95 1C FF FF FF 0F B6 82 27 07 00 00 E8 FD CA E4 FF 90 83 C4 0C 33 C0 89 45 F0 68 E9 05 01 00 8D 8D 90 FE FF FF 51 E8 A5 E1 E4 FF 83 C4 08 C6 45 FC 23
+
+  SET Q_Starting_Offset = 0x1ED760
+  SET Q_Replace_Offset  = 0
+
+  SET searchlength = 15
+  SPRINT searchpattern  ~123456789012345~
+  SPRINT searchbytes    ~83 C4 0C C7 45 F0 00 00 00 00 68 E9 05 01 00~
+
+  SET replacelength = 58
+  SPRINT replacepattern ~1234567890123456789012345678901234567890123456789012345678~
+  PATCH_IF Q_VER = 2 BEGIN SPRINT replacebytes ~8B 45 D4 85 C0 74 13 8B 95 1C FF FF FF 0F B6 82 27 07 00 00 E8 BD CC E4 FF 90 83 C4 0C 33 C0 89 45 F0 68 E9 05 01 00 8D 8D 90 FE FF FF 51 E8 2D E3 E4 FF 83 C4 08 C6 45 FC 23~ END
+                ELSE BEGIN SPRINT replacebytes ~8B 45 D4 85 C0 74 13 8B 95 1C FF FF FF 0F B6 82 27 07 00 00 E8 FD CA E4 FF 90 83 C4 0C 33 C0 89 45 F0 68 E9 05 01 00 8D 8D 90 FE FF FF 51 E8 A5 E1 E4 FF 83 C4 08 C6 45 FC 23~ END
+
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  LAUNCH_PATCH_MACRO Q_Engine_Patcher
+
+
+
+  SPRINT "Q_Patch_Name" ~3. Retrieve Alignment/Morale Values and Output.~
+
+// Two functions: check if TNO and if so display values for GOOD/LAW globals inside alignment area & display morale in profile for other PC's
+// offset: 0003A43F
+// replace 2cd:  50 68 D9 ED 5E 00 FF 74 24 10 FF 74 24 10 E8 11 17 00 00 68 90 1B 97 00 FF 74 24 08 FF 74 24 08 E8 FF 16 00 00 83 C4 1C C3 51 E8 40 2A 38 00 85 C0 75 44 6A 00 68 20 FF 96 00 68 18 FF 96 00 E8 40 9A 02 00 36 FF 70 28 6A 00 68 F8 FE 96 00 68 18 FF 96 00 E8 2B 9A 02 00 36 FF 70 28 FF 74 24 14 68 CF A4 43 00 FF 75 EC FF 74 24 1C E8 B2 16 00 00 83 C4 1C EB 18 FF 74 24 0C 68 E8 71 94 00 FF 75 EC FF 74 24 14 E8 98 16 00 00 83 C4 14 C3 25 73 0A 0A 4C 61 77 3A 20 25 64 0A 47 6F 6F 64 3A 20 25 64 00
+// replace 4cd:  50 68 99 EF 5E 00 FF 74 24 10 FF 74 24 10 E8 49 17 00 00 68 40 0A 97 00 FF 74 24 08 FF 74 24 08 E8 37 17 00 00 83 C4 1C C3 51 E8 00 2C 38 00 85 C0 75 44 6A 00 68 D0 ED 96 00 68 C8 ED 96 00 E8 80 9A 02 00 36 FF 70 28 6A 00 68 A8 ED 96 00 68 C8 ED 96 00 E8 6B 9A 02 00 36 FF 70 28 FF 74 24 14 68 CF A4 43 00 FF 75 EC FF 74 24 1C E8 EA 16 00 00 83 C4 1C EB 18 FF 74 24 0C 68 EC 61 94 00 FF 75 EC FF 74 24 14 E8 D0 16 00 00 83 C4 14 C3 25 73 0A 0A 4C 61 77 3A 20 25 64 0A 47 6F 6F 64 3A 20 25 64 00
+
+  SET searchlength = 0
+  SET replacelength = 165
+  SPRINT replacepattern ~123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345~
+  PATCH_IF Q_VER = 2 BEGIN SPRINT replacebytes ~50 68 D9 ED 5E 00 FF 74 24 10 FF 74 24 10 E8 11 17 00 00 68 90 1B 97 00 FF 74 24 08 FF 74 24 08 E8 FF 16 00 00 83 C4 1C C3 51 E8 40 2A 38 00 85 C0 75 44 6A 00 68 20 FF 96 00 68 18 FF 96 00 E8 40 9A 02 00 36 FF 70 28 6A 00 68 F8 FE 96 00 68 18 FF 96 00 E8 2B 9A 02 00 36 FF 70 28 FF 74 24 14 68 CF A4 43 00 FF 75 EC FF 74 24 1C E8 B2 16 00 00 83 C4 1C EB 18 FF 74 24 0C 68 E8 71 94 00 FF 75 EC FF 74 24 14 E8 98 16 00 00 83 C4 14 C3 25 73 0A 0A 4C 61 77 3A 20 25 64 0A 47 6F 6F 64 3A 20 25 64 00~ END
+                ELSE BEGIN SPRINT replacebytes ~50 68 99 EF 5E 00 FF 74 24 10 FF 74 24 10 E8 49 17 00 00 68 40 0A 97 00 FF 74 24 08 FF 74 24 08 E8 37 17 00 00 83 C4 1C C3 51 E8 00 2C 38 00 85 C0 75 44 6A 00 68 D0 ED 96 00 68 C8 ED 96 00 E8 80 9A 02 00 36 FF 70 28 6A 00 68 A8 ED 96 00 68 C8 ED 96 00 E8 6B 9A 02 00 36 FF 70 28 FF 74 24 14 68 CF A4 43 00 FF 75 EC FF 74 24 1C E8 EA 16 00 00 83 C4 1C EB 18 FF 74 24 0C 68 EC 61 94 00 FF 75 EC FF 74 24 14 E8 D0 16 00 00 83 C4 14 C3 25 73 0A 0A 4C 61 77 3A 20 25 64 0A 47 6F 6F 64 3A 20 25 64 00~ END
+  LAUNCH_PATCH_MACRO Q_Pattern_Maker
+  WRITE_EVALUATED_ASCII 0x3A43F "%replacepattern%" (%replacelength%)
+  PATCH_PRINT ~%Q_Patch_Name%~
+  PATCH_PRINT ~Engine Patched at Offset: 0x3A43F~
+
+BUT_ONLY_IF_IT_CHANGES

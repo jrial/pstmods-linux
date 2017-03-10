@@ -1,0 +1,21 @@
+
+
+// ================================================================================================
+//                             MAXIMIZED FRIENDS SPELL TWEAK
+//                                BY QWINN (Paul Escalona)
+// ================================================================================================
+// Last Modification Date:  2008/05/09 - v1
+// ================================================================================================
+
+// Removes the random component of the Friends spell.  The Friends spell will always boost charisma
+// by 8 points when cast, rather than random 2-8 points.
+
+COPY_EXISTING ~SPWI114.SPL~ ~override~
+  READ_LONG 0x6a "EffectsOffset"
+  WRITE_LONG "EffectsOffset" + 0x1c 8
+  WRITE_LONG "EffectsOffset" + 0x20 1
+ BUT_ONLY_IF_IT_CHANGES
+ 
+
+
+

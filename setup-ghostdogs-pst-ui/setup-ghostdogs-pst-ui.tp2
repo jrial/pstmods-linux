@@ -1,0 +1,172 @@
+///////////////////////////////////////////////////////////////////////////////
+//
+// GhostDogs Planescape: Torment User Interface
+// For use with Bigg's Widescreen mod
+// Author: GhostDog, with the help of Taplonaplo
+// Version: 2.2
+//
+///////////////////////////////////////////////////////////////////////////////
+
+
+BACKUP ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Backup~
+AUTHOR ~Mod forum: http://www.shsforums.net/forum/571-ghostdogs-pst-ui/ ,  email: the_vampyri_lestat@hotmail.com~
+README ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/GhostDogs-PST-UI-README.txt~
+VERSION ~v2.2~
+
+
+
+BEGIN ~Planescape Torment User Interface~
+PRINT ~Checking if Bigg's Widescreen Mod is installed~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/CD_check.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/WDM_check.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/resolution_check.tph~
+
+ACTION_IF UI = 1 THEN BEGIN
+
+PRINT ~Widescreen Mod detected~
+PRINT ~Installing User Interface 1 %Xnew%x%Ynew%...~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/UI_x480.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/chu_patch.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/exe_patch.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/extend_mos.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/storefix.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/480_tooltip_fix.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/journalpics_loadingbar_fix.tph~
+
+END ELSE BEGIN ACTION_IF UI = 2 THEN BEGIN
+
+PRINT ~Widescreen Mod detected~
+PRINT ~Installing User Interface 2 %Xnew%x%Ynew%...~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/UI_x720.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/chu_patch.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/exe_patch.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/extend_mos.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/storefix.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/journalpics_loadingbar_fix.tph~
+
+END ELSE BEGIN ACTION_IF UI = 3 THEN BEGIN
+
+PRINT ~Widescreen Mod detected~
+PRINT ~Installing User Interface 3 %Xnew%x%Ynew%...~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/UI_x800.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/chu_patch.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/exe_patch.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/extend_mos.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/storefix.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/journalpics_loadingbar_fix.tph~
+
+END ELSE BEGIN ACTION_IF UI = 4 THEN BEGIN
+
+PRINT ~Widescreen Mod detected~
+PRINT ~Installing User Interface 4 %Xnew%x%Ynew%...~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/UI_x1024.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/chu_patch.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/exe_patch.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/extend_mos.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/storefix.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/journalpics_loadingbar_fix.tph~
+
+END ELSE BEGIN ACTION_IF UI = 5 THEN BEGIN
+
+PRINT ~Widescreen Mod detected~
+PRINT ~Installing User Interface 5 %Xnew%x%Ynew%...~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/UI_Big_1024.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/chu_patch.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/exe_patch.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/extend_mos.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/storefix.tph~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/journalpics_loadingbar_fix.tph~
+
+END END END END END
+
+
+//=========================================
+// Below is the Bigger Fonts Installation:
+//=========================================
+
+
+BEGIN ~20% bigger fonts for English, French, German, Spanish and Italian languages~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/iso-8859-1/Size13~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+BEGIN ~40% bigger fonts for English, French, German, Spanish and Italian languages~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/iso-8859-1/Size15~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+BEGIN ~80% bigger fonts for English, French, German, Spanish and Italian languages~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/iso-8859-1/Size16~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+BEGIN ~120% bigger fonts for English, French, German, Spanish and Italian languages                                 ~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/iso-8859-1/Size18~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+
+
+BEGIN ~20% bigger fonts for the Hungarian language~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/iso-8859-2/Size13~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+BEGIN ~40% bigger fonts for the Hungarian language~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/iso-8859-2/Size15~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+BEGIN ~80% bigger fonts for the Hungarian language~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/iso-8859-2/Size16~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+BEGIN ~120% bigger fonts for the Hungarian language                                                                  ~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/iso-8859-2/Size18~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+
+
+BEGIN ~20% bigger fonts for the Polish and Czech language~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/cp1250/Size13~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+BEGIN ~40% bigger fonts for the Polish and Czech language~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/cp1250/Size15~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+BEGIN ~80% bigger fonts for the Polish and Czech language~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/cp1250/Size16~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+BEGIN ~120% bigger fonts for the Polish and Czech language                                                             ~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/cp1250/Size18~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+
+
+BEGIN ~20% bigger fonts for the Russian Language~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/cp1251/Size13~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+BEGIN ~40% bigger fonts for the Russian Language~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/cp1251/Size15~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+BEGIN ~80% bigger fonts for the Russian Language~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/cp1251/Size16~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~
+
+BEGIN ~120% bigger fonts for the Russian Language~
+SUBCOMPONENT ~Bigger fonts? If so, choose language and size.~
+COPY ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/Fonts/cp1251/Size18~ ~override~
+INCLUDE ~setup-ghostdogs-pst-ui/GhostDogs-PST-UI/TPH/Font_chu_patch.tph~

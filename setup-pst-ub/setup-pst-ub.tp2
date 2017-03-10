@@ -1,0 +1,230 @@
+
+// ================================================================================================
+//                         PLANESCAPE: TORMENT UNFINISHED BUSINESS
+//                                BY QWINN (Paul Escalona)
+// ================================================================================================
+// Last Modification Date:  June 15, 2012 - v4.12
+// ================================================================================================
+
+
+BACKUP ~setup-pst-ub/PST-UB/backup~
+AUTHOR ~pescalona@verizon.net~
+// MODDER
+VERSION ~v4.12~
+
+NO_IF_EVAL_BUG
+
+ASK_EVERY_COMPONENT
+
+LANGUAGE
+  ~English~  ~english~             ~setup-pst-ub/PST-UB/tra/english/ub.tra~
+                                   ~setup-pst-ub/PST-UB/tra/english/ub.tra~
+LANGUAGE
+  ~German~   ~german~              ~setup-pst-ub/PST-UB/tra/english/ub.tra~
+                                   ~setup-pst-ub/PST-UB/tra/german/ub.tra~
+LANGUAGE
+  ~Spanish~  ~spanish~             ~setup-pst-ub/PST-UB/tra/english/ub.tra~
+                                   ~setup-pst-ub/PST-UB/tra/spanish/ub.tra~
+LANGUAGE
+  ~Italian~  ~italian~             ~setup-pst-ub/PST-UB/tra/english/ub.tra~
+                                   ~setup-pst-ub/PST-UB/tra/italian/ub.tra~
+LANGUAGE
+  ~Polish~   ~polish~              ~setup-pst-ub/PST-UB/tra/english/ub.tra~
+                                   ~setup-pst-ub/PST-UB/tra/polish/ub.tra~
+LANGUAGE
+  ~Russian~  ~russian~             ~setup-pst-ub/PST-UB/tra/english/ub.tra~
+                                   ~setup-pst-ub/PST-UB/tra/russian/ub.tra~
+LANGUAGE
+  ~French~  ~french~               ~setup-pst-ub/PST-UB/tra/english/ub.tra~
+                                   ~setup-pst-ub/PST-UB/tra/french/ub.tra~
+
+BEGIN @-2000  // Readme Viewer
+INSTALL_BY_DEFAULT
+NO_LOG_RECORD
+DESIGNATED 100
+
+PRINT @-2001 // Would you like to view the Readme? [Y]es or [N]o:
+ACTION_READLN ~view_readme~
+
+OUTER_WHILE NOT(~%view_readme%~ STRING_EQUAL ~Y~) AND
+            NOT(~%view_readme%~ STRING_EQUAL ~y~) AND
+            NOT(~%view_readme%~ STRING_EQUAL ~N~) AND
+            NOT(~%view_readme%~ STRING_EQUAL ~n~) BEGIN
+ PRINT @-2001 // Would you like to view the Readme? [Y]es or [N]o:
+ ACTION_READLN ~view_readme~
+END
+
+ACTION_IF (~%view_readme%~ STRING_EQUAL ~Y~ OR ~%view_readme%~ STRING_EQUAL ~y~) THEN
+BEGIN
+  ACTION_IF ~%LANGUAGE%~ STRING_EQUAL ~english~ THEN
+    BEGIN  AT_INTERACTIVE_NOW ~VIEW setup-pst-ub/PST-UB/PSTUB_Readme.html~ END
+  ACTION_IF ~%LANGUAGE%~ STRING_EQUAL ~spanish~ THEN
+    BEGIN  AT_INTERACTIVE_NOW ~VIEW setup-pst-ub/PST-UB/PSTUB_Leeme.html~ END
+  ACTION_IF ~%LANGUAGE%~ STRING_EQUAL ~italian~ THEN
+    BEGIN  AT_INTERACTIVE_NOW ~VIEW setup-pst-ub/PST-UB/PSTUB_Leggermi.html~ END
+  ACTION_IF ~%LANGUAGE%~ STRING_EQUAL ~german~  THEN
+    BEGIN  AT_INTERACTIVE_NOW ~VIEW setup-pst-ub/PST-UB/PSTUB_LiesMich.html~ END
+  ACTION_IF ~%LANGUAGE%~ STRING_EQUAL ~polish~  THEN
+    BEGIN  AT_INTERACTIVE_NOW ~VIEW setup-pst-ub/PST-UB/PSTUB_Dokumentacja.html~ END
+  ACTION_IF ~%LANGUAGE%~ STRING_EQUAL ~french~  THEN
+    BEGIN  AT_INTERACTIVE_NOW ~VIEW setup-pst-ub/PST-UB/PSTUB_LisezMoi.html~ END
+END
+
+BEGIN @1 // ~All Recommended PS:T Unfinished Business Components~
+DESIGNATED 0
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "1"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "2"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "3"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "4"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "5"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "6"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "7"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "8"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "9"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "10"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "11"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "12"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "13"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "14"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "15"
+  UNINSTALL "Setup-setup-pst-ub/PST-UB.tp2" "16"
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!ABLE.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/Able/tph/Able.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!MMMM.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/MorteIntro/tph/MorteIntro.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!CANDLE.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/Candlestick/tph/Candlestick.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!DTRUTH.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/Deionarra/tph/Deionarra.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!YEMETH.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/Yemeth/tph/Yemeth.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!ELYCE.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/Elyce/tph/Elyce.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!CRSTMN.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/CurstCitizens/tph/CurstCitizens.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!CRSTPR.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/CurstPrisoners/tph/CurstPrisoners.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!CARLP.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/Parfidor/tph/Parfidor.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!MTEETH.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/MorteTeeth/tph/MorteTeeth.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!THUGS.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/AlleyThug/tph/AlleyThug.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!ITEMS.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/Items/tph/Items.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!SOUNDS.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/Sounds/tph/Sounds.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!MEBBTH.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/Mebbeth/tph/Mebbeth.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!LOWERW.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/LowerWard/tph/LowerWard.tph~
+  COPY_EXISTING ~SCALPEL.itm~ ~override/Q!ALUFND.xxx~
+  INCLUDE ~setup-pst-ub/PST-UB/Bestiary/tph/Bestiary.tph~
+
+
+
+BEGIN @21 // Expanded Deionarra's Truth Mod
+DESIGNATED 50
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!XPDEIO.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/XPDeionarra/tph/XPDeionarra.tph~
+
+BEGIN @15 // ~Restored Cheat Items (Not Recommended)~
+DESIGNATED 51
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!CITEMS.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/CheatItems/tph/CheatItems.tph~
+
+BEGIN @2 // ~Restored Able Ponder-Thought Research~
+DESIGNATED 1
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!ABLE.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/Able/tph/Able.tph~
+
+BEGIN @3 // ~Restored More Morte Mortuary Moments~
+DESIGNATED 2
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!MMMM.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/MorteIntro/tph/MorteIntro.tph~
+
+BEGIN @4 // ~Restored Candlestick Quest~
+DESIGNATED 3
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!CANDLE.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/Candlestick/tph/Candlestick.tph~
+
+BEGIN @5 // ~Restored Deionarra's Truth Conversations~
+DESIGNATED 4
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!DTRUTH.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/Deionarra/tph/Deionarra.tph~
+
+BEGIN @6 // ~Restored Pendant of Yemeth Quest~
+DESIGNATED 5
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!YEMETH.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/Yemeth/tph/Yemeth.tph~
+
+BEGIN @7 // ~Restored Elyce's Company~
+DESIGNATED 6
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!ELYCE.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/Elyce/tph/Elyce.tph~
+
+BEGIN @8 // ~Restored Curst Citizens~
+DESIGNATED 7
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!CRSTMN.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/CurstCitizens/tph/CurstCitizens.tph~
+
+BEGIN @9 // ~Restored Curst Prisoners~
+DESIGNATED 8
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!CRSTPR.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/CurstPrisoners/tph/CurstPrisoners.tph~
+
+BEGIN @10 // ~Restored Carl Parfidor~
+DESIGNATED 9
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!CARLP.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/Parfidor/tph/Parfidor.tph~
+
+BEGIN @11 // ~Restored Morte-Ingress's Teeth Banter~
+DESIGNATED 10
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!MTEETH.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/MorteTeeth/tph/MorteTeeth.tph~
+
+BEGIN @12 // ~Restored Alley of Dangerous Angles Thugs~
+DESIGNATED 11
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!THUGS.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/AlleyThug/tph/AlleyThug.tph~
+
+BEGIN @13 // ~Restored Items~
+DESIGNATED 12
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!ITEMS.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/Items/tph/Items.tph~
+
+BEGIN @14 // ~Restored Party Comments and Banters~
+DESIGNATED 13
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!SOUNDS.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/Sounds/tph/Sounds.tph~
+
+BEGIN @20 // ~Restored Mebbeth~
+DESIGNATED 14
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!MEBBTH.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/Mebbeth/tph/Mebbeth.tph~
+
+BEGIN @22 // ~Restored Lower Ward~
+DESIGNATED 15
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!LOWERW.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/LowerWard/tph/LowerWard.tph~
+
+BEGIN @25 // ~Restored Bestiary Entries~
+DESIGNATED 16
+FORBID_COMPONENT "Setup-setup-pst-ub/PST-UB.tp2" "0" @16 // ~   Already Successfully Installed!~
+COPY_EXISTING ~SCALPEL.itm~ ~override/Q!BESTIA.xxx~
+INCLUDE ~setup-pst-ub/PST-UB/Bestiary/tph/Bestiary.tph~

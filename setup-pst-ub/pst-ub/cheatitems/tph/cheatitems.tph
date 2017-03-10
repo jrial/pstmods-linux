@@ -1,0 +1,39 @@
+
+// ================= RESTORATION PACK'S RESTORED CHEAT ITEMS =====================
+
+// Modification by Restoration Pack
+// WeiDUization by Qwinn
+
+// ===============================================================================
+
+
+// ======================================= IDS FIXES ===========================================
+
+// Removing the "Bones" modifier from PermanentStatChange and Damage in the ACTION.IDS and
+// INSTANT.IDS.
+
+// Adding here to help eliminate the need to install Fixpack before UB.  Did same for
+// Tweak Pack version of Tome of Cheats.
+
+COPY_EXISTING ACTION.IDS ~override~
+  REPLACE_TEXTUALLY EXACT_MATCH ~*Bones~ ~*~
+ BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING INSTANT.IDS ~override~
+  REPLACE_TEXTUALLY EXACT_MATCH ~*Bones~ ~*~
+ BUT_ONLY_IF_IT_CHANGES
+
+CLEAR_IDS_MAP
+
+// ==============================================================================================
+
+
+COMPILE ~setup-pst-ub/PST-UB/CheatItems/dlg/CheatItems.d~
+COMPILE ~setup-pst-ub/PST-UB/CheatItems/dlg/DCHEATS.d~ USING ~setup-pst-ub/PST-UB/tra/%LANGUAGE%/dcheats.tra~
+
+// The original game files (strref 50577) said:
+// ~There are a number of chapters within the tome:  Teleport Cheat, Healing Cheat, Wealth Cheat, Spell Recharge
+// Cheat, Attribute Score Cheat, Death Cheat, Explore Area Cheat, Word 'o Good Cheat, and Word o' Evil Cheat.~
+// They didn't actually do any of that though, of course.  Here's what I did manage to make it do.
+
+STRING_SET 50577 @50577 // ~There are a number of chapters within the tome:  Teleport Cheat, Rest Anywhere Cheat, Wealth Cheat, Attribute Score Cheat, Death Cheat, Experience Cheat, Word 'o Good and Evil Cheat, and Word o' Law and Chaos Cheat.~

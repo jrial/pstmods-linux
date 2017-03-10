@@ -1,0 +1,796 @@
+//============================================================================
+// This will edit offsets in torment.exe in order to correct the display of
+// many game elements. Thanks go to Taplonalpo who found most of these
+// offsets, and to weak-ling for the action menu and tooltip offsets. The
+// script automatically checks your game version and patches accordingly
+// (Thanks to the Vanished One for this).
+//============================================================================
+
+
+COPY ~Torment.exe~ ~Torment.exe~
+SET ~failure~ = 0
+PATCH_IF (CDver = 4) THEN BEGIN
+  PATCH_PRINT ~4CDver exe patch~
+
+
+
+  // Loading and CD Screens :
+
+  WRITE_SHORT "0x04f463e" Xnew
+  WRITE_SHORT "0x04f4640" Ynew
+
+  // CD Message "To quit the game press alt-F4"
+
+  WRITE_SHORT "0x0018f8be" Xnew / 2 - 240
+  WRITE_SHORT "0x0018f8c7" Ynew / 2 - 12
+
+  // Screenshots :
+
+  WRITE_SHORT "0x0430f77" Xnew
+  WRITE_SHORT "0x0430f81" Ynew
+
+  // Action Menu :
+
+  WRITE_SHORT "0x03cad81" Xnew
+  WRITE_SHORT "0x03cad88" Ynew
+  WRITE_SHORT "0x03caeac" Xnew
+  WRITE_SHORT "0x03caeb3" Ynew - 1
+  WRITE_SHORT "0x03caed7" Ynew - 73
+  WRITE_SHORT "0x03caede" Ynew - 73
+
+  // Edit Box :
+
+  WRITE_SHORT "0x00ffd8e" Xnew
+  WRITE_SHORT "0x00ffd98" Ynew
+  WRITE_SHORT "0x00ffed9" Xnew
+  WRITE_SHORT "0x00ffee3" Ynew
+  WRITE_SHORT "0x00fffe3" Xnew
+  WRITE_SHORT "0x00fffed" Ynew
+
+  // Tooltip :
+
+  WRITE_SHORT "0x01a28ec" Xnew
+  WRITE_SHORT "0x01a28f3" Ynew
+
+  // Cinematics :
+
+  WRITE_SHORT "0x03f200" Xnew / 2 + 320
+  WRITE_SHORT "0x03f184" Ynew
+
+  // Stretch Movies :
+
+  WRITE_LONG 0x0003F522 0x9090006A
+
+  // Sliders :
+
+  WRITE_SHORT "0x0fcfb6" Xnew
+  WRITE_SHORT "0x0fcfbd" Ynew
+
+  // Mapnotes :
+
+  WRITE_SHORT "0x243b0b" Xnew
+  WRITE_SHORT "0x243b15" Ynew
+  WRITE_SHORT "0x243b5e" Xnew
+  WRITE_SHORT "0x243b68" Ynew
+
+  // Journal Pics :
+
+  WRITE_SHORT "0x232fc0" Xnew
+  WRITE_SHORT "0x232fc7" Ynew
+
+  // Dialog :
+
+  WRITE_SHORT "0x09a60b" Xnew / 2
+  WRITE_SHORT "0x09a617" Ynew / 2 - 155
+
+  WRITE_SHORT "0x3D580d" Ynew - 310
+  WRITE_SHORT "0x406745" Ynew - 310
+
+  // Some low level spells :
+
+  WRITE_SHORT "0x2bdcba" Xnew / 2
+  WRITE_SHORT "0x2bdcb5" Ynew / 2 + 9
+
+
+  // Meteor Storm :
+
+  WRITE_SHORT "0x02CB0AD" Xnew
+  WRITE_SHORT "0x02CB0B7" Ynew
+  WRITE_SHORT "0x02ca70f" Xnew / 2
+  WRITE_SHORT "0x02ca716" (Ynew - 73) / 2
+
+  // Conflagration :
+
+  WRITE_SHORT "0x02d65b8" Xnew
+  WRITE_SHORT "0x02d65c2" Ynew
+  WRITE_SHORT "0x02d6495" Xnew / 2
+  WRITE_SHORT "0x02d6488" Ynew / 2 + 110
+  WRITE_SHORT "0x02d528a" Xnew / 2 
+  WRITE_SHORT "0x02d5291" Ynew / 2 + 9
+
+  // Abyssal Fury :
+
+  WRITE_SHORT "0x02c0765" Xnew / 2 
+  WRITE_SHORT "0x02c0760" Ynew / 2 + 20
+
+  // Power Word Kill :
+
+  WRITE_SHORT "0x02c978b" Xnew / 2
+  WRITE_SHORT "0x02c9786" Ynew / 2 + 150
+
+  // Cloudkill :
+
+  WRITE_SHORT "0x02b928e" Xnew / 2
+  WRITE_SHORT "0x02b9289" Ynew / 2 + 9
+
+  // Elysium fire :
+
+  WRITE_SHORT "0x02bf434" Xnew / 2
+  WRITE_SHORT "0x02bf42f" Ynew / 2 + 9
+
+  WRITE_SHORT "0x02bfa6f" Xnew / 2
+  WRITE_SHORT "0x02bfa6a" Ynew / 2 + 9
+
+  // Howl Of Pandemonium :
+
+  WRITE_SHORT "0x02ba1f3" Xnew / 2
+  WRITE_SHORT "0x02ba1fa" Ynew / 2 + 9
+
+  // Desert Hell :
+
+  WRITE_SHORT "0x02c719b" Xnew
+  WRITE_SHORT "0x02c71a2" Ynew
+  WRITE_SHORT "0x02c71c6" Xnew / 2
+  WRITE_SHORT "0x02c71c1" Ynew / 2 + 9
+
+  // Ingus Fury :
+
+  WRITE_SHORT "0x02d7254" Xnew / 2
+  WRITE_SHORT "0x02d725b" Ynew / 2 + 9
+
+  // Deathbolt :
+
+  WRITE_SHORT "0x02cec33" Xnew / 2
+
+  // Chain Lightning storm :
+
+  WRITE_SHORT "0x02cd5f6" Xnew / 2
+  WRITE_SHORT "0x02cd5f1" Ynew / 2 - 60
+
+  // Stygian Ice Storm :
+
+  WRITE_SHORT "0x02c81ba" Xnew / 2
+  WRITE_SHORT "0x02c81c1" Ynew / 2 - 60
+
+  // Bladestorm :
+
+  WRITE_SHORT "0x02bb1e1" Xnew / 2
+  WRITE_SHORT "0x02bb1eb" Ynew / 2 + 9
+  WRITE_SHORT "0x02bbbea" Xnew
+  WRITE_SHORT "0x02bbbf4" Ynew
+
+  // Ax Of Torment :
+
+  WRITE_SHORT "0x02c5eda" Xnew / 2
+  WRITE_SHORT "0x02c5ed5" Ynew / 2 + 9
+
+  // Mechanus Cannon/Celestial Host/Rune of torment Display Window :
+
+  WRITE_SHORT "0x03bc6ee" Xnew
+  WRITE_SHORT "0x03bc6f5" Ynew
+  WRITE_SHORT "0x03bc6e4" 0
+
+  // Mechanus Cannon :
+
+  WRITE_SHORT "0x02d2771" Xnew / 2
+  WRITE_SHORT "0x02d2778" Ynew / 2 + 9
+
+  // Celestial Host :
+
+  WRITE_SHORT "0x02d9061" Xnew
+  WRITE_SHORT "0x02d906b" Ynew
+  WRITE_SHORT "0x02d8345" Xnew / 2
+  WRITE_SHORT "0x02d833a" Ynew / 2 - 60
+
+  WRITE_SHORT "0x02d8c3a" Xnew / 2
+  WRITE_SHORT "0x02d8c44" Ynew / 2 - 36
+
+  // Celestial Host gate:
+  WRITE_SHORT "0x002d94b6" Xnew / 2
+  WRITE_SHORT "0x002d9485" 1
+  // Celestial Host - Heaven's Angel impact:
+  WRITE_SHORT "0x002DA31F" Xnew
+
+  // Celestial Host - Heaven's Angel :
+
+  WRITE_SHORT "0x02d9344" Xnew / 2
+  WRITE_SHORT "0x02d9326" Ynew / 2
+
+  // Celestial Host Phoenix :
+
+  WRITE_SHORT "0x02daee2" Xnew / 2
+  WRITE_SHORT "0x02daeca" Ynew / 2 - 60
+
+  // Celestial Host Archer :
+
+  WRITE_SHORT "0x02dbb00" Xnew / 2
+  WRITE_SHORT "0x02dbafb" Ynew / 2
+  WRITE_SHORT "0x02dbbbd" Ynew - 208
+  WRITE_SHORT "0x02dc2e1" 400
+  WRITE_SHORT "0x02dc2c3" Ynew - 204
+
+  // Celesetial Host Dragon :
+
+  WRITE_SHORT "0x02dd460" Xnew / 2
+  WRITE_SHORT "0x02dd45b" Ynew / 2 - 60
+
+  // Skull Mob :
+
+  WRITE_SHORT "0x02a910f" Xnew / 2
+  WRITE_SHORT "0x02a910a" Ynew / 2 + 9
+
+  // Raise Dead :
+
+  WRITE_SHORT "0x02d35d2" Xnew / 2
+  WRITE_SHORT "0x02d35cd" Ynew / 2 + 9
+
+  // Spiritual Hammer :
+
+  WRITE_SHORT "0x02d2108" Xnew / 2
+  WRITE_SHORT "0x02d2103" Ynew / 2 + 9
+
+  // Call Lightning :
+
+  WRITE_SHORT "0x02ded9b" Xnew / 2
+  WRITE_SHORT "0x02ded96" Ynew / 2 + 9
+
+  // Rune Of Torment :
+
+  WRITE_SHORT "0x02d0e28" Xnew / 2
+  WRITE_SHORT "0x02d0e23" Ynew / 2 + 9
+
+  //Cursor scrolling fix:
+  //x1
+  WRITE_BYTE   "0x854ab"   Xnew / 16
+  WRITE_BYTE   "0x856b8"   Xnew / 16
+  //x2
+  WRITE_SHORT   "0x8554f"  Xnew - (Xnew / 16) -1
+  WRITE_SHORT   "0x85777"  Xnew - (Xnew / 16) -1
+  //y1
+  WRITE_BYTE   "0x85042"   Ynew / 12
+  WRITE_BYTE   "0x85251"   Ynew / 12
+  //y2
+  WRITE_SHORT   "0x850e7"  Ynew - (Ynew / 12) - 1
+  WRITE_SHORT   "0x85310"  Ynew - (Ynew / 12) - 1
+
+
+END
+
+
+ELSE BEGIN
+    PATCH_IF (CDver = 2) THEN BEGIN
+      PATCH_PRINT ~2CDver exe patch~
+
+
+      // Cinematics :
+
+      WRITE_SHORT "0x003f1c0" Xnew / 2 + 320
+      WRITE_SHORT "0x003f144" Ynew
+
+      // Stretch Movies :
+
+      WRITE_LONG 0x0003F4E2 0x9090006A
+
+      // Loading and CD Screens :
+
+      WRITE_SHORT "0x04f564e" Xnew
+      WRITE_SHORT "0x04f5650" Ynew
+
+      // CD Message "To quit the game press alt-F4"
+
+      WRITE_SHORT "0x0018f87e" Xnew / 2 - 240
+      WRITE_SHORT "0x0018f887" Ynew / 2 - 12
+
+      // Screenshots :
+
+      WRITE_SHORT "0x0431bd7" Xnew
+      WRITE_SHORT "0x0431be1" Ynew
+
+      // Edit Box :
+
+      WRITE_SHORT "0x00ffd4e" Xnew
+      WRITE_SHORT "0x00ffd58" Ynew
+      WRITE_SHORT "0x00ffe99" Xnew
+      WRITE_SHORT "0x00ffea3" Ynew
+      WRITE_SHORT "0x00fffa3" Xnew
+      WRITE_SHORT "0x00fffad" Ynew
+
+      // Slider :
+
+      WRITE_SHORT "0x00fcf76" Xnew
+      WRITE_SHORT "0x00fcf7d" Ynew
+
+      // Tooltip :
+
+      WRITE_SHORT "0x01a28ac" Xnew
+      WRITE_SHORT "0x01a28b3" Ynew
+
+      // Journal Pics :
+
+      WRITE_SHORT "0x0232e00" Xnew
+      WRITE_SHORT "0x0232e07" Ynew
+
+      // Mapnotes :
+
+      WRITE_SHORT "0x024394b" Xnew
+      WRITE_SHORT "0x0243955" Ynew
+      WRITE_SHORT "0x024399e" Xnew
+      WRITE_SHORT "0x02439a8" Ynew
+
+      // Action Menu :
+
+      WRITE_SHORT "0x03cabc1" Xnew
+      WRITE_SHORT "0x03cabc8" Ynew
+      WRITE_SHORT "0x03cacec" Xnew
+      WRITE_SHORT "0x03cacf3" Ynew - 1
+      WRITE_SHORT "0x03cad17" Ynew - 73
+      WRITE_SHORT "0x03cad1e" Ynew - 73
+
+      // Dialog :
+
+      WRITE_SHORT "0x009a5cb" Xnew / 2
+      WRITE_SHORT "0x009a5d7" Ynew / 2 - 155
+
+      WRITE_SHORT "0x3D564d" Ynew - 310
+      WRITE_SHORT "0x406585" Ynew - 310
+
+      // Meteor Storm :
+
+      WRITE_SHORT "0x02caeed" Xnew
+      WRITE_SHORT "0x02caef7" Ynew
+      WRITE_SHORT "0x02ca54f" Xnew / 2
+      WRITE_SHORT "0x02ca556" (Ynew - 73) / 2
+
+      // Conflagration :
+
+      WRITE_SHORT "0x02d63f8" Xnew
+      WRITE_SHORT "0x02d6402" Ynew
+      WRITE_SHORT "0x02d50ca" Xnew / 2
+      WRITE_SHORT "0x02d50d1" Ynew / 2 + 9
+      WRITE_SHORT "0x02d62d5" Xnew / 2
+      WRITE_SHORT "0x02d62c8" Ynew / 2 + 110
+
+      // General Spells :
+
+      WRITE_SHORT "0x02bdafa" Xnew / 2
+      WRITE_SHORT "0x02bdaf5" Ynew / 2 + 9
+
+      // Abyssal Fury :
+
+      WRITE_SHORT "0x02c05a5" Xnew / 2
+      WRITE_SHORT "0x02c05a0" Ynew / 2 + 20
+
+      // Power Word Kill :
+
+      WRITE_SHORT "0x02c95cb" Xnew / 2
+      WRITE_SHORT "0x02c95c6" Ynew / 2 + 150
+
+      // Cloudkill :
+
+      WRITE_SHORT "0x02b90ce" Xnew / 2
+      WRITE_SHORT "0x02b90c9" Ynew / 2 + 9
+
+      // Elysium fire :
+
+      WRITE_SHORT "0x02bf274" Xnew / 2
+      WRITE_SHORT "0x02bf26f" Ynew / 2 + 9
+
+      WRITE_SHORT "0x02bf8af" Xnew / 2
+      WRITE_SHORT "0x02bf8aa" Ynew / 2 + 9
+
+      // Howl Of Pandemonium :
+
+      WRITE_SHORT "0x02ba033" Xnew / 2
+      WRITE_SHORT "0x02ba03a" Ynew / 2 + 9
+
+      // Desert Hell :
+
+      WRITE_SHORT "0x02c6fdb" Xnew
+      WRITE_SHORT "0x02c6fe2" Ynew
+      WRITE_SHORT "0x02c7006" Xnew / 2
+      WRITE_SHORT "0x02c7001" Ynew / 2 + 9
+
+      // Ingus Fury :
+
+      WRITE_SHORT "0x02d7094" Xnew / 2
+      WRITE_SHORT "0x02d709b" Ynew / 2 + 9
+
+      // Deathbolt :
+
+      WRITE_SHORT "0x02cea73" Xnew / 2
+
+      // Chain Lightning storm :
+
+      WRITE_SHORT "0x02cd436" Xnew / 2
+      WRITE_SHORT "0x02cd431" Ynew / 2 - 60
+
+      // Stygian Ice Storm :
+
+      WRITE_SHORT "0x02c7ffa" Xnew / 2
+      WRITE_SHORT "0x02c8001" Ynew / 2 - 60
+
+      // Bladestorm :
+
+      WRITE_SHORT "0x02bb021" Xnew / 2
+      WRITE_SHORT "0x02bb02b" Ynew / 2 + 9
+      WRITE_SHORT "0x02bba2a" Xnew
+      WRITE_SHORT "0x02bba34" Ynew
+
+      // Ax Of Torment :
+
+      WRITE_SHORT "0x02c5d1a" Xnew / 2
+      WRITE_SHORT "0x02c5d15" Ynew / 2 + 9
+
+      // Mechanus Cannon/Celestial Host/Rune of torment Display Window :
+
+      WRITE_SHORT "0x03bc52e" Xnew
+      WRITE_SHORT "0x03bc535" Ynew
+      WRITE_SHORT "0x03bc524" 0
+
+      // Mechanus Cannon :
+
+      WRITE_SHORT "0x02d25b1" Xnew / 2
+      WRITE_SHORT "0x02d25b8" Ynew / 2 + 9
+
+      // Celestial Host :
+
+      WRITE_SHORT "0x02d8ea1" Xnew
+      WRITE_SHORT "0x02d8eab" Ynew
+      WRITE_SHORT "0x02d8185" Xnew / 2
+      WRITE_SHORT "0x02d817a" Ynew / 2 - 60
+
+      WRITE_SHORT "0x02d8a7a" Xnew / 2
+      WRITE_SHORT "0x02d8a84" Ynew / 2 - 36
+
+
+      // Celestial Host gate:
+      WRITE_SHORT "0x002d92f6" Xnew / 2
+      WRITE_SHORT "0x002d92c5" 1
+      // Celestial Host - Heaven's Angel impact:
+      WRITE_SHORT "0x002DA15F" Xnew
+
+
+      // Celestial Host - Heaven's Angel :
+
+      WRITE_SHORT "0x02d9184" Xnew / 2
+      WRITE_SHORT "0x02d9166" Ynew / 2
+
+      // Celestial Host Phoenix :
+
+      WRITE_SHORT "0x02dad22" Xnew / 2
+      WRITE_SHORT "0x02dad0a" Ynew / 2 - 60
+
+      // Celestial Host Archer :
+
+      WRITE_SHORT "0x02db940" Xnew / 2
+      WRITE_SHORT "0x02db93b" Ynew / 2
+      WRITE_SHORT "0x02db9fd" Ynew - 208
+      WRITE_SHORT "0x02dc121" 400
+      WRITE_SHORT "0x02dc103" Ynew - 204
+
+      // Celesetial Host Dragon :
+
+      WRITE_SHORT "0x02dd2a0" Xnew / 2
+      WRITE_SHORT "0x02dd29b" Ynew / 2 - 60
+
+      // Skull Mob :
+
+      WRITE_SHORT "0x02a8f4f" Xnew / 2
+      WRITE_SHORT "0x02a8f4a" Ynew / 2 + 9
+
+      // Raise Dead :
+
+      WRITE_SHORT "0x02d3412" Xnew / 2
+      WRITE_SHORT "0x02d340d" Ynew / 2 + 9
+
+      // Spiritual Hammer :
+
+      WRITE_SHORT "0x02d1f48" Xnew / 2
+      WRITE_SHORT "0x02d1f43" Ynew / 2 + 9
+
+      // Call Lightning :
+
+      WRITE_SHORT "0x02debdb" Xnew / 2
+      WRITE_SHORT "0x02debd6" Ynew / 2 + 9
+
+      // Rune Of Torment :
+
+      WRITE_SHORT "0x02d0c68" Xnew / 2
+      WRITE_SHORT "0x02d0c63" Ynew / 2 + 9
+
+      //Cursor Scrolling fix:
+      //x1
+      WRITE_BYTE   "0x8546b"   Xnew / 16
+      WRITE_BYTE   "0x85678"   Xnew / 16
+      //x2
+      WRITE_SHORT   "0x8550f"  Xnew - (Xnew / 16) -1
+      WRITE_SHORT   "0x85737"  Xnew - (Xnew / 16) -1
+      //y1
+      WRITE_BYTE   "0x85002"   Ynew / 12
+      WRITE_BYTE   "0x85211"   Ynew / 12
+      //y2
+      WRITE_SHORT   "0x850a7"  Ynew - (Ynew / 12) - 1
+      WRITE_SHORT   "0x852d0"  Ynew - (Ynew / 12) - 1
+
+
+      END
+
+
+      ELSE BEGIN
+	PATCH_IF (CDver = 5) THEN BEGIN
+	  PATCH_PRINT ~4CDver Chinese exe patch~
+
+
+
+	  // Loading and CD Screens :
+
+	  WRITE_SHORT "0x04DB32E" Xnew
+	  WRITE_SHORT "0x04DB330" Ynew
+
+	  // CD Message "To quit the game press alt-F4"
+
+	  WRITE_SHORT "0x001875EE" Xnew / 2 - 240
+	  WRITE_SHORT "0x001875F7" Ynew / 2 - 12
+
+	  // Screenshots :
+
+	  WRITE_SHORT "0x04242B7" Xnew
+	  WRITE_SHORT "0x04242C1" Ynew
+
+	  // Action Menu :
+
+	  WRITE_SHORT "0x03BE5D1" Xnew
+	  WRITE_SHORT "0x03BE5D8" Ynew
+	  WRITE_SHORT "0x03BE6FC" Xnew
+	  WRITE_SHORT "0x03BE703" Ynew - 1
+	  WRITE_SHORT "0x03BE727" Ynew - 73
+	  WRITE_SHORT "0x03BE72E" Ynew - 73
+
+	  // Edit Box :
+
+	  WRITE_SHORT "0x00F8DD1" Xnew
+	  WRITE_SHORT "0x00F8DDB" Ynew
+	  WRITE_SHORT "0x00F8F1C" Xnew
+	  WRITE_SHORT "0x00F8DDB" Ynew
+	  WRITE_SHORT "0x00F9026" Xnew
+	  WRITE_SHORT "0x00F9030" Ynew
+
+	  // Tooltip :
+
+	  WRITE_SHORT "0x019A37C" Xnew
+	  WRITE_SHORT "0x019A383" Ynew
+
+	  // Cinematics :
+
+	  WRITE_SHORT "0x03E840" Xnew / 2 + 320
+	  WRITE_SHORT "0x03E7C4" Ynew
+
+          // Stretch Movies :
+
+          WRITE_LONG 0x0003EB62 0x9090006A
+
+	  // Sliders :
+
+	  WRITE_SHORT "0x0F6027" Xnew
+	  WRITE_SHORT "0x0F602E" Ynew
+
+	  // Mapnotes :
+
+	  WRITE_SHORT "0x23A50B" Xnew
+	  WRITE_SHORT "0x23A515" Ynew
+	  WRITE_SHORT "0x23A55E" Xnew
+	  WRITE_SHORT "0x23A568" Ynew
+
+	  // Journal Pics :
+
+	  WRITE_SHORT "0x229C70" Xnew
+	  WRITE_SHORT "0x229C77" Ynew
+
+	  // Dialog :
+
+	  WRITE_SHORT "0x0984DB" Xnew / 2
+	  WRITE_SHORT "0x0984E7" Ynew / 2 - 155
+
+	  WRITE_SHORT "0x3C8FCF" Ynew - 310  //不确定
+	  WRITE_SHORT "0x3F9A8A" Ynew - 310  //不确定
+
+	  // Some low level spells :
+
+	  WRITE_SHORT "0x2B36DA" Xnew / 2
+	  WRITE_SHORT "0x2B36D5" Ynew / 2 + 9
+
+
+	  // Meteor Storm :
+
+	  WRITE_SHORT "0x02C0A54" Xnew
+	  WRITE_SHORT "0x02C0A5E" Ynew
+	  WRITE_SHORT "0x02C00D8" Xnew / 2
+	  WRITE_SHORT "0x02C00DF" (Ynew - 73) / 2
+
+	  // Conflagration :
+
+	  WRITE_SHORT "0x02CBD1A" Xnew
+	  WRITE_SHORT "0x02CBD24" Ynew
+	  WRITE_SHORT "0x02CBBF7" Xnew / 2
+	  WRITE_SHORT "0x02CBBEA" Ynew / 2 + 110
+	  WRITE_SHORT "0x02CAA0D" Xnew / 2 
+	  WRITE_SHORT "0x02CAA14" Ynew / 2 + 9
+
+	  // Abyssal Fury :
+
+	  WRITE_SHORT "0x02B6185" Xnew / 2 
+	  WRITE_SHORT "0x02B6180" Ynew / 2 + 20
+
+	  // Power Word Kill :
+
+	  WRITE_SHORT "0x02BF154" Xnew / 2
+	  WRITE_SHORT "0x02BF14F" Ynew / 2 + 150
+
+	  // Cloudkill :
+
+	  WRITE_SHORT "0x02AECDE" Xnew / 2
+	  WRITE_SHORT "0x02AECD9" Ynew / 2 + 9
+
+	  // Elysium fire :
+
+	  WRITE_SHORT "0x02B36DA" Xnew / 2
+	  WRITE_SHORT "0x02B36D5" Ynew / 2 + 9
+
+	  WRITE_SHORT "0x02B548F" Xnew / 2
+	  WRITE_SHORT "0x02B548A" Ynew / 2 + 9
+
+	  // Howl Of Pandemonium :
+
+	  WRITE_SHORT "0x02AFC43" Xnew / 2
+	  WRITE_SHORT "0x02AFC4A" Ynew / 2 + 9
+
+	  // Desert Hell :
+
+	  WRITE_SHORT "0x02BCB64" Xnew
+	  WRITE_SHORT "0x02BCB6B" Ynew
+	  WRITE_SHORT "0x02BCB8F" Xnew / 2
+	  WRITE_SHORT "0x02BCB8A" Ynew / 2 + 9
+
+	  // Ingus Fury :
+
+	  WRITE_SHORT "0x02CC9B6" Xnew / 2
+	  WRITE_SHORT "0x02CC9BD" Ynew / 2 + 9
+
+	  // Deathbolt :
+
+	  WRITE_SHORT "0x02C45C4" Xnew / 2
+
+	  // Chain Lightning storm :
+
+	  WRITE_SHORT "0x02C2F87" Xnew / 2
+	  WRITE_SHORT "0x02C2F82" Ynew / 2 - 60
+
+	  // Stygian Ice Storm :
+
+	  WRITE_SHORT "0x02BDB83" Xnew / 2
+	  WRITE_SHORT "0x02BDB8A" Ynew / 2 - 60
+
+	  // Bladestorm :
+
+	  WRITE_SHORT "0x02B0C24" Xnew / 2
+	  WRITE_SHORT "0x02B0C2E" Ynew / 2 + 9
+	  WRITE_SHORT "0x02B160A" Xnew
+	  WRITE_SHORT "0x02B1614" Ynew
+
+	  // Ax Of Torment :
+
+	  WRITE_SHORT "0x02BB8D3" Xnew / 2
+	  WRITE_SHORT "0x02BB8CE" Ynew / 2 + 9
+
+	  // Mechanus Cannon/Celestial Host/Rune of torment Display Window :
+
+	  WRITE_SHORT "0x03AFFDE" Xnew
+	  WRITE_SHORT "0x03AFFE5" Ynew
+	  WRITE_SHORT "0x03AFFD4" 0
+
+	  // Mechanus Cannon :
+
+	  WRITE_SHORT "0x02C804D" Xnew / 2
+	  WRITE_SHORT "0x02C8054" Ynew / 2 + 9
+
+	  // Celestial Host :
+
+	  WRITE_SHORT "0x02CE6F6" Xnew
+	  WRITE_SHORT "0x02CE700" Ynew
+	  WRITE_SHORT "0x02CD9FB" Xnew / 2
+	  WRITE_SHORT "0x02CD9F0" Ynew / 2 - 60
+
+	  WRITE_SHORT "0x02CE2CF" Xnew / 2
+	  WRITE_SHORT "0x02CE2D9" Ynew / 2 - 36
+
+          // Celestial Host gate:
+          WRITE_SHORT "0x002ceb4b" Xnew / 2
+          WRITE_SHORT "0x002ceb1a" 1
+
+          // Celestial Host - Heaven's Angel impact:
+          WRITE_SHORT "0x002CF9B4" Xnew
+
+
+	  // Celestial Host - Heaven's Angel :
+
+	  WRITE_SHORT "0x02CE9D9" Xnew / 2
+	  WRITE_SHORT "0x02CE9BB" Ynew / 2
+
+	  // Celestial Host Phoenix :
+
+	  WRITE_SHORT "0x02D0577" Xnew / 2
+	  WRITE_SHORT "0x02D055F" Ynew / 2 - 60
+
+	  // Celestial Host Archer :
+
+	  WRITE_SHORT "0x02D1195" Xnew / 2
+	  WRITE_SHORT "0x02D1190" Ynew / 2
+	  WRITE_SHORT "0x02D1252" Ynew - 208
+	  WRITE_SHORT "0x02D1270" 400
+	  WRITE_SHORT "0x02D1958" Ynew - 204
+
+	  // Celesetial Host Dragon :
+
+	  WRITE_SHORT "0x02D2AF5" Xnew / 2
+	  WRITE_SHORT "0x02D2AF0" Ynew / 2 - 60
+
+	  // Skull Mob :
+
+	  WRITE_SHORT "0x029eb5f" Xnew / 2
+	  WRITE_SHORT "0x029eb5a" Ynew / 2 + 9
+
+	  // Raise Dead :
+
+	  WRITE_SHORT "0x02c8e05" Xnew / 2
+	  WRITE_SHORT "0x02c8e00" Ynew / 2 + 9
+
+	  // Spiritual Hammer :
+
+	  WRITE_SHORT "0x02C79E4" Xnew / 2
+	  WRITE_SHORT "0x02C79DF" Ynew / 2 + 9
+
+	  // Call Lightning :
+
+	  WRITE_SHORT "0x02D4430" Xnew / 2
+	  WRITE_SHORT "0x02D442B" Ynew / 2 + 9
+
+	  // Rune Of Torment :
+
+	  WRITE_SHORT "0x02C6797" Xnew / 2
+	  WRITE_SHORT "0x02C6792" Ynew / 2 + 9
+
+	  //Cursor scrolling fix:
+	  //x1
+	  WRITE_BYTE   "0x83e14"   Xnew / 16
+	  WRITE_BYTE   "0x84021"   Xnew / 16
+	  //x2
+	  WRITE_SHORT   "0x83eb8"  Xnew - (Xnew / 16) -1
+	  WRITE_SHORT   "0x840e0"  Xnew - (Xnew / 16) -1
+	  //y1
+	  WRITE_BYTE   "0x839ab"   Ynew / 12
+	  WRITE_BYTE   "0x83bba"   Ynew / 12
+	  //y2
+	  WRITE_SHORT   "0x83a50"  Ynew - (Ynew / 12) - 1
+	  WRITE_SHORT   "0x83c79"  Ynew - (Ynew / 12) - 1
+
+
+	    END
+	    ELSE BEGIN
+	      PATCH_PRINT ~unsupported version~
+	      SET ~failure~ = 1
+	    END
+END
+END
+
+ACTION_IF (~failure~ = 1) THEN
+BEGIN FAIL ~Error: your version of the game is not supported.~ END

@@ -1,0 +1,612 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style type="text/css">
+    /*<![CDATA[*/
+    <!-- 
+      body {
+        margin: 0;
+        padding: 0;
+        cursor: default;
+        text-align: center;
+        color: #000;
+        background: #e3e3db url('http://spellholdstudios.net/images/sh_bg_main.jpg');
+      }
+
+      #wrap {
+        text-align: left;
+        margin: 0 auto;
+        margin-top: 20px;
+        width: 88%;
+        font-family: Verdana, Tahoma, Arial, sans-serif;
+        font-size: 12px;
+        color: #333;
+      }
+
+      #header {
+        text-align: center;
+        background: #e5e5e5;
+        border: 1px solid #781808;
+        border-top: 5px solid #781808;
+        border-bottom: 5px solid #781808;
+        padding: 5px 0 13px 0;
+      }
+      
+      #header .about {
+        margin: 7px 0 0 0;
+        padding: 0;
+        font-style: italic;
+        color: #555;
+      }
+      
+      #header .menu {
+        font-weight: bold;
+        margin: 0;
+        color: #999;
+      }
+      
+      #header .menu a:link,
+      #header .menu a:visited {
+        color: #333;
+      }
+
+      #maindiv {
+        margin: 0 auto;
+        margin-top: -20px;
+        width: 80%;
+      }
+
+      #maindiv .content {
+        counter-increment: kman;
+        counter-reset: h2;
+        background-color: #e8e8e6;
+        padding: 0 0 25px 0;
+        margin: 50px auto;
+        border-width: 1px 1px 4px 10px;
+        border-style: solid;
+        border-color: #781808;
+        position: relative;
+        display: block;
+      }
+      
+      #maindiv .content::before {
+        content: counter(kman, lower-roman);
+        font-size: 100%;
+        font-weight: bold;
+        text-align: center;
+        color: #eee;
+        background-color: #781808;
+        width: 35px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        display: block;
+      }
+      
+      h2 {
+        display: block;
+        font-family: Verdana, Trebuchet MS, Arial, serif;
+        text-align: left;
+        text-indent: 30px;
+        padding: 0px;
+        margin: 20px 0 0 0;
+        border-bottom: dotted 2px #d0d0d0;
+        border-top: dotted 2px #d0d0d0;
+        background: #deded9;
+        font-size: 160%;
+      }
+
+      h2::first-letter {
+        color: #781808;
+        background-color: transparent;
+      }
+
+      #maindiv p {
+        font-size: 100%;
+        font-style: normal;
+        line-height: 150%;
+        padding: 0px;
+        margin: 10px auto;
+        width: 90%;
+        display: block;
+        text-align: justify;
+      }
+      
+      #maindiv address a:link,
+      #maindiv address a:visited {
+        font-weight: bold;
+        text-decoration: underline;
+        background-color: transparent;
+        color: #eaeaea !important;
+        padding-right: 5px;
+        padding-left: 6px;
+      }
+
+      #maindiv address a:focus,
+      #maindiv address a:hover {
+        text-decoration: none;
+        color: #F1F1F1;
+        border: 0;
+      }
+
+      #maindiv address a:active {
+        color: #fff;
+        text-decoration: line-through;
+        border: none;
+      }
+      
+      #maindiv address {
+        font-size: 95%;
+        font-style: normal;
+        font-weight: bold;
+        text-decoration: none;
+        color: #BBB;
+        background-color: #781808;
+        padding: 3px 0px 0px;
+        margin: 0px;
+        width: 100%;
+        position: absolute;
+        bottom: -1px;
+        left: 0px;
+        display: block;
+        text-align: right;
+      }
+      
+      #maindiv .important {
+        font-size: 95%;
+        font-family: Verdana;
+        text-align: left;
+        background-color: #F1F1F1;
+        border-top: solid 1px #aaa;
+        border-bottom: solid 1px #aaa;
+        border-left: solid 6px #aaa;
+        border-right: solid 6px #aaa;
+        padding: 10px;
+        margin: 20px auto;
+        width: 80%;
+        line-height: 160%;
+      }
+      
+      #maindiv .important::before {
+        display: none;
+      }
+      
+      #maindiv .important p {
+        font-size: 100%;
+        text-indent: 0px;
+        margin: 5px 0 10px 0;
+      }
+      
+      #maindiv ul {
+        margin: -10px 0 0 30px;
+        *margin-left: 65px;
+      }
+      
+      #maindiv ol {
+        margin: -10px 0 0 35px;
+        *margin-left: 70px;
+      }
+      
+      #maindiv .important ul {
+        margin: -10px 0 0 15px;
+      }
+
+      #maindiv .important ol {
+        margin: -10px 0 0 20px;
+      }
+      
+      #maindiv ul li {
+        list-style-type: square;
+        line-height: 150%;
+        text-align: justify;
+	margin-right: 5%;
+      }
+
+      #maindiv ol li {
+        line-height: 150%;
+        text-align: justify;
+	margin-right: 5%;
+      }
+
+      .t1 {
+        font-weight: bold;
+        width: 26%;
+        text-align: right;
+        clear: right;
+        float: left;
+        *float: none;
+        *margin-left: 65px;
+        line-height: 22px;
+      }
+      
+      .t2 {
+        text-align: left;
+        width: 73%;
+        float: right;
+        *float: none;
+        line-height: 22px;
+      }
+      
+      hr {
+        margin: 10px 0 10px 0;
+        padding: 0;
+        height: 1px;
+        border: 0;
+        color: #aaa;
+        background-color: #aaa;
+      }
+      
+      hr.floatfix {
+        clear: both;
+        color: #e8e8e6;
+        background-color: #e8e8e6;
+        *margin: 0;
+        *padding: 0;
+      }
+
+      h1 {
+        font-size: 225%;
+        color: #444;
+        padding: 5px 0 5px 0;
+        margin: 0;
+        width: 100%;
+      }
+
+      h3,
+      h4,
+      h5 {
+        margin: 10px 40px 10px 40px;
+        padding: 0;
+      }
+      
+      h3 {
+        font-size: 125%;
+        font-style: italic;
+      }
+      
+      h4 {
+        font-size: 125%;
+      }
+      
+      h5 {
+        font-size: 100%;
+      }
+      
+      h6 {
+        width: 100%;
+        margin: 10px 0 15px 0;
+        background-color: #ECECEC;
+        text-align: left;
+        text-indent: 30px;
+        font-size: 100%;
+        font-style: italic;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        border-bottom: solid 1px #bbb;
+        border-top: solid 1px #bbb;
+      }
+
+      a:link,
+      a:visited {
+        color: #781808;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      a:hover,
+      a:active {
+        color: #222;
+        border-bottom: 1px solid black;
+      }
+
+    -->
+    /*]]>*/
+    </style>
+    <title>SPELLHOLD STUDIOS - Qwinn's Planescape: Torment Tweak Pack</title>
+  </head>
+  <body>
+    <a name="top" id="top"></a>
+    <div id="wrap">
+      <div id="header">
+        <h1>Planescape: Torment Tweak Pack de Qwinn</h1>
+        <strong>Un mod de Spellhold Studios para Planescape: Torment</strong>
+        <hr />
+        <p class="about">
+          Autor:  Qwinn (Paul Escalona)
+        </p>
+        <p class="about">
+          Arreglos del motor por:  scient (Brendan Casey)
+        </p>
+        <p class="about">
+          <a href="http://spellholdstudios.net/ie/pst-qtweaks">Página web del mod</a> &#8226;
+          <a href="http://www.shsforums.net/index.php?showforum=554">Foro del mod</a> &#8226;
+          Versión: 4.00
+        </p>
+        <hr />
+        <p class="menu">
+          <a href="#intro">Introducción</a> &middot;
+          <a href="#installation">Instalación</a> &middot;
+          <a href="#components">Lista de componentes</a> &middot;
+          <a href="#faq">FAQ</a> &middot;
+          <a href="#credits">Créditos</a> &middot;
+          <a href="#version">Historial de versiones</a>
+        </p>
+      </div>
+      <div id="maindiv">
+
+        <!-- ================== I n t r o d u c t i o n ================== -->
+        <a name="intro" id="intro"></a>
+        <div class="content">
+        <h2>Introducción</h2>
+        
+          <p>Este mod WeiDU añade una serie de ajustes de uso sencillo para tu instalación de Planescape: Torment.</p>
+
+          <p>Aquí hay una pequeña lista de Ajustes. Para la Versión 4.00, hay 17 en total. Pulsa <a href="#components">aquí</a> para ver una descripción detallada de cada uno.</p>
+
+          <br />
+
+<ul>
+<li>Acelerador de Banter (ALTAMENTE recomendado) - por Qwinn</li>
+<li>Mostrar GAC0 al Estilo BG2 - por scient</li>
+<li>Anillos, Amuletos, Brazales y Pergaminos Apilables - por Qwinn</li>
+<li>Guardado Rápido y Cargado Rápido - por scient</li>
+<li>Explorar Zonas de Ciudad - por Qwinn</li>
+<li>Balanza de Almas - por scient</li>
+<li>¡Salvar a Nordom! - por Qwinn</li>
+<li>Deshabilitar Mínimo de Características - por scient</li>
+<li>Puntos de Golpe Maximizados por Nivel para ESN y el Grupo - por Qwinn y scient</li>
+<li>Conjuro de Amigos Maximizado - por Qwinn</li>
+<li>Sin Música de Batalla - por Qwinn</li>
+<li>Usar Fuentes de Texto Flotante en Todas Partes - por Qwinn</li>
+<li>Identificar Todos los Objetos - por Qwinn</li>
+<li>Glabrezu Tempranos - por Qwinn</li>
+<li>Leprechaun Annah de Acción de Poder - por Black Isle</li>
+<li>Morte Huevo de Pascua - por Black Isle</li>
+<li>Descansar en Cualquier Parte (No Recomendado) - por Qwinn</li>
+<li>Tomo de Trucos (No Recomendado) - por Qwinn</li>
+
+ <br />
+</ul>
+
+
+            <address>
+            <span class="footer">PS:T Tweak Pack de Qwinn &gt; Introducción</span> &#8226;<a href="#top">VOLVER AL PRINCIPIO</a>
+          </address>
+        </div>
+
+        <!-- ================== I n s t a l l a t i o n ================== -->
+        <a name="installation" id="installation"></a>
+        <div class="content">
+          <h2>Instalación</h2>
+
+          <p>PS:T Tweak Pack de Qwinn fue creado y probado en una instalación limpia de la versión de 4 CDs de Planescape: Torment, seguido de la aplicación del <a href="http://www.sorcerers.net/Games/Torment/index_misc.php">Parche Oficial PS:T 1.1 disponible en Sorcerer's Place</a>, y por último el <a href="http://spellholdstudios.net/ie/pst-fixpack">PS:T Ultimate WeiDU Fixpack</a>.<p>
+
+          <p>Instalar el PS:T Ultimate WeiDU Fixpack antes que PS:T Tweak Pack de Qwinn es altamente recomendado. El Léeme de PS:T Fixpack contiene instrucciones para crear una buena base para el resto de mods WeiDU, incluyendo cómo parchear el juego si tienes la versión de 4 CDs y la instalación de tu paquete de idiomas si es necesario.</p>
+
+          <p>Una vez que la base de parchear e instalar arreglos de errores esté completada, cualquier otro mod WeiDU que quieras instalar puede instalarse en cualquier orden. Por ejemplo, después de instalar el Fixpack, siéntete libre de instalar el <a href="http://spellholdstudios.net/ie/pst-ub">PS:T Unfinished Business</a> antes o después del PS:T Tweak Pack de Qwinn, ya que no habrá diferencia. Todos los mods WeiDU están diseñados para ejecutarse juntos y no introducir conflictos entre cada uno de ellos.</p>
+
+          <p><strong>Para instalar PS:T Tweak Pack de Qwinn</strong>, simplemente extrae el psttweak.rar en tu directorio principal de Planescape: Torment (probablemente C:\Archivos de programa\Black Isle\Torment). Pulsa sobre Setup-PST-Tweak.exe y sigue las instrucciones que se muestran.</p>
+
+          <p><strong>Para desinstalar</strong>, simplemente pulsa sobre Setup-PST-Tweak.exe una vez más y sigue las instrucciones que se muestran.</p>
+
+           <address>
+            <span class="footer">PS:T Tweak Pack de Qwinn &gt; Instalación</span> &#8226;<a href="#top">VOLVER AL PRINCIPIO</a>
+          </address>
+        </div>
+
+        <!-- =========================== C O M P O N E N T   L I S T  ======================== -->
+        <a name="components" id="components"></a>
+        <div class="content">
+          <h2>Lista detallada de componentes</h2>
+
+<h4>1. Acelerador de Banter</h4>
+
+<p>Esto encaja perfectamente con el Ultimate WeiDU Fixpack, ya que sin esto, la vasta mayoría de banters simplemente -no- aparecerán en tu partida. Aparecen muy raramente... por un momento pensé que -no podías- tener banters con Morte o Annah. Al final de una lenta y cuidadosa partida, puedes ver, si tienes suerte, tal vez 12 de los 78 banters totalmente doblados que vienen en el juego; y si juegas muchas veces, casi seguro que obtienes los -mismos- 12 en cada partida. Con este componente, podrás verlos todos.</p>
+
+<p>Cuando consideres instalar este ajuste, ten en cuenta que PS:T está doblado por las voces de famosos actores. Para quienes no lo sepan, aquí hay algunas pistas: Annah está doblada por Sheenah Easton (cantante escocesa y actriz). Nordom está doblado por Dan Castellaneta (Homer Simpson). Dak'kon está doblado por Mitch Pileggi (Asistente del Director Skinner en Expendientes X). Trias está doblado por John de Lancie ("Q" en Star Trek: The Next Generation). Morte está doblado por Rob Paulsen (Arthur de "The Tick", Pinky de la serie "Pinky y Cerebro", Kivan en Baldur's Gate, Anomen en BG2). Caída-de-la-Virtud y Deionarra están dobladas por Jennifer Hale (Dynaheir en Baldur's Gate, Mazzy en BG2).</p>
+
+<p>Notas importantes:</p>
+
+<ul>
+<li>Este ajuste hace que los banters aparezcan en función del tiempo de juego, no tiempo real. Esto significa que el viajar por el mapa del mundo o descansar pueden activar un banter, dependiendo del intervalo seleccionado.</li>
+<li>Con la versión 3.5 del Tweak Pack, el método normal del juego para hacer que los banters aparezcan -está- completamente desactivado mediante un arreglo del motor proporcionado por scient. Parece que, de hecho, soluciona numerosos problemas persistentes como el que ocasionalmente no es posible hablar con los miembros del grupo hasta que no se guarde y cargue la partida o al entrar en un área nueva. En ese sentido, el Acelerador de Banter puede considerarse incluso un arreglo, pero por consistencia permanecerá en el Tweak Pack.</li>
+<li>Puedes desactivar el acelerador de banters desactivando la IA del Grupo. Si quieres ver los banters pero no la IA de combate del grupo, deja activada la IA del Grupo y usa la tecla "T" para cambiar la IA de Combate.</li>
+</ul>
+
+<h4>2. Mostrar GAC0 al Estilo BG2</h4>
+
+<p>La forma en la que PS:T muestra el GAC0 es, francamente, terrible. Solo muestra un número, que incluye factores que muchos jugadores creen que no debería, y no incluye aquellos que muchos querrían que apareciesen. Gracias a scient, nuestro increiblemente talentoso gurú del motor de PS:T, puedes ver el GAC0 del personaje en dos líneas separadas: GAC0 base y GAC0 ajustado, tal y como lo hacen en Baldur's Gate 2. Es un componente muy recomendado.</p>
+
+<h4>3. Anillos, Amuletos, Brazales y Pergaminos Apilables</h4>
+
+<p>Justo lo que parece. Hace el manejo del inventario más fácil, ya que las múltiples cantidades del mismo objeto pueden almacenarse en un solo hueco de inventario.</p>
+
+<h4>4. Guardado Rápido y Cargado Rápido</h4>
+
+<p>Esto añade la funcionalidad del Cargado Rápido a PS:T (el juego por defecto solo tiene el Guardado Rápido). Puedes asignar F9 o F10 como botón de Cargado Rápido, ya que el Guardado Rápido está asignado a la tecla F5, aparte de su configuración normal.</p>
+
+<h4>5. Explorar Zonas de Ciudad</h4>
+
+<p>Este ajuste elimina la Niebla de Guerra de todas las zonas de ciudad del juego. La versión anterior que existía en PS:T Tweak Pack de Qwinn v1.00-2.00, Explorar <i>Todas</i> las Zonas, ya no tiene soporte. No la uses.</p>
+
+<h4>6. Balanza de Almas</h4>
+
+<p>Este mini-mod introduce un nuevo objeto, disponible desde el principio del juego, llamado la Balanza de Almas. Permite a ESN ver una representación numérica de su alineamiento, haciendo posible ver los efectos de sus acciones. Sin este ajuste, el jugador no puede ver una representación numérica, sólo su alineamiento general, p.e., "Neutral Bueno" o "Caótico Maligno".</p>
+
+<p>A partir del Tweak Pack v3.51, este ajuste instala en su lugar un arreglo del motor, producido por el Gurú del Motor scient, que te permite ver tu alineamiento numérico al mover el cursor del ratón sobre el botón de alineamiento en el registro de tu personaje. A partir de la v4.0, también muestra la moral del miembro del grupo directamente en la información del personaje.</p>
+
+<p>ESN comienza el juego con un indicador 0 de "Bien" y "Ley". Los actos malignos restan el indicador "Bien", y los actos buenos añaden. Los actos caóticos restan del indicador de "Ley", y los legales añaden. Llevarlo por debajo de -20 o -21 hace que el alineamiento del personaje cambie de Neutral a Caótico o Maligno, y llevarlo por encima de 14 o 15 hace que el alineamiento del personaje cambie de Neutral a Bueno o Legal.</p>
+
+<p>Tassadar88 en Spellhold Studios proporcionó amablemente los iconos de inventario de la Balanza, que se ajustan bien con el estilo general de gráficos de PS:T, y, aunque el gráfico ya no se usa, su trabajo sigue siendo muy apreciado.</p>
+
+<h4>7. ¡Salvar a Nordom!</h4>
+
+<p>Los jugadores más sociables sin conocimiento de metajuego abandonarán Sigil con un grupo completo, especialmente si han encontrado a Nordom para entonces. Cuando encuentras a Vhailor en Curst Subterráneo, tienes que hacer una horrible decisión: Dejar a Vhailor donde está (lo que básicamente elimina todo su contenido del juego) o dejar a uno de los miembros de tu grupo actual en la prisión de Vhailor sin ninguna salida para toda la eternidad (normalmente el pobre Nordom). No por ninguna buena razón, simplemente debido al límite arbitrario de 6 miembros en el grupo.</p>
+
+<p>Este ajuste te permite... ¡Salvar a Nordom! Los requisitos son: Debes estar en la zona donde encontraste a Vhailor. Debes tener a Vhailor en tu grupo. Nordom *no* debe estar en tu grupo. Y debes tener el Cubo de Modron contigo. Si cumples estos requisitos, habla con Nordom antes de marcharte, y sugerirá la manera en la que puede ser salvado, de forma que puedas volver a él cuando finalmente vuelvas a Sigil.</p>
+
+<p>Esto está complemente creado por mí (Qwinn). Contiene un nuevo diálogo; espero que te guste y que encaje en el personaje.</p>
+
+<h4>8. Deshabilitar Mínimo de Características</h4>
+
+<p>El juego por defecto establece todas las características de ESN a un mínimo de 9. Este ajuste, de nuestro gurú del motor scient, reduce el mínimo de cada característica a 3. La decisión de establecer el mínimo en 9 tuvo que surgir muy avanzado el proceso de desarrollo, porque algunas comprobaciones de diálogo original comprueban si una característica alcanza el mínimo de 9, por lo que en el juego original siempre pasaban dicha comprobación. Sin embargo, con este ajuste puede que falles dichas comprobaciones si bajas lo bastante la característica en cuestión. También es necesario tener un mínimo de 9 en INT para ser entrenado como mago y de 9 en DES para ser entrenado como ladrón. ¡Reduce tus características por debajo de 9 bajo tu propio riesgo!</p>
+
+<h4>9. Puntos de Golpe Maximizados por Nivel para ESN y el Grupo</h4>
+
+<p>Quita la aleatoriedad de los puntos de golpe obtenidos por ESN o un miebro del grupo al subir de nivel. En su lugar asigna simplemen la máxima cantidad de PG que pueden conseguir por su clase.</p>
+
+<h4>10. Conjuro de Amigos Maximizado</h4>
+
+<p>Quita la aleatoriedad de la mejora de Carisma obtenida por el conjuro Amigos. Cuando se lanza, el conjuro garantiza una mejora de 8 puntos temporales al Carisma, en lugar de la mejora aleatoria de 2-8 puntos.</p>
+
+<h4>11. Sin Música de Batalla</h4>
+
+<p>Esto elimina la música de batalla de todas las zonas excepto las cercanas al final de juego. Créditos a Platter por traer la metodología para ello.</p>
+
+<h4>12. Usar Fuentes de Texto Flotante en Todas Partes</h4>
+
+<p>Esto reemplaza las fuentes que se usan en todas partes excepto en los textos flotantes con las usadas únicamente por los textos flotantes. Algunos la consideran más sencilla de leer. Yo, personalmente, no.</p>
+
+<p>Recomiendo encarecidamente NO usar esto si usas el excelente PS:T UI Mod de Ghostdog. Su ofrece muchas opciones de fuentes, todas superiores a este ajuste.</p>
+
+<h4>13. Identificar Todos los Objetos</h4>
+
+<p>Auto-explicatorio. Establece los valores de conocimiento necesarios para identificar cada objeto del juego a 0.<p>
+
+<h4>14. Glabrezu Tempranos</h4>
+
+<p>Por demanda popular, este ajuste hará que en BajoSigil aparezcan Glabrezu tal y como lo harían después de que vuelvas a Sigil casi al final del juego. Aunque yo no lo usaría debido al desbalanceo que causa, puedo apreciar el deseo de hacerlo... hay algunas recompensas maravillosas que solo dejan caer los Glabrezu, que para cuando los consigues sin el ajuste, ya no tienen casi utilidad alguna. Las apariciones de Glabrezu, sin embargo, siguen siendo extremadamente raras, y para reducir el desbalanceo de este ajuste, Glabrezu Tempranos reduce sus recompensas de 70,000 de experiencia a 12,000 para mantenerse en línea con las ganancias de puntos de experiencia disponibles en ese punto del juego. Los Glabrezu de cerca del final del juego siguen dando la recompensa completa de 70,000 de experiencia.</p>
+
+<h4>15. Leprechaun Annah de Acción de Poder, by Black Isle</h4>
+
+<p>La gente de Black Isle proporcionó este atuendo alternativo para Annah, incluyendo envoltorios de hojas para las dagas de puño.</p>
+
+<h4>16. Morte Huevo de Pascua</h4>
+
+<p>Con el mismo espíritu que el Leprechaun Annah de Acción de Poder, este ajuste (también por la gente de Black Isle) le da a Morte nuevos gráficos e incluso sonidos para disfrutarlos en el juego.</p>
+
+<h4>17. Descansar en Cualquier Parte (No Recomendado)</h4>
+
+<p>Básicamente auto-explicatorio. Ya no se te negará descansar mostrando el mensaje "Es muy peligroso descansar aquí." cuando uses el botón Descansar. No recomendado; hace el juego muy fácil.</p>
+
+<h4>18. Tomo de Trucos (No Recomendado)</h4>
+
+<p>Basado en una descripción de objeto que viene con los archivos originales del juego, este ajuste añade el Tomo de Trucos al juego, una herramienta útil para probar mods para el juego pero que puede potenciar de tal manera a ESN como para hacer el juego trivial. Es altamente -no- recomendado para jugadores casuales, ya que eliminará cualquier reto que salga del juego.<p>
+
+<p>Esta versión del Tomo de Trucos contiene el Truco de Teletransporte, Truco de Descansar en Cualquier Parte, Truco de Riqueza, Truco de Puntuación de Característica, Truco de Muerte, Truco de Experiencia, Truco de Palabra del Bien y el Mal, y Truco de Palabra de la Ley y el Caos.</p>
+
+<p>Mencionar también que el <a href="http://www.spellholdstudios.net/ie/pst-ub">PS:T Unfinished Business</a> contiene también un ajuste de Tomo de Trucos, aunque la diferencia reside en que con este componente del Tweak Pack comienzas el juego con el Tomo de Trucos en tu posesión, mientras que con el componente del Unfinished Business tienes que esperar a obtenerlo de parte de Vrischika (como estaba... *cough*... "previsto") recorriendo parte del juego antes de poder comprar el Tomo. Y Vrischika lo vende bastante caro, sin contar con maldiciones.</p>
+
+
+           <address>
+            <span class="footer">PS:T Tweak Pack de Qwinn &gt; Lista de componentes</span> &#8226;<a href="#top">VOLVER AL PRINCIPIO</a>
+          </address>
+        </div>
+
+        <!-- ================== F A Q ================== -->
+        <a name="faq" id="faq"></a>
+        <div class="content">
+          <h2>Cuestiones Frecuentemente Preguntadas</h2>
+          
+          <p><strong>C: Llevo jugando bastante, y hasta ahora no he visto ningún "banter entre el grupo"; ¿de qué estás hablando?</strong><br />R: Ocurre una de dos cosas. A) En algún momento, has deshabilitado la IA de Grupo (un pequeño botón cerca de la esquina inferior derecha de la pantalla principal). Las limitaciones del juego requieren que implemente los scripts de banter en la IA del Grupo. Si no te importa la IA de Combate del juego para tus personajes, proporciona la habilidad para activarlo o desactivarlo pulsando la tecla "T" de tu teclado (pero solo cuando la IA de Grupo está activa).  B) Necesitas esperar un poco más. Dak'kon no inicia ningún banter; es bastante callado. Eso significa que no vas a ver ningún banter hasta que no hayas cogido a un cuarto miembro del grupo, que llevará su tiempo. Si llevas a dos personajes con banters (Morte, Annah, Virtud, Nordom) en tu grupo durante más tiempo del intervalo elegido durante su instalación, y tienes la IA de Grupo activada, informa de esto en los foros.</p>
+
+          <p><strong>C: Mientras juego con uno de estos componentes, me he encontrado con un error. ¿Qué puedo hacer?</strong><br />R: Informa de este error en el <a href="http://www.shsforums.net/index.php?showforum=554">Foro del Mod PS:T Tweak Pack de Qwinn</a> en Spellhold Studios, y haré todo lo posible por resolver el problema en poco tiempo.</p>
+
+          <p><strong>C: He tenido problemas instalando PS:T Tweak Pack de Qwinn. ¿Alguna ayuda?</strong><br />R: Antes de instalar PS:T Tweak Pack de Qwinn, ¿instalaste el Parche Oficial 1.1 (si tienes la versión de 4 CDs) y luego el <a href="http://spellholdstudios.net/ie/pst-fixpack">PS:T Ultimate WeiDU Fixpack</a>, tal y como se describe en el <a href="#installation">Proceso de Instalación</a>?</p>
+
+          <p>Si crees que lo has hecho, por favor informa de los problemas en el <a href="http://www.shsforums.net/index.php?showforum=554">Foro del Mod PS:T Tweak Pack de Qwinn</a> de Spellhold Studios, y haré todo lo posible para resolver los problemas en poco tiempo. Podría ser de ayuda si, al describir tu problema, pegas el archivo SETUP-PST-TWEAK.DEBUG que encontrarás en tu carpeta de Torment.</p>
+
+          <address>
+            <span class="footer">PS:T Tweak Pack de Qwinn &gt; FAQ</span> &#8226;<a href="#top">VOLVER AL PRINCIPIO</a>
+          </address>
+        </div>
+
+        <!-- ================== C r e d i t s ================== -->
+        <a name="credits" id="credits"></a>
+        <div class="content">
+          <h2>Créditos</h2>
+
+<p>A menos que se mencione lo contrario, todo el trabajo de este mod es el mío propio (Qwinn). Este mod no comparte relación alguna con otros mods que realizan funciones similares. Por ejemplo, el componente Tomo de Trucos no comparte nada con el mod Tome o' Cheats de Platter, el cual nunca he visto o descargado, aparte de que el nombre viene de los propios archivos del juego. Tampoco comparte relación alguna con el G3 Tweak Pack excepto que en que compilo el estándar que compilaron en los mods WeiDU PS:T creando archivos en el directorio override que permitan a los mods WeiDU detectar la presencia del resto.</p>
+
+<p>Muchísimas gracias a <strong>Tassadar88</strong> en los foros de Spellhold Studios, por proporcionarme el excelente archivo gráfico .BAM que podrás ver en el juego cuando contemples la Balanza de Almas en la pantalla de inventario.</p>
+
+<p>Muchas gracias a varios de los modders del foro de Gibberlings 3 quienes pacientemente respondieron a muchas de mis tontas preguntas a medida que aprendía a hacer mods, particularmente a <strong>Miloch, Isaya, devsin y Nythrun</strong>, quienes me indicaron la dirección correcta en muchos de los puntos conflictivos, y a varios jugadores que me alentaron a mantener el proyecto en G3 también (particularmente, pero sin embargo no limitado a, <strong>Icendoan, Daulmakan, y Bearwere)</strong>. También quiero extender mi agradecimiento a Spellhold Studios, y a <strong>K'aeloree</strong> y <strong>SConrad</strong> en particular, por gentilmente permitirme alojar los tres mods aquí y garantizarme una destacada posición en su página principal del foro. Finalmente, gracias a <strong>thebigg</strong> en Pocket Plane Group por escucharme e implementar mi lista de sugerencias de características adicionales para incluir en WeiDU 207 que hagan mi trabajo más fácil.</p>
+
+<p>Versión 3.00:<p>
+
+<p>Gracias a muchos de los amables jugadores que han realizado un duro trabajo para traducir estos mods. <strong>Ghildrean</strong> proporcionó la traducción al Español, <strong>Yakkuz</strong> proporcionó la traducción al Italiano, y la traducción al Alemán fue proporcionada como cooperación entre (por orden alfabético) <strong>Arkain, Avantenor, Doctor Who, HomiSite, y Zenju,</strong> con HomiSite y Zenju liderando el proyecto. Zenju, a propósito, hizo también la más reciente revisión de la traducción alemana del juego, y es por ello por lo que estoy especialmente agradecido por su ayuda.</p>
+
+<p>Este léeme fue traducido amablemente por <strong>Ghildrean</strong>.</p>
+
+<p>Versión 3.50:</p>
+
+<p>Muchísimas gracias a <strong>scient</strong> por proporcionar los arreglos del motor que permitieron desactivar el antiguo y problemático método de crear banters, y por proporcionar un arreglo ingenioso del motor para reemplazar el componente de Balanza de Almas con un simple valor numérico del alineamiento y de la moral en la pantalla de personaje.</p>
+
+<p>¡Espero que disfrutes de la mejor experiencia de Planescape: Torment! Con lo inconstante que la memoria puede ser (tal y como ESN puede asegurar), que la memoria de esto, el mejor CRPG jamás escrito, nunca muera.</p>
+
+<p>Versión 4.00:</p>
+
+<p>Agradecimientos adicionales a scient, esta vez por el excelente ajuste de Mostrar GAC0 al Estilo BG2 y por el ajuste de Deshabilitar Mínimo de Características. ¡Gracias, scient!</p>
+
+<p>También agradecer a los miembros del foro <strong>yarpen</strong> y <strong>W. Irving</strong> por la nueva traducción al Polaco.</p>
+
+
+          <hr class="floatfix" /><!-- Don't remove the <hr /> unless you have text following the last "t2" in this <div>! -->
+          <address>
+            <span class="footer">PS:T Tweak Pack de Qwinn &gt; Créditos</span> &#8226;<a href="#top">VOLVER AL PRINCIPIO</a>
+          </address>
+        </div>
+
+        <!-- ================== V e r s i o n   H i s t o r y ================== -->
+        <a name="version" id="version"></a>
+        <div class="content">
+          <h2>Historial de versiones</h2>
+          <h6>04 de junio de 2008 - Versión 1.00</h6>
+          <ul>
+            <li>Inicio de la publicación</li>
+          </ul>
+
+          <h6>07 de junio de 2008 - Versión 2.00</h6>
+            <p>Añadidos 7 nuevos ajustes:</p><br />
+          <ul>
+<li>Leprechaun Annah de Acción de Poder, by Black Isle</li>
+<li>Morte Huevo de Pascua, por Black Isle</li>
+<li>Explorar Todas las Zonas</li>
+<li>Descansar en Cualquier Sitio</li>
+<li>Identificar Todos los Objetos</li>
+<li>Usar Fuentes de Textos Flotantes en Todas Partes</li>
+<li>Sin Música de Batalla</li>
+           </ul>
+
+          <h6>12 de agosto de 2008 - Versión 3.00</h6>
+          <ul>
+            <li>Reemplazado el ajuste "Explorar Todas las Zonas" por "Explorar Zonas de Ciudad".</li>
+            <li>Añadidas las traducciones al Español, Alemán e Italiano.</li>
+          </ul>
+          <h6>20 de diciembre de 2008 - Versión 3.50</h6>
+            <ul>
+            <li>scient ha proporcionado un arreglo del motor permitiendo desactivar el método problemático original para producir banters.</li>
+            <li>scient ha proporcionado un ajuste del motor permitiendo que la metodología de la Balanza de Almas sea reemplazada con mostrar el alineaimento y la moral de forma numérica en la pantalla de personaje.</li>
+            <li>Añadido el ajuste de Glabrezu Tempranos.</li>
+          </ul>
+
+          <h6>01 de enero de 2009 - Versión 3.51</h6>
+            <ul>
+            <li>Arreglos menores al Acelerador de Banter. Restaura un puñado de banters que se saltaba, y se asegura de que ningún PNJ se quede pillado en modo banter.</li>
+          </ul>
+
+          <h6>15 de enero de 2010 - Versión 4.00</h6>
+            <ul>
+            <li>Añadidos los ajustes de Cargado Rápido, Mostrar GAC0 al Estilo BG2 y Deshabilitar Mínimo de Características. También, el indicador de moral del ajuste de la Balanza de Almas se ha cambiado del botón de alineamiento a la información de registro del personaje principal.</li>
+          </ul>
+
+
+          <address>
+            <span class="footer">PS:T Tweak Pack de Qwinn &gt; Historial de versiones</span> &#8226;<a href="#top">VOLVER AL PRINCIPIO</a>
+          </address>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>

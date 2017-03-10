@@ -1,0 +1,338 @@
+
+// Banter.d has each banter dialogue reset the timer.  We do that in the dialogues rather than here, because
+// that ensures a banter actually runs, and this script will keep digging until it actually executes a banter.
+
+// There are five NPC's that can initiate banters with other party members.
+
+// Morte has 26
+// Annah has 14
+// Grace has 15
+// Nordom has 21
+// Vhailor has 3
+
+// You may notice every call to do a banter starts with three lines that clears TNO's dialogue and then attempt to
+// do a dialogue with himself.  This is due to an unusual situation - if the last dialogue file you interacted
+// with was an item (say, the Modron Cube), then the next time you issue the StartDialog command it will talk
+// using the item dialogue rather than the dialogue file you specified in your StartDialog command.  This happens
+// until you attempt a normal Dialogue action with anything else.  But it doesn't have to be a successful Dialogue.
+// Telling TNO to talk to himself with no dialogue file set doesn't start any dialogue, but it -does- clear
+// whatever override is set on the StartDialog command to talk to an item.  So, that's why those are there.
+
+// There's also a Banter_Attempt counter.  This makes sure that, when you run out of banters, the script doesn't
+// go haywire attempting to run dialogs that won't ever fire.  After 30 tries, it'll give up for 24 game hours.
+
+// Since Vhailor only has 3 banters (2 conditional) and he's picked up so late, let's give his priority so
+// we can forget about him and NOT have to do another 24 possible permutations.  These 3 blocks take care
+// of him, leaving us with just 4 other NPC's to worry about.  Also, Vhailor behaves oddly for some reason.
+// His dialogue reverts to DVHAIL before the dialogue is done, creating a zombie. I do the dialogue setting
+// within the dialog script for him.
+
+IF
+  HotKey(T)
+  Global("CombatScriptsActive","GLOBAL",0)
+THEN
+  RESPONSE #100
+     SetGlobal("CombatScriptsActive","GLOBAL",1)
+     FloatMessage(Myself,%Combat Scripts Activated%)
+END
+
+IF
+  HotKey(T)
+  Global("CombatScriptsActive","GLOBAL",1)
+THEN
+  RESPONSE #100
+     SetGlobal("CombatScriptsActive","GLOBAL",0)
+     FloatMessage(Myself,%Combat Scripts Deactivated%)
+END
+
+IF
+  GlobalGT("Banter_Attempt","GLOBAL",30)
+THEN
+  RESPONSE #100
+    SetGlobalTimer("Banter_Timer","GLOBAL",7200)
+    SetGlobal("Banter_Attempt","GLOBAL",0)
+END
+
+IF
+  GlobalTimerExpired("Banter_Timer","GLOBAL")
+  !See(NearestEnemyOf(Myself))
+  InParty("Vhail")
+  NearbyDialog("DVHAIL")
+  InParty("Morte")
+  NearbyDialog("DMORTE")
+  Global("Vhail_Talked_Morte","GLOBAL",0)
+  Global("Lawful_Vhailor_5","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ActionOverride("Vhail",StartDialog("BVHAILOR","Vhail"))
+    ActionOverride("Vhail",SetDialog("DVHAIL"))
+END
+
+IF
+  GlobalTimerExpired("Banter_Timer","GLOBAL")
+  !See(NearestEnemyOf(Myself))
+  InParty("Vhail")
+  NearbyDialog("DVHAIL")
+  InParty("Annah")
+  NearbyDialog("DANNAH")
+  Global("Vhail_Talked_Annah","GLOBAL",0)
+  Global("Lawful_Vhailor_5","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ActionOverride("Vhail",StartDialog("BVHAILOR","Vhail"))
+    ActionOverride("Vhail",SetDialog("DVHAIL"))
+END
+
+IF
+  GlobalTimerExpired("Banter_Timer","GLOBAL")
+  !See(NearestEnemyOf(Myself))
+  InParty("Vhail")
+  NearbyDialog("DVHAIL")
+  InParty("Grace")
+  NearbyDialog("DGRACE")
+  Global("Vhail_Talked_Grace","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ActionOverride("Vhail",StartDialog("BVHAILOR","Vhail"))
+    ActionOverride("Vhail",SetDialog("DVHAIL"))
+END
+
+// Let's do a full random in case we have all the other 4 in our group.
+IF
+  GlobalTimerExpired("Banter_Timer","GLOBAL")
+  !See(NearestEnemyOf(Myself))
+  InParty("Morte")
+  NearbyDialog("DMORTE")
+  InParty("Annah")
+  NearbyDialog("DANNAH")
+  InParty("Grace")
+  NearbyDialog("DGRACE")
+  InParty("Nordom")
+  NearbyDialog("DNORDOM")
+THEN
+  RESPONSE #25
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Morte",StartDialog("BMORTE","Morte"))
+    ActionOverride("Morte",SetDialog("DMORTE"))
+  RESPONSE #15
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Annah",StartDialog("BANNAH","Annah"))
+    ActionOverride("Annah",SetDialog("DANNAH"))
+  RESPONSE #15
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Grace",StartDialog("BGRACE","Grace"))
+    ActionOverride("Grace",SetDialog("DGRACE"))
+  RESPONSE #23
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Nordom",StartDialog("BNORDOM","Nordom"))
+    ActionOverride("Nordom",SetDialog("DNORDOM"))
+END
+
+// Now lets do the four possible groups that include three but not all four of them.
+
+IF
+  GlobalTimerExpired("Banter_Timer","GLOBAL")
+  !See(NearestEnemyOf(Myself))
+  InParty("Morte")
+  NearbyDialog("DMORTE")
+  InParty("Annah")
+  NearbyDialog("DANNAH")
+  InParty("Grace")
+  NearbyDialog("DGRACE")
+THEN
+  RESPONSE #25
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Morte",StartDialog("BMORTE","Morte"))
+    ActionOverride("Morte",SetDialog("DMORTE"))
+  RESPONSE #15
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Annah",StartDialog("BANNAH","Annah"))
+    ActionOverride("Annah",SetDialog("DANNAH"))
+  RESPONSE #15
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Grace",StartDialog("BGRACE","Grace"))
+    ActionOverride("Grace",SetDialog("DGRACE"))
+END
+
+
+IF
+  GlobalTimerExpired("Banter_Timer","GLOBAL")
+  !See(NearestEnemyOf(Myself))
+  InParty("Morte")
+  NearbyDialog("DMORTE")
+  InParty("Annah")
+  NearbyDialog("DANNAH")
+  InParty("Nordom")
+  NearbyDialog("DNORDOM")
+THEN
+  RESPONSE #25
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Morte",StartDialog("BMORTE","Morte"))
+    ActionOverride("Morte",SetDialog("DMORTE"))
+  RESPONSE #15
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Annah",StartDialog("BANNAH","Annah"))
+    ActionOverride("Annah",SetDialog("DANNAH"))
+  RESPONSE #23
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Nordom",StartDialog("BNORDOM","Nordom"))
+    ActionOverride("Nordom",SetDialog("DNORDOM"))
+END
+
+IF
+  GlobalTimerExpired("Banter_Timer","GLOBAL")
+  !See(NearestEnemyOf(Myself))
+  InParty("Morte")
+  NearbyDialog("DMORTE")
+  InParty("Grace")
+  NearbyDialog("DGRACE")
+  InParty("Nordom")
+  NearbyDialog("DNORDOM")
+THEN
+  RESPONSE #25
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Morte",StartDialog("BMORTE","Morte"))
+    ActionOverride("Morte",SetDialog("DMORTE"))
+  RESPONSE #15
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Grace",StartDialog("BGRACE","Grace"))
+    ActionOverride("Grace",SetDialog("DGRACE"))
+  RESPONSE #23
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Nordom",StartDialog("BNORDOM","Nordom"))
+    ActionOverride("Nordom",SetDialog("DNORDOM"))
+END
+
+IF
+  GlobalTimerExpired("Banter_Timer","GLOBAL")
+  !See(NearestEnemyOf(Myself))
+  InParty("Annah")
+  NearbyDialog("DANNAH")
+  InParty("Grace")
+  NearbyDialog("DGRACE")
+  InParty("Nordom")
+  NearbyDialog("DNORDOM")
+THEN
+  RESPONSE #15
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Annah",StartDialog("BANNAH","Annah"))
+    ActionOverride("Annah",SetDialog("DANNAH"))
+  RESPONSE #15
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Grace",StartDialog("BGRACE","Grace"))
+    ActionOverride("Grace",SetDialog("DGRACE"))
+  RESPONSE #23
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Nordom",StartDialog("BNORDOM","Nordom"))
+    ActionOverride("Nordom",SetDialog("DNORDOM"))
+END
+
+// Now the various possible pairs.  Nordom + 1 other seems the least likely configuration, and he's the last
+// likely of the remainder to be picked up, so let's give him priority.
+IF
+  GlobalTimerExpired("Banter_Timer","GLOBAL")
+  !See(NearestEnemyOf(Myself))
+  InParty("Annah")
+  NearbyDialog("DANNAH")
+  InParty("Nordom")
+  NearbyDialog("DNORDOM")
+THEN
+  RESPONSE #15
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Annah",StartDialog("BANNAH","Annah"))
+    ActionOverride("Annah",SetDialog("DANNAH"))
+  RESPONSE #23
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Nordom",StartDialog("BNORDOM","Nordom"))
+    ActionOverride("Nordom",SetDialog("DNORDOM"))
+END
+IF
+  GlobalTimerExpired("Banter_Timer","GLOBAL")
+  !See(NearestEnemyOf(Myself))
+  !WasInDialog()
+  InParty("Grace")
+  NearbyDialog("DGRACE")
+  InParty("Nordom")
+  NearbyDialog("DNORDOM")
+THEN
+  RESPONSE #15
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Grace",StartDialog("BGRACE","Grace"))
+    ActionOverride("Grace",SetDialog("DGRACE"))
+  RESPONSE #23
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Nordom",StartDialog("BNORDOM","Nordom"))
+    ActionOverride("Nordom",SetDialog("DNORDOM"))
+END
+IF
+  GlobalTimerExpired("Banter_Timer","GLOBAL")
+  !See(NearestEnemyOf(Myself))
+  InParty("Morte")
+  NearbyDialog("DMORTE")
+  InParty("Nordom")
+  NearbyDialog("DNORDOM")
+THEN
+  RESPONSE #25
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Morte",StartDialog("BMORTE","Morte"))
+    ActionOverride("Morte",SetDialog("DMORTE"))
+  RESPONSE #23
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Nordom",StartDialog("BNORDOM","Nordom"))
+    ActionOverride("Nordom",SetDialog("DNORDOM"))
+END
+
+// Now Grace + either Annah or Morte, since she's the next most likely to be picked up last
+IF
+  GlobalTimerExpired("Banter_Timer","GLOBAL")
+  !See(NearestEnemyOf(Myself))
+  InParty("Grace")
+  NearbyDialog("DGRACE")
+  InParty("Annah")
+  NearbyDialog("DANNAH")
+THEN
+  RESPONSE #15
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Grace",StartDialog("BGRACE","Grace"))
+    ActionOverride("Grace",SetDialog("DGRACE"))
+  RESPONSE #15
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Annah",StartDialog("BANNAH","Annah"))
+    ActionOverride("Annah",SetDialog("DANNAH"))
+END
+IF
+  GlobalTimerExpired("Banter_Timer","GLOBAL")
+  !See(NearestEnemyOf(Myself))
+  InParty("Grace")
+  NearbyDialog("DGRACE")
+  InParty("Morte")
+  NearbyDialog("DMORTE")
+THEN
+  RESPONSE #15
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Grace",StartDialog("BGRACE","Grace"))
+    ActionOverride("Grace",SetDialog("DGRACE"))
+  RESPONSE #25
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Morte",StartDialog("BMORTE","Morte"))
+    ActionOverride("Morte",SetDialog("DMORTE"))
+END
+
+// And finally, the only pair left, Morte and Annah
+IF
+  GlobalTimerExpired("Banter_Timer","GLOBAL")
+  !See(NearestEnemyOf(Myself))
+  InParty("Annah")
+  NearbyDialog("DANNAH")
+  InParty("Morte")
+  NearbyDialog("DMORTE")
+THEN
+  RESPONSE #15
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Annah",StartDialog("BANNAH","Annah"))
+    ActionOverride("Annah",SetDialog("DANNAH"))
+  RESPONSE #25
+    IncrementGlobal("Banter_Attempt","GLOBAL",1)
+    ActionOverride("Morte",StartDialog("BMORTE","Morte"))
+    ActionOverride("Morte",SetDialog("DMORTE"))
+END

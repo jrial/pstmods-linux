@@ -1,0 +1,3 @@
+
+
+COMPILE ~setup-pst-tweak/PST-Tweak/SaveNordom/dlg/SaveNordom.d~ USING ~setup-pst-tweak/PST-Tweak/tra/%LANGUAGE%/SaveNordom.tra~
