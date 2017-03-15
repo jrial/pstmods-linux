@@ -27,8 +27,12 @@ These mods should be installed in a certain order:
 For more info, see [Thunderpeel2001's blog post](http://thunderpeel2001.blogspot.be/2009/01/planescape-torment-fully-modded.html),
 which also covers the required preparation steps for non-gog users.
 
-I still need to write an installer script for this.
-   
+An installer that works on the GOG version is included. To use it, simply run
+`install.sh`. You can use tab completion to complete the PS:T installation
+folder path, but don't use `~` to abbreviate your home folder; use `${HOME}`
+or the full path instead. The script assumes `wget` and `unzip` are installed
+and on the user's `$PATH`.
+
 
 ## How?
 
